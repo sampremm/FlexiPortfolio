@@ -1,0 +1,2 @@
+# FlexiPortfolio
+ FlexiPortfolio is a versatile and responsive portfolio website template designed to showcase your projects, experiences, and contact information with style and functionality. With clean and modern design elements, smooth transitions, and thoughtful responsiveness, FlexiPortfolio ensures your portfolio looks great on any device. This repository contains the HTML, CSS, and JavaScript code needed to set up your own customizable portfolio website.
