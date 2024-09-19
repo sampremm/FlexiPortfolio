@@ -5,3 +5,4 @@ function Togglemenu(){
     icon.classList.toggle("open")
 
 }
+

@@ -15,7 +15,7 @@ a, .button{
     transition: all 300ms;
 }
 nav,.nav-link{
-    display: flex;
+    display: flex
 }
 nav{
     justify-content: space-around;
