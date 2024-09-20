@@ -141,10 +141,6 @@ nav {
     opacity: 0;
 }
 
-#socialcontainer .icon {
-    animation: bounceIn 1s ease forwards;
-    opacity: 0;
-}
 
 .project-img {
     animation: rotateIn 1s ease forwards;
