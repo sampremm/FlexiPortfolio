@@ -1,0 +1,204 @@
+/* Common Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes buttonHoverEffect {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-200deg);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0);
+    }
+}
+
+@keyframes bounceIn {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Typing Animation Keyframes */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    0% {
+        border-color: transparent;
+    }
+    100% {
+        border-color: black;
+    }
+}
+
+/* Apply Animations to Existing Elements */
+#profile .section__pic-container img,
+#about .section__pic-container img,
+#projects .details-container {
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+}
+
+.section_text_p1, .title, .about-details-container, .experience-details-container, .contact-info-container {
+    animation: fadeIn 1s ease-in forwards;
+    opacity: 0;
+}
+
+.icon.arrow, .button-container .button {
+    animation: slideIn 1s ease forwards;
+    opacity: 0;
+}
+
+/* Animation Delays for Staggered Effects */
+#profile .section__pic-container img {
+    animation-delay: 0.3s;
+}
+
+#about .section__pic-container img {
+    animation-delay: 0.6s;
+}
+
+.experience-details-container .details-container:nth-child(1) {
+    animation-delay: 0.4s;
+}
+
+.experience-details-container .details-container:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.experience-details-container .details-container:nth-child(3) {
+    animation-delay: 0.8s;
+}
+
+.contact-info-container:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.contact-info-container:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+/* Button Hover Effects */
+.button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 300ms ease;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    
+}
+
+/* Additional Animations */
+nav {
+    animation: slideIn 1s ease forwards;
+    opacity: 0;
+}
+
+
+.project-img {
+    animation: rotateIn 1s ease forwards;
+    opacity: 0;
+}
+
+footer {
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+}
+
+footer p {
+    animation: fadeIn 1s ease-in forwards;
+    opacity: 0;
+}
+
+/* Typing Effect for Titles */
+.typing-effect {
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid black; /* Cursor effect */
+    animation: typing 2s steps(30, end), blink 0.75s step-end infinite;
+}
+
+.project-typing-effect {
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid black; /* Cursor effect */
+    animation: typing 1.5s steps(20, end), blink 0.75s step-end infinite;
+}
+/* Add a class for hidden elements */
+.hidden {
+    opacity: 0;
+    transform: translateY(20px); /* or whichever transformation you prefer */
+}
+
+/* Remove animation styles from existing elements */
+#profile .section__pic-container img,
+#about .section__pic-container img,
+#projects .details-container,
+.section_text_p1,
+.title,
+.about-details-container,
+.experience-details-container,
+.contact-info-container,
+.icon.arrow,
+.button-container .button,
+nav,
+.project-img,
+footer,
+footer p {
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+}
+
