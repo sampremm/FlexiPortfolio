@@ -1,24 +1,23 @@
 import React from 'react';
 import image from '../assets/img2.jpg';
 import { PROFILE } from '../constants';
-import {resume } from '../assets/resume.pdf';
 
 const Hero = () => {
   const openResume = () => {
-    window.open('' + resume, '_blank');
+    window.open('https://drive.google.com/file/d/1S0Th4qqbR2HutV0P5qsOScdAKX13AdrP/view', '_blank');
   };
 
   return (
     <div
-      className="relative  flex min-h-screen items-end justify-center"
+      className="relative flex min-h-screen items-end justify-center"
       id="hero"
       aria-label={`${PROFILE.name} - Hero Section`}
     >
       <img
         src={image}
         alt={`${PROFILE.name} profile background`}
-        className="absolute sm:object-left  sm:w-full inset-0 z-10 h-full w-full object-cover"
-        loading="lazy" // Lazy loading for better performance
+        className="absolute sm:object-left sm:w-full inset-0 z-10 h-full w-full object-cover"
+        loading="lazy"
       />
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent to-black lg:from-30%">
       </div>
@@ -30,7 +29,7 @@ const Hero = () => {
           {PROFILE.info}
         </p>
         <button
-          className="mt-8 rounded-full bg-yellow-400 py-2 px-6 text-lg font-semibold text-gray-900 shadow-lg transition ease-in-out transform  hover:bg-yellow-500 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          className="mt-8 rounded-full bg-yellow-400 py-2 px-6 text-lg font-semibold text-gray-900 shadow-lg transition ease-in-out transform hover:bg-yellow-500 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
           onClick={openResume}
         >
           Resume
