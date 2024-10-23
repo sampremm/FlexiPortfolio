@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
+import { motion } from 'framer-motion';
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({
@@ -45,22 +46,19 @@ const ContactForm = () => {
             setIsSending(true);
             emailjs.send(
                 "service_ufp43wu",
-                "template_id_here",
+                "template_id_here",  // Replace with your template ID
                 formData,
-                "axzyjhD3URCFm3dtC"
+                "axzyjhD3URCFm3dtC" // Replace with your user ID
             ).then(
                 (result) => {
                     console.log("SUCCESS!", result.status, result.text);
                     toast.success("Message sent successfully");
-                    setFormData({
-                        name: "",
-                        email: "",
-                        message: ""
-                    });
+                    setFormData({ name: "", email: "", message: "" });
                 },
                 (error) => {
                     console.log("FAILED...", error.text);
                     toast.error("Failed to send message");
+                    setError({ message: "Failed to send message. Please try again." });
                 }
             ).finally(() => {
                 setIsSending(false);
@@ -74,7 +72,12 @@ const ContactForm = () => {
             <h2 className="my-8 text-center text-4xl text-white font-semibold tracking-tighter">
                 Let&apos;s Connect
             </h2>
-            <form onSubmit={handleSubmit}>
+            <motion.form
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1 }}
+                onSubmit={handleSubmit}
+            >
                 <div className='mb-4'>
                     <input
                         type="text"
@@ -85,7 +88,16 @@ const ContactForm = () => {
                         onChange={handleChange}
                         className='mb-8 w-full appearance-none rounded border text-white border-gray-900 bg-transparent py-3 px-2 text-sm text-white focus:border-gray-500 focus:outline-none'
                     />
-                    {error.name && <p className='text-red-500'>{error.name}</p>}
+                    {error.name && (
+                        <motion.p 
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            aria-live="polite"
+                            className='text-red-500'
+                        >
+                            {error.name}
+                        </motion.p>
+                    )}
                 </div>
                 <div className='mb-4'>
                     <input
@@ -97,7 +109,16 @@ const ContactForm = () => {
                         onChange={handleChange}
                         className='mb-8 w-full appearance-none rounded border text-white border-gray-900 bg-transparent py-3 px-2 text-sm text-white focus:border-gray-500 focus:outline-none'
                     />
-                    {error.email && <p className='text-red-500'>{error.email}</p>}
+                    {error.email && (
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            aria-live="polite"
+                            className='text-red-500'
+                        >
+                            {error.email}
+                        </motion.p>
+                    )}
                 </div>
                 <div className='mb-4'>
                     <textarea
@@ -108,7 +129,16 @@ const ContactForm = () => {
                         onChange={handleChange}
                         className='mb-8 w-full appearance-none rounded border text-white border-gray-900 bg-transparent py-3 px-2 text-sm text-gray-700 focus:border-gray-500 focus:outline-none'
                     />
-                    {error.message && <p className='text-red-500'>{error.message}</p>}
+                    {error.message && (
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            aria-live="polite"
+                            className='text-red-500'
+                        >
+                            {error.message}
+                        </motion.p>
+                    )}
                 </div>
                 <button
                     type='submit'
@@ -117,7 +147,7 @@ const ContactForm = () => {
                 >
                     {isSending ? "Sending..." : "Send"}
                 </button>
-            </form>
+            </motion.form>
         </div>
     );
 };
