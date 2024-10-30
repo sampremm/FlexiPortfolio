@@ -17,7 +17,7 @@ const Hero = () => {
         <motion.img
           src={image}
           alt={`${PROFILE.name} profile background`}
-          className="absolute sm:object-left sm:w-full inset-0 z-10 h-full w-full object-cover"
+          className="absolute sm:object-cover sm:w-full inset-0 z-10 h-full w-full object-cover"
           loading="lazy"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
