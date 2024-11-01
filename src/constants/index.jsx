@@ -20,6 +20,7 @@ import image2 from "../assets/bloging.jpg";
 import image3 from "../assets/url.jpg";
 import image4 from "../assets/streamyard.png";
 import image5 from "../assets/portfolio.jpg";
+import image6 from "../assets/Logo_Vercel-1.jpg";
 
 
 
@@ -46,44 +47,51 @@ export const ABOUT = {
   text2:
     "Hello! I'm Sam Prem Kumar Thalla, a passionate software developer with a knack for tackling complex challenges. I specialize in building dynamic, responsive web applications that are both efficient and user-friendly. With a strong foundation in full-stack development and a focus on modern technologies, I bring a practical approach to problem-solving while ensuring high-quality results. Beyond coding, I enjoy exploring new ideas and continuously learning to stay ahead in the tech world. Whether I'm working on an innovative project or diving into the latest trends, I'm committed to delivering impactful and polished solutions every time.",
 };
-
 export const PROJECTS = [
   {
     title: "StreamYard Clone",
     subtitle:
-      "A real-time streaming application built with Node.js, Express.js, Socket.IO, FFmpeg, and Docker, enabling live video streaming with minimal latency.",
+      "Developed a real-time streaming application similar to StreamYard, enabling users to stream live video with minimal latency. Integrated FFmpeg for encoding and streaming video content via an RTMP server and utilized Socket.IO for seamless communication between clients. The application was containerized using Docker for efficient deployment and scaling, along with robust error handling to ensure stream stability.",
     image: image4,
     link: "https://github.com/sampremm/streamyard-clone",
   },
   {
     title: "Chess.com Clone",
     subtitle:
-      "A real-time multiplayer chess game built with Node.js, Socket.IO, Chess.js, and Tailwind CSS.",
+      "Built an interactive chess game that supports drag-and-drop moves and real-time updates via WebSocket, enabling spectators to observe matches and enhancing user engagement. Conducted unit tests for game mechanics to ensure accurate behavior. Utilized REST APIs for efficient game data management, maintaining game state, logging player moves, and facilitating real-time interactions between players and spectators throughout the match",
     image: image1,
     link: "https://github.com/sampremm/Chess",
   },
   {
     title: "Blogging Website",
     subtitle:
-      "A blogging platform developed using the MERN stack, featuring JWT-based authentication and rich text formatting.",
+      "Developed a blogging platform that allows users to create, edit, and delete posts with secure JWT-based authentication. Designed a responsive front-end using React.js and TailwindCSS, integrating Markdown for rich text formatting. Utilized Mongoose for database schema modeling and employed MongoDB for data storage, along with integration of AWS S3 for image uploads.",
     image: image2,
     link: "https://github.com/sampremm/mern-blogging",
   },
   {
     title: "URL Shortener",
     subtitle:
-      "A URL shortening service created with Node.js, Express.js, MongoDB, and JavaScript.",
+     "Developed a URL shortening service using Node.js, Express.js, MongoDB, and JavaScript. The application allows users to input long URLs, generating shortened links for easy sharing and tracking. Implemented features such as link analytics and user authentication to manage personalized URLs, ensuring a secure and user-friendly experience.",
     image: image3,
     link: "https://github.com/sampremm/link_shotner",
   },
   {
     title: "Portfolio Website",
     subtitle:
-      "A personal portfolio website built with React.js and Tailwind CSS.",
+      "Created a personal portfolio website using React.js and Tailwind CSS to showcase my projects, skills, and experiences. The site features a modern, responsive design that enhances user engagement and provides seamless navigation. Implemented interactive elements and smooth animations to highlight my work and ensure an enjoyable browsing experience.",
     image: image5,
     link: "https://github.com/sampremm/FlexiPortfolio",
   },
+  {
+    title: "Vercel-Clone",
+    subtitle:
+      "Developed a platform resembling Vercel for deploying front-end applications, enabling seamless integrations and efficient deployment. Utilized Docker to create isolated environments for serving React static assets, uploaded the Docker image to AWS ECR, and managed a cluster with AWS ECS, hosting static files on S3. Designed a reverse proxy to stream index.html for a smooth user experience and developed a responsive front-end using React.js to enhance user interaction.",
+    image: image6, 
+    link: "https://github.com/sampremm/vercel",
+  },
 ];
+
 
 export const SKILLS = [
   {
