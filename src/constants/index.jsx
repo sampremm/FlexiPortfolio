@@ -67,7 +67,7 @@ export const PROJECTS = [
     subtitle:
       "Developed a blogging platform that allows users to create, edit, and delete posts with secure JWT-based authentication. Designed a responsive front-end using React.js and TailwindCSS, integrating Markdown for rich text formatting. Utilized Mongoose for database schema modeling and employed MongoDB for data storage, along with integration of AWS S3 for image uploads.",
     image: image2,
-    link: "https://github.com/sampremm/mern-blogging",
+    link: "https://github.com/sampremm/bloging",
   },
   {
     title: "URL Shortener",

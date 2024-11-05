@@ -11,7 +11,7 @@ const Hero = () => {
   return (
     <>
       <div
-        className="relative flex min-h-screen items-end justify-center"
+        className="relative flex min-h-screen items-end justify-center  "
         id="hero"
       >
         <motion.img
