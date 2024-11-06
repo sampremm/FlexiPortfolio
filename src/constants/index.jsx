@@ -99,10 +99,6 @@ export const SKILLS = [
     name: "React",
   },
   {
-    icon: <TbBrandNextjs className="text-4xl lg:text-6xl text-white" />,
-    name: "Next.js",
-  },
-  {
     icon: <SiMongodb className="text-4xl lg:text-6xl text-green-600" />,
     name: "MongoDB",
   },
