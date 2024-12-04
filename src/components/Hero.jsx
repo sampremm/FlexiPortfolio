@@ -1,5 +1,5 @@
 import React from 'react';
-import image from '../assets/samprem.jpg';
+import image from '../assets/naruto-uzumaki.jpg';
 import { PROFILE } from '../constants';
 import { motion } from 'framer-motion';
 
