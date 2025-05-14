@@ -21,6 +21,7 @@ import image3 from "../assets/url.jpg";
 import image4 from "../assets/streamyard.png";
 import image5 from "../assets/portfolio.jpg";
 import image6 from "../assets/Logo_Vercel-1.jpg";
+import image7 from "../assets/uber.webp";
 
 
 
@@ -37,58 +38,60 @@ export const NAVIGATION_LINKS = [
 ];
 
 export const PROFILE = {
-  name: "Sam Prem Kumar ",
-  info: "Full-stack developer.",
+  name: "Sam Prem Kumar Thalla",
+  info: "Aspiring Software Developer | MERN Stack | Tech Enthusiast",
 };
+
 
 export const ABOUT = {
   text1:
-    "I tackle software challenges by building dynamic and responsive web applications, blending problem-solving with modern design.",
+    "I build robust and scalable web applications using modern technologies, always driven by a problem-solving mindset and clean UI/UX principles.",
   text2:
-    "Hello! I'm Sam Prem Kumar Thalla, a passionate software developer with a knack for tackling complex challenges. I specialize in building dynamic, responsive web applications that are both efficient and user-friendly. With a strong foundation in full-stack development and a focus on modern technologies, I bring a practical approach to problem-solving while ensuring high-quality results. Beyond coding, I enjoy exploring new ideas and continuously learning to stay ahead in the tech world. Whether I'm working on an innovative project or diving into the latest trends, I'm committed to delivering impactful and polished solutions every time.",
+    "Hello! I'm Sam Prem Kumar Thalla, a passionate and growth-oriented software developer with a foundation in Java and full-stack web development. My work spans dynamic ride-sharing apps, deployment platforms like Vercel, real-time streaming solutions, and more. I'm well-versed in tools like Docker, AWS, and Redis, and actively build scalable backend services and responsive React frontends. I take pride in clean architecture, teamwork, and staying updated with the evolving tech world. Whether tackling performance, security, or design, I strive to build solutions that are fast, functional, and future-ready.",
 };
+
 export const PROJECTS = [
   {
-    title: "StreamYard Clone",
+    title: "Uber Clone",
     subtitle:
-      "Developed a real-time streaming application similar to StreamYard, enabling users to stream live video with minimal latency. Integrated FFmpeg for encoding and streaming video content via an RTMP server and utilized Socket.IO for seamless communication between clients. The application was containerized using Docker for efficient deployment and scaling, along with robust error handling to ensure stream stability.",
+      "A dynamic ride-hailing application built with React.js, Node.js, Express.js, and MongoDB. Features real-time tracking via WebSockets, Google Maps API integration for route calculations, secure JWT authentication, and optimized driver allocation logic.",
+    image: image7,
+    link: "https://github.com/sampremm/uber-clone",
+  },
+  {
+    title: "Vercel Clone - Backend",
+    subtitle:
+      "A custom deployment platform that mimics Vercel. Built using Node.js, Docker, AWS ECS/ECR, and S3. Designed for hosting front-end apps with isolated containers, reverse proxy streaming, and static file distribution. Emphasizes CI/CD and container orchestration.",
+    image: image6,
+    link: "https://github.com/sampremm/vercel-backend",
+  },
+  {
+    title: "StreamYard Streaming App",
+    subtitle:
+      "A live video streaming app using React, Node.js, FFmpeg, and Socket.IO. Streams are encoded and pushed via an RTMP server. Dockerized for scalability and production readiness. Focused on real-time performance and minimal latency.",
     image: image4,
     link: "https://github.com/sampremm/streamyard-clone",
   },
   {
-    title: "Chess.com Clone",
-    subtitle:
-      "Built an interactive chess game that supports drag-and-drop moves and real-time updates via WebSocket, enabling spectators to observe matches and enhancing user engagement. Conducted unit tests for game mechanics to ensure accurate behavior. Utilized REST APIs for efficient game data management, maintaining game state, logging player moves, and facilitating real-time interactions between players and spectators throughout the match",
-    image: image1,
-    link: "https://github.com/sampremm/Chess",
-  },
-  {
-    title: "Blogging Website",
-    subtitle:
-      "Developed a blogging platform that allows users to create, edit, and delete posts with secure JWT-based authentication. Designed a responsive front-end using React.js and TailwindCSS, integrating Markdown for rich text formatting. Utilized Mongoose for database schema modeling and employed MongoDB for data storage, along with integration of AWS S3 for image uploads.",
-    image: image2,
-    link: "https://github.com/sampremm/bloging",
-  },
-  {
     title: "URL Shortener",
     subtitle:
-     "Developed a URL shortening service using Node.js, Express.js, MongoDB, and JavaScript. The application allows users to input long URLs, generating shortened links for easy sharing and tracking. Implemented features such as link analytics and user authentication to manage personalized URLs, ensuring a secure and user-friendly experience.",
+      "Built with Node.js, Express.js, MongoDB, and Redis. Implements link shortening, redirection, click analytics, and user authentication. Uses Redis for caching frequent redirections and improving performance.",
     image: image3,
     link: "https://github.com/sampremm/link_shotner",
   },
   {
-    title: "Portfolio Website",
+    title: "Blogging Website",
     subtitle:
-      "Created a personal portfolio website using React.js and Tailwind CSS to showcase my projects, skills, and experiences. The site features a modern, responsive design that enhances user engagement and provides seamless navigation. Implemented interactive elements and smooth animations to highlight my work and ensure an enjoyable browsing experience.",
-    image: image5,
-    link: "https://github.com/sampremm/FlexiPortfolio",
+      "MERN-based blogging platform with Markdown support and AWS S3 image uploads. Implements JWT auth, REST APIs with Express.js, MongoDB with Mongoose, and a responsive UI using TailwindCSS. Enables CRUD operations on blog posts.",
+    image: image2,
+    link: "https://github.com/sampremm/bloging",
   },
   {
-    title: "Vercel-Clone",
+    title: "Portfolio Website",
     subtitle:
-      "Developed a platform resembling Vercel for deploying front-end applications, enabling seamless integrations and efficient deployment. Utilized Docker to create isolated environments for serving React static assets, uploaded the Docker image to AWS ECR, and managed a cluster with AWS ECS, hosting static files on S3. Designed a reverse proxy to stream index.html for a smooth user experience and developed a responsive front-end using React.js to enhance user interaction.",
-    image: image6, 
-    link: "https://github.com/sampremm/vercel",
+      "Modern React + Tailwind CSS portfolio to showcase projects and experience. Includes interactive sections, smooth transitions, and mobile responsiveness. Built to reflect clean design and developer personality.",
+    image: image5,
+    link: "https://github.com/sampremm/FlexiPortfolio",
   },
 ];
 

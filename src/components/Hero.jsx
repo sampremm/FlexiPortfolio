@@ -5,13 +5,13 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   const openResume = () => {
-    window.open('https://drive.google.com/file/d/1VtPW-7oV0p8LhGYoFK98nt8kn0elMrBH/view?usp=sharing', '_blank');
+    window.open('https://drive.google.com/file/d/1wdDS3iIDu-7FgllkuaWn6IXbXTgr2YiS/view?usp=sharing', '_blank');
   };
 
   return (
     <>
       <div
-        className="relative flex min-h-screen items-end justify-center  "
+        className=" relative flex min-h-screen items-end justify-center pt-28 "
         id="hero"
       >
         <motion.img

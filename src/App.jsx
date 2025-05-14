@@ -9,7 +9,7 @@ import Fotter from './components/Fotter';
 
 const App = () => {
   return (
-    <main className='overflow-x-hidden bg-black tracking-tighter text-gray-200 antialiased min-h-screen m-0 p-0'>
+      <main className="overflow-x-hidden bg-black text-gray-200 antialiased min-h-screen m-0 p-0">
       <Navbar />
       <Hero />
       <About />
