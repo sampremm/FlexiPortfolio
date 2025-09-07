@@ -1,155 +1,73 @@
-import React, { useState } from 'react';
-import emailjs from '@emailjs/browser';
-import toast, { Toaster } from 'react-hot-toast';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-const ContactForm = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: ""
-    });
-    const [error, setError] = useState({});
-    const [isSending, setIsSending] = useState(false);
+const GitHubProfile = () => {
+  const [repos, setRepos] = useState([]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
+  useEffect(() => {
+    fetch("https://api.github.com/users/sampremm/repos?sort=updated&per_page=3")
+      .then((res) => res.json())
+      .then((data) => setRepos(data))
+      .catch(console.error);
+  }, []);
 
-    const validate = () => {
-        let errors = {};
-        if (!formData.name) {
-            errors.name = "Name is required";
-        }
-        if (!formData.email) {
-            errors.email = "Email is required";
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            errors.email = "Email is invalid";
-        }
-        if (!formData.message) {
-            errors.message = "Message is required";
-        }
-        return errors;
-    };
+  return (
+    <div className="flex flex-col items-center mt-12 px-4 text-white" id="contact">
+      {/* Section Title */}
+      <h2 className="text-4xl font-semibold mb-8">Let's Connect</h2>
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const validationErrors = validate();
-        if (Object.keys(validationErrors).length > 0) {
-            setError(validationErrors);
-        } else {
-            setError({});
-            setIsSending(true);
-            emailjs.send(
-                "service_ufp43wu",
-                "template_id_here",  // Replace with your template ID
-                formData,
-                "axzyjhD3URCFm3dtC" // Replace with your user ID
-            ).then(
-                (result) => {
-                    console.log("SUCCESS!", result.status, result.text);
-                    toast.success("Message sent successfully");
-                    setFormData({ name: "", email: "", message: "" });
-                },
-                (error) => {
-                    console.log("FAILED...", error.text);
-                    toast.error("Failed to send message");
-                    setError({ message: "Failed to send message. Please try again." });
-                }
-            ).finally(() => {
-                setIsSending(false);
-            });
-        }
-    };
+      {/* GitHub Avatar */}
+      <motion.a
+        href="https://github.com/sampremm"
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.2, rotate: 5 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      >
+        <motion.img
+          src="https://github.com/sampremm.png"
+          alt="Sam Prem Kumar Thalla"
+          className="w-32 h-32 rounded-full border-4 border-gray-300 shadow-lg"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        />
+      </motion.a>
 
-    return (
-        <div className='mx-auto max-w-3xl p-4 text-white' id='contact'>
-            <Toaster />
-            <h2 className="my-8 text-center text-4xl text-white font-semibold tracking-tighter">
-                Let&apos;s Connect
-            </h2>
-            <motion.form
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 1 }}
-                onSubmit={handleSubmit}
-            >
-                <div className='mb-4'>
-                    <input
-                        type="text"
-                        id='name'
-                        name="name"
-                        placeholder="Your Name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className='mb-8 w-full appearance-none rounded border text-white border-gray-900 bg-transparent py-3 px-2 text-sm text-white focus:border-gray-500 focus:outline-none'
-                    />
-                    {error.name && (
-                        <motion.p 
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            aria-live="polite"
-                            className='text-red-500'
-                        >
-                            {error.name}
-                        </motion.p>
-                    )}
-                </div>
-                <div className='mb-4'>
-                    <input
-                        type="email"
-                        id='email'
-                        name="email"
-                        placeholder="Your Email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className='mb-8 w-full appearance-none rounded border text-white border-gray-900 bg-transparent py-3 px-2 text-sm text-white focus:border-gray-500 focus:outline-none'
-                    />
-                    {error.email && (
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            aria-live="polite"
-                            className='text-red-500'
-                        >
-                            {error.email}
-                        </motion.p>
-                    )}
-                </div>
-                <div className='mb-4'>
-                    <textarea
-                        id='message'
-                        name="message"
-                        placeholder="Your Message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        className='mb-8 w-full appearance-none rounded border text-white border-gray-900 bg-transparent py-3 px-2 text-sm text-gray-700 focus:border-gray-500 focus:outline-none'
-                    />
-                    {error.message && (
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            aria-live="polite"
-                            className='text-red-500'
-                        >
-                            {error.message}
-                        </motion.p>
-                    )}
-                </div>
-                <button
-                    type='submit'
-                    className={`mb-8 rounded bg-yellow-500 px-4 py-2 text-sm font-semibold text-white hover:bg-yellow-600 ${isSending ? "cursor-not-allowed opacity-50" : ""}`}
-                    disabled={isSending}
-                >
-                    {isSending ? "Sending..." : "Send"}
-                </button>
-            </motion.form>
-        </div>
-    );
+      {/* Contribution Graph */}
+      <h3 className="text-2xl font-semibold mt-6 mb-4">GitHub Contributions</h3>
+      <motion.img
+        src="https://ghchart.rshah.org/sampremm"
+        alt="GitHub Contributions"
+        className="w-full max-w-xl mt-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      />
+
+      {/* Latest 3 Repos */}
+      <h3 className="text-2xl font-semibold mt-8 mb-4">Latest Repositories</h3>
+      <div className="flex flex-col md:flex-row gap-6">
+        {repos.map((repo, index) => (
+          <motion.a
+            key={repo.id}
+            href={repo.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-gray-800 p-4 rounded-lg shadow-lg w-72"
+            whileHover={{ scale: 1.05, y: -5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 * index, type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <h4 className="text-lg font-semibold text-white mb-2">{repo.name}</h4>
+            <p className="text-gray-300 text-sm line-clamp-3">{repo.description || "No description"}</p>
+          </motion.a>
+        ))}
+      </div>
+    </div>
+  );
 };
 
-export default ContactForm;
+export default GitHubProfile;

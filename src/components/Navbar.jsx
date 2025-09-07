@@ -30,7 +30,7 @@ const Navbar = () => {
         NAVIGATION_LINKS.map((link, index) => (
             <li key={index}>
                 <a
-                    className="text-sm text-white hover:text-yellow-400"
+                    className="text-sm text-white hover:text-yellow-400 "
                     href={link.href}
                     onClick={(e) => handleLinkClick(e, link.href)}
                     aria-label={`Navigate to ${link.label}`}

@@ -10,25 +10,17 @@ import {
 import { RiReactjsLine } from "react-icons/ri";
 import { TbBrandNextjs } from "react-icons/tb";
 import { SiMongodb, SiTailwindcss, SiPostman } from "react-icons/si"; // Added SiPostman here
-import { DiRedis } from "react-icons/di";
 import { FaNodeJs } from "react-icons/fa";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { GrMysql } from "react-icons/gr"; // Ensure GrMysql is imported
 
-import image1 from "../assets/chess.jpeg";
-import image2 from "../assets/bloging.jpg";
+import image1 from "../assets/java-logo.png";
+import image2 from "../assets/todo-image.jpg";
 import image3 from "../assets/url.jpg";
 import image4 from "../assets/streamyard.png";
-import image5 from "../assets/portfolio.jpg";
+
 import image6 from "../assets/Logo_Vercel-1.jpg";
 import image7 from "../assets/uber.webp";
-
-
-
-import user1 from "../assets/profile-pictures/user1.jpg";
-import user2 from "../assets/profile-pictures/user2.jpg";
-import user3 from "../assets/profile-pictures/user3.jpg";
-import user4 from "../assets/profile-pictures/user4.jpg";
 
 export const NAVIGATION_LINKS = [
   { label: "About", href: "#about" },
@@ -52,48 +44,49 @@ export const ABOUT = {
 
 export const PROJECTS = [
   {
-    title: "Uber Clone",
+    title: "Multithreaded Web Server (Java)",
     subtitle:
-      "A dynamic ride-hailing application built with React.js, Node.js, Express.js, and MongoDB. Features real-time tracking via WebSockets, Google Maps API integration for route calculations, secure JWT authentication, and optimized driver allocation logic.",
-    image: image7,
-    link: "https://github.com/sampremm/uber-clone",
+      "A Java-based multithreaded web server using a fixed-size thread pool to handle multiple client connections concurrently over TCP sockets. Demonstrates concurrency, socket programming, and resource management.",
+    image: image1, // replace with your image asset
+    link: "https://github.com/sampremm/multithreaded-webserver-java",
   },
   {
-    title: "Vercel Clone - Backend",
+    title: "URL Shortener",
     subtitle:
-      "A custom deployment platform that mimics Vercel. Built using Node.js, Docker, AWS ECS/ECR, and S3. Designed for hosting front-end apps with isolated containers, reverse proxy streaming, and static file distribution. Emphasizes CI/CD and container orchestration.",
+      "Node.js + Express.js + MongoDB + Redis. Implements link shortening, redirection, click analytics, and user authentication. Uses Redis caching for high performance.",
+    image: image3,
+    link: "https://github.com/sampremm/link_shotner",
+  },
+  {
+    title: "Vercel Clone – Backend",
+    subtitle:
+      "Custom deployment platform mimicking Vercel. Node.js + Docker + AWS ECS/ECR + S3. Designed for isolated containers, reverse proxy streaming, static file distribution, and CI/CD orchestration.",
     image: image6,
     link: "https://github.com/sampremm/vercel-backend",
   },
   {
     title: "StreamYard Streaming App",
     subtitle:
-      "A live video streaming app using React, Node.js, FFmpeg, and Socket.IO. Streams are encoded and pushed via an RTMP server. Dockerized for scalability and production readiness. Focused on real-time performance and minimal latency.",
+      "A browser-based live video streaming app using React, Node.js, WebRTC, FFmpeg, and Socket.IO. Dockerized for scalability with RTMP server integration for real-time performance.",
     image: image4,
     link: "https://github.com/sampremm/streamyard-clone",
   },
   {
-    title: "URL Shortener",
+    title: "Uber – Ride Application",
     subtitle:
-      "Built with Node.js, Express.js, MongoDB, and Redis. Implements link shortening, redirection, click analytics, and user authentication. Uses Redis for caching frequent redirections and improving performance.",
-    image: image3,
-    link: "https://github.com/sampremm/link_shotner",
+      "A dynamic ride-hailing application built with React.js, Node.js, Express.js, and MongoDB. Real-time tracking via WebSockets, Google Maps API for route calculations, secure JWT authentication, and optimized driver allocation logic.",
+    image: image7,
+    link: "https://github.com/sampremm/uber-clone",
   },
   {
-    title: "Blogging Website",
+    title: "Dockerized Todo App (Node + Prisma + PostgreSQL)",
     subtitle:
-      "MERN-based blogging platform with Markdown support and AWS S3 image uploads. Implements JWT auth, REST APIs with Express.js, MongoDB with Mongoose, and a responsive UI using TailwindCSS. Enables CRUD operations on blog posts.",
-    image: image2,
-    link: "https://github.com/sampremm/bloging",
-  },
-  {
-    title: "Portfolio Website",
-    subtitle:
-      "Modern React + Tailwind CSS portfolio to showcase projects and experience. Includes interactive sections, smooth transitions, and mobile responsiveness. Built to reflect clean design and developer personality.",
-    image: image5,
-    link: "https://github.com/sampremm/FlexiPortfolio",
+      "Full-featured backend Todo app with JWT authentication. Built with Node.js + Express, Prisma ORM, PostgreSQL, and Docker Compose for containerized deployment.",
+    image: image2, // replace with your image asset
+    link: "https://github.com/sampremm/backend-todo-app",
   },
 ];
+
 
 
 export const SKILLS = [

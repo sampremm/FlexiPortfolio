@@ -5,15 +5,14 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   const openResume = () => {
-    window.open('https://drive.google.com/file/d/1wdDS3iIDu-7FgllkuaWn6IXbXTgr2YiS/view?usp=sharing', '_blank');
+    window.open('https://drive.google.com/file/d/1nX_Y4m_CDNUyy086ejPyUP0Imzqy8EWg/view?usp=sharing', '_blank');
   };
 
   return (
     <>
       <div
-        className=" relative flex min-h-screen items-end justify-center pt-28 "
-        id="hero"
-      >
+        className="fixed relative flex min-h-screen items-end justify-center pt-28 "
+        id="hero">
         <motion.img
           src={image}
           alt={`${PROFILE.name} profile background`}
@@ -45,9 +44,10 @@ const Hero = () => {
             {PROFILE.info}
           </p>
           <motion.button
+
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 2 }}
+            transition={{ duration: 1, delay: 2, }}
             whileHover={{ scale: 1.05 }} // Scale up on hover
             whileTap={{ scale: 0.95 }} // Scale down on tap
             className="mt-8 rounded-full bg-yellow-400 py-2 px-6 text-lg font-semibold text-gray-900 shadow-lg transition ease-in-out transform hover:bg-yellow-500 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
