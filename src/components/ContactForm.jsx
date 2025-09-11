@@ -11,29 +11,72 @@ const GitHubProfile = () => {
       .catch(console.error);
   }, []);
 
+  
+
   return (
     <div className="flex flex-col items-center mt-12 px-4 text-white" id="contact">
       {/* Section Title */}
       <h2 className="text-4xl font-semibold mb-8">Let's Connect</h2>
+  <div className="flex gap-8 mt-8 justify-around">
+    {/* LinkedIn */}
+  <motion.a
+    href="https://www.linkedin.com/in/samprem1/"
+    target="_blank"
+    rel="noopener noreferrer"
+    whileHover={{ scale: 1.2, rotate: 5 }}
+    whileTap={{ scale: 0.95 }}
+    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+  >
+    <motion.img
+      src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
+      alt="LinkedIn Profile"
+      className="w-32 h-32 rounded-full border-4 border-gray-300 shadow-lg"
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+    />
+  </motion.a>
+  {/* GitHub */}
+  <motion.a
+    href="https://github.com/sampremm"
+    target="_blank"
+    rel="noopener noreferrer"
+    whileHover={{ scale: 1.2, rotate: 5 }}
+    whileTap={{ scale: 0.95 }}
+    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+  >
+    <motion.img
+      src="https://github.com/sampremm.png"
+      alt="Sam Prem Kumar Thalla"
+      className="w-32 h-32 rounded-full border-4 border-gray-300 shadow-lg"
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+    />
+  </motion.a>
 
-      {/* GitHub Avatar */}
-      <motion.a
-        href="https://github.com/sampremm"
-        target="_blank"
-        rel="noopener noreferrer"
-        whileHover={{ scale: 1.2, rotate: 5 }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      >
-        <motion.img
-          src="https://github.com/sampremm.png"
-          alt="Sam Prem Kumar Thalla"
-          className="w-32 h-32 rounded-full border-4 border-gray-300 shadow-lg"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        />
-      </motion.a>
+  
+
+  {/* Gmail */}
+  <motion.a
+    href="mailto:samprem888111@gmail.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    whileHover={{ scale: 1.2, rotate: 5 }}
+    whileTap={{ scale: 0.95 }}
+    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+  >
+    <motion.img
+      src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
+      alt="Email"
+      className="w-32 h-32 rounded-full border-4 border-gray-300 shadow-lg"
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.6 }}
+    />
+  </motion.a>
+</div>
+
 
       {/* Contribution Graph */}
       <h3 className="text-2xl font-semibold mt-6 mb-4">GitHub Contributions</h3>

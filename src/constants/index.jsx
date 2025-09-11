@@ -8,7 +8,6 @@ import {
 } from "react-icons/fa6"; // Ensure all icons are available in the specified library
 
 import { RiReactjsLine } from "react-icons/ri";
-import { TbBrandNextjs } from "react-icons/tb";
 import { SiMongodb, SiTailwindcss, SiPostman } from "react-icons/si"; // Added SiPostman here
 import { FaNodeJs } from "react-icons/fa";
 import { BiLogoPostgresql } from "react-icons/bi";
