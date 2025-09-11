@@ -37,10 +37,17 @@ export const PROFILE = {
 
 export const ABOUT = {
   text1:
-    "I build robust and scalable web applications using modern technologies, always driven by a problem-solving mindset and clean UI/UX principles.",
+    "I build robust and scalable web applications using modern technologies, driven by a problem-solving mindset and a focus on clean.",
   text2:
-    "Hello! I'm Sam Prem Kumar Thalla, a passionate and growth-oriented software developer with a foundation in Java and full-stack web development. My work spans dynamic ride-sharing apps, deployment platforms like Vercel, real-time streaming solutions, and more. I'm well-versed in tools like Docker, AWS, and Redis, and actively build scalable backend services and responsive React frontends. I take pride in clean architecture, teamwork, and staying updated with the evolving tech world. Whether tackling performance, security, or design, I strive to build solutions that are fast, functional, and future-ready.",
+    "Hello! I'm Sam Prem Kumar Thalla — a passionate, growth-oriented software developer with a strong foundation in Java and full-stack web development. I’ve engineered ride-hailing apps, deployment platforms similar to Vercel, real-time streaming solutions, and more. Skilled in Docker, AWS, and Redis, I specialize in building scalable backend services and responsive React frontends. I take pride in clean architecture, collaborative work, and staying ahead of the evolving tech landscape. Whether it’s performance, security, or design, my goal is to deliver solutions that are fast, reliable, and future-ready.",
+  publication: {
+    title:
+      "Published a journal article on Maximum Power Point Tracking using Cuckoo Search Algorithm (CSA)",
+    link:
+      "https://drive.google.com/file/d/1QUZ3L33mAqRigHwQnwg__ZOjVhmEPucZ/view",
+  },
 };
+
 
 export const PROJECTS = [
   {
