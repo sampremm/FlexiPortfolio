@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   const openResume = () => {
-    window.open('https://drive.google.com/file/d/1nX_Y4m_CDNUyy086ejPyUP0Imzqy8EWg/view?usp=sharing', '_blank');
+    window.open('https://drive.google.com/file/d/1AcswuVURgUtHBzlRrNMI3ZQkxreclXn1/view?usp=sharing', '_blank');
   };
 
   return (

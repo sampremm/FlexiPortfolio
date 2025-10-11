@@ -42,7 +42,7 @@ const Project = () => {
               image={project.image}
               title={project.title}
               subtitle={project.subtitle}
-              link={project.link}
+              link={project.link }
             />
           </motion.div>
         ))}
