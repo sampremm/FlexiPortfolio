@@ -61,7 +61,7 @@ export const PROJECTS = [
     subtitle:
       "Node.js + Express.js + MongoDB + Redis. Implements link shortening, redirection, click analytics, and user authentication. Uses Redis caching for high performance.",
     image: image3,
-    link: "https://github.com/sampremm/link_shotner",
+    link: "https://github.com/sampremm/url-shortener",
   },
   {
     title: "Vercel Clone – Backend",
