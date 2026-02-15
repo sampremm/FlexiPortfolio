@@ -126,10 +126,6 @@ export const SKILLS = [
     name: "Redis",
   },
   {
-    icon: <SiKubernetes className="text-4xl lg:text-6xl text-blue-500" />,
-    name: "Kubernetes",
-  },
-  {
     icon: <FaDocker className="text-4xl lg:text-6xl text-blue-600" />,
     name: "Docker",
   },
