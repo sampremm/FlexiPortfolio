@@ -6,6 +6,8 @@ import Project from './components/Project';
 import Skills from './components/Skills';
 import ContactForm from './components/ContactForm';
 import Fotter from './components/Fotter';
+import Photography from "./components/photography";
+
 
 const App = () => {
   return (
@@ -13,6 +15,7 @@ const App = () => {
       <Navbar />
       <Hero />
       <About />
+      <Photography />
       <Project />
       <Skills />
       <ContactForm />

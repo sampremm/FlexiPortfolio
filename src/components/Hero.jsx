@@ -1,63 +1,116 @@
-import React from 'react';
-import image from '../assets/naruto-uzumaki.jpg';
-import { PROFILE } from '../constants';
-import { motion } from 'framer-motion';
+import React from "react";
+import image from "../assets/naruto-uzumaki.jpg";
+import { PROFILE } from "../constants";
+import { motion } from "framer-motion";
 
 const Hero = () => {
-  const openResume = () => {
-    window.open('https://drive.google.com/file/d/1AcswuVURgUtHBzlRrNMI3ZQkxreclXn1/view?usp=sharing', '_blank');
+
+  const openLinkedIn = () => {
+    window.open("https://www.linkedin.com/in/samprem1/", "_blank");
+  };
+
+  const openGithub = () => {
+    window.open("https://github.com/sampremm", "_blank");
+  };
+
+  const scrollToProjects = () => {
+    const section = document.getElementById("projects");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
-    <>
-      <div
-        className="fixed relative flex min-h-screen items-end justify-center pt-28 "
-        id="hero">
-        <motion.img
-          src={image}
-          alt={`${PROFILE.name} profile background`}
-          className="absolute sm:object-cover inset-0 z-10 h-full w-full object-cover"
-          loading="lazy"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        />
-        
-        <motion.div
-          className="absolute inset-0 z-10 bg-gradient-to-b from-transparent to-black lg:from-30%"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-        </motion.div>
-        
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="z-20 mx-4 max-w-3xl pb-20 text-center text-white"
-        >
-          <h1 className="text-5xl font-semibold uppercase tracking-wide md:text-7xl">
-            {PROFILE.name}
-          </h1>
-          <p className="pt-2 text-lg font-semibold">
-            {PROFILE.info}
-          </p>
-          <motion.button
+    <section
+      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      id="hero"
+    >
+      {/* Background Image */}
+      <motion.img
+        src={image}
+        alt="hero background"
+        className="absolute inset-0 h-full w-full object-cover"
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 8, ease: "easeOut" }}
+      />
 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 2, }}
-            whileHover={{ scale: 1.05 }} // Scale up on hover
-            whileTap={{ scale: 0.95 }} // Scale down on tap
-            className="mt-8 rounded-full bg-yellow-400 py-2 px-6 text-lg font-semibold text-gray-900 shadow-lg transition ease-in-out transform hover:bg-yellow-500 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
-            onClick={openResume}
+      {/* Dark Radial Overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_40%,rgba(0,0,0,0.85)_100%)]" />
+
+      {/* Content */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="relative z-10 text-center px-6 max-w-3xl"
+      >
+        {/* Name */}
+        <h1 className="text-4xl md:text-6xl font-bold text-white tracking-wide">
+          {PROFILE.name}
+        </h1>
+
+        {/* Role */}
+        <p className="mt-4 text-lg md:text-xl text-gray-300">
+          {PROFILE.info}
+        </p>
+
+        {/* Backend Highlights */}
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          {[
+            "Node.js Backend",
+            "Redis Caching",
+            "Docker & AWS",
+            "Real-time Systems",
+            "System Design",
+          ].map((item) => (
+            <span
+              key={item}
+              className="text-sm px-4 py-1 bg-gray-900/80 border border-gray-700 rounded-full text-gray-300"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+
+        {/* Buttons */}
+        <div className="mt-10 flex justify-center gap-4 flex-wrap">
+
+          {/* LinkedIn */}
+          <motion.button
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            onClick={openLinkedIn}
+            className="rounded-full border border-blue-500 px-6 py-2 text-blue-400 hover:bg-blue-500 hover:text-white"
           >
-            Resume
+            LinkedIn
           </motion.button>
-        </motion.div>
-      </div>
-    </>
+
+          {/* GitHub */}
+          <motion.button
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            onClick={openGithub}
+            className="rounded-full border border-gray-600 px-6 py-2 text-white hover:bg-gray-900"
+          >
+            GitHub
+          </motion.button>
+
+          {/* Projects */}
+          <motion.button
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            onClick={scrollToProjects}
+            className="rounded-full border border-gray-600 px-6 py-2 text-white hover:bg-gray-900"
+          >
+            View Projects
+          </motion.button>
+        </div>
+      </motion.div>
+    </section>
   );
 };
 

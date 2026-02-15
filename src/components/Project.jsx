@@ -1,54 +1,94 @@
+import React from "react";
 import { PROJECTS } from "../constants";
-import Card from "./Card";
 import { motion } from "framer-motion";
+import { FaGithub } from "react-icons/fa";
 
-const containerVariants = {
-  hidden: { opacity: 0, y:-20 },
+const container = {
+  hidden: {},
   visible: {
-    opacity: 1,y: 0,
-    transition: { staggerChildren: 0.4, duration: 0.5 },
+    transition: {
+      staggerChildren: 0.15,
+    },
   },
 };
 
-const itemsVariants = {
-  hidden: { opacity: 0, x:0.8  },
+const item = {
+  hidden: { opacity: 0, y: 40 },
   visible: {
-    opacity: 1, scale: 1  , transition: { duration: 0.5 },
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
   },
 };
 
-const Project = () => {
+const Projects = () => {
   return (
-    <div id="projects">
+    <section id="projects" className="py-24 px-6 text-white text-center">
+      {/* Heading */}
       <motion.h2
-        className="mt-20 text-center text-4xl font-semibold"
-        initial="hidden"
-        whileInView="visible"
-        variants={containerVariants}
+        className="text-4xl font-semibold mb-4"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
         Projects
       </motion.h2>
+
+      <p className="text-gray-400 mb-12 max-w-xl mx-auto">
+        Production-style systems focused on scalability, performance, and real-world architecture.
+      </p>
+
+      {/* Project Grid */}
       <motion.div
-        className="flex flex-wrap justify-center py-8"
+        variants={container}
         initial="hidden"
         whileInView="visible"
-        variants={containerVariants}
         viewport={{ once: true }}
+        className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
       >
         {PROJECTS.map((project, index) => (
-          <motion.div key={index} variants={itemsVariants}>
-            <Card
-              image={project.image}
-              title={project.title}
-              subtitle={project.subtitle}
-              link={project.link }
-            />
+          <motion.div
+            key={index}
+            variants={item}
+            whileHover={{ y: -10, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden shadow-lg group"
+          >
+            {/* Image */}
+            <div className="h-48 overflow-hidden">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
+              />
+            </div>
+
+            {/* Content */}
+            <div className="p-5 text-left">
+              <h3 className="text-lg font-semibold mb-2">
+                {project.title}
+              </h3>
+
+              <p className="text-sm text-gray-400 mb-4 line-clamp-4">
+                {project.subtitle}
+              </p>
+
+              {/* GitHub Button */}
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm bg-zinc-800 px-4 py-2 rounded-full hover:bg-zinc-700 transition"
+              >
+                <FaGithub />
+                View Code
+              </a>
+            </div>
           </motion.div>
         ))}
       </motion.div>
-    </div>
+    </section>
   );
 };
 
-export default Project;
+export default Projects;

@@ -5,21 +5,31 @@ import {
   FaInstagram,
   FaGitAlt,
   FaDocker,
-} from "react-icons/fa6"; // Ensure all icons are available in the specified library
+} from "react-icons/fa6";
 
 import { RiReactjsLine } from "react-icons/ri";
-import { SiMongodb, SiTailwindcss, SiPostman } from "react-icons/si"; // Added SiPostman here
+import {
+  SiMongodb,
+  SiTailwindcss,
+  SiPostman,
+  SiRedis,
+  SiKubernetes,
+  SiTypescript,
+} from "react-icons/si";
+
 import { FaNodeJs } from "react-icons/fa";
 import { BiLogoPostgresql } from "react-icons/bi";
-import { GrMysql } from "react-icons/gr"; // Ensure GrMysql is imported
+import { GrMysql } from "react-icons/gr";
 
 import image1 from "../assets/java-logo.png";
 import image2 from "../assets/todo-image.jpg";
-import image3 from "../assets/url.jpg";
-import image4 from "../assets/streamyard.png";
 
-import image6 from "../assets/Logo_Vercel-1.jpg";
-import image7 from "../assets/uber.webp";
+import image3 from "../assets/url.jpg";
+import image4 from "../assets/Logo_Vercel-1.jpg";
+import image5 from "../assets/notificy.jpg";
+import image6 from "../assets/streamyard.jpg";
+
+/* ================= NAVIGATION ================= */
 
 export const NAVIGATION_LINKS = [
   { label: "About", href: "#about" },
@@ -28,98 +38,116 @@ export const NAVIGATION_LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
+/* ================= PROFILE ================= */
+
 export const PROFILE = {
   name: "Sam Prem Kumar Thalla",
-  info: "Aspiring Software Developer | MERN Stack | Tech Enthusiast",
+  info:
+    "Backend-Focused Software Engineer | Node.js • Redis • Docker • AWS",
 };
 
+/* ================= ABOUT ================= */
 
 export const ABOUT = {
   text1:
-    "I build robust and scalable web applications using modern technologies, driven by a problem-solving mindset and a focus on clean.",
+    "Backend engineer focused on building scalable, reliable systems.",
+
   text2:
-    "Hello! I'm Sam Prem Kumar Thalla — a passionate, growth-oriented software developer with a strong foundation in Java and full-stack web development. I’ve engineered ride-hailing apps, deployment platforms similar to Vercel, real-time streaming solutions, and more. Skilled in Docker, AWS, and Redis, I specialize in building scalable backend services and responsive React frontends. I take pride in clean architecture, collaborative work, and staying ahead of the evolving tech landscape. Whether it’s performance, security, or design, my goal is to deliver solutions that are fast, reliable, and future-ready.",
+    "I specialize in designing backend systems using Node.js, TypeScript, PostgreSQL, MongoDB, and Redis. My experience includes building production-style APIs, asynchronous processing systems, caching layers, and performance-focused architectures.\n\nI have developed scalable systems such as a Redis-powered URL shortener, a queue-based notification system using BullMQ, a TypeScript expense tracking platform, and a multithreaded Java web server tested under heavy load. I focus on clean architecture, reliability, and building systems that scale. Currently, I am deepening my expertise in System Design, Distributed Systems, and cloud infrastructure.",
+
   publication: {
     title:
-      "Published a journal article on Maximum Power Point Tracking using Cuckoo Search Algorithm (CSA)",
+      "Research Publication: Maximum Power Point Tracking using Cuckoo Search Algorithm (CSA)",
     link:
       "https://drive.google.com/file/d/1QUZ3L33mAqRigHwQnwg__ZOjVhmEPucZ/view",
   },
 };
 
+/* ================= PROJECTS ================= */
 
 export const PROJECTS = [
   {
-    title: "Multithreaded Web Server (Java)",
+    title: "Vercel Backend – Deployment Platform",
     subtitle:
-      "A Java-based multithreaded web server using a fixed-size thread pool to handle multiple client connections concurrently over TCP sockets. Demonstrates concurrency, socket programming, and resource management.",
-    image: image1, // replace with your image asset
-    link: "https://github.com/sampremm/multithreaded-webserver-java",
+      "Production-style deployment system built with Node.js, Docker, AWS ECS/ECR, and S3. Supports isolated builds, reverse proxy routing, static asset delivery, and CI/CD orchestration.",
+    image: image4,
+    link: "https://github.com/sampremm/vercel-backend",
   },
   {
-    title: "URL Shortener",
+    title: "Scalable URL Shortener",
     subtitle:
-      "Node.js + Express.js + MongoDB + Redis. Implements link shortening, redirection, click analytics, and user authentication. Uses Redis caching for high performance.",
+      "High-performance URL shortening service with Redis caching, JWT authentication, and click analytics. Designed for low-latency redirects and high request throughput.",
     image: image3,
     link: "https://github.com/sampremm/url-shortener",
   },
   {
-    title: "Vercel Clone – Backend",
+    title: "Templated Notification System",
     subtitle:
-      "Custom deployment platform mimicking Vercel. Node.js + Docker + AWS ECS/ECR + S3. Designed for isolated containers, reverse proxy streaming, static file distribution, and CI/CD orchestration.",
-    image: image6,
-    link: "https://github.com/sampremm/vercel-backend",
+      "Queue-based asynchronous notification system using BullMQ and Redis. Implemented background workers, retry logic, idempotency, and delivery state management.",
+    image: image5,
+    link: "https://github.com/sampremm/algohire-hackthon",
   },
   {
-    title: "StreamYard Streaming App",
+    title: "Expense Tracker API (TypeScript)",
     subtitle:
-      "A browser-based live video streaming app using React, Node.js, WebRTC, FFmpeg, and Socket.IO. Dockerized for scalability with RTMP server integration for real-time performance.",
-    image: image4,
+      "REST API built with Node.js, TypeScript, PostgreSQL, and Prisma. Includes JWT authentication, structured data models, and clean service-layer architecture.",
+    image: image2,
+    link: "https://github.com/sampremm/Xpensetracker",
+  },
+  {
+    title: "StreamYard Clone – Real-time Streaming",
+    subtitle:
+      "Real-time video streaming platform using WebRTC, Socket.IO, and FFmpeg. Dockerized architecture for scalable low-latency broadcasting.",
+    image: image6,
     link: "https://github.com/sampremm/streamyard-clone",
   },
   {
-    title: "Uber – Ride Application",
+    title: "Multithreaded Java Web Server",
     subtitle:
-      "A dynamic ride-hailing application built with React.js, Node.js, Express.js, and MongoDB. Real-time tracking via WebSockets, Google Maps API for route calculations, secure JWT authentication, and optimized driver allocation logic.",
-    image: image7,
-    link: "https://github.com/sampremm/uber-clone",
-  },
-  {
-    title: "Dockerized Todo App (Node + Prisma + PostgreSQL)",
-    subtitle:
-      "Full-featured backend Todo app with JWT authentication. Built with Node.js + Express, Prisma ORM, PostgreSQL, and Docker Compose for containerized deployment.",
-    image: image2, // replace with your image asset
-    link: "https://github.com/sampremm/backend-todo-app",
+      "High-performance HTTP server using Java sockets and thread pools. Tested for scalability under heavy concurrent load.",
+    image: image1,
+    link: "https://github.com/sampremm/multithreaded-webserver-java",
   },
 ];
 
-
+/* ================= SKILLS ================= */
 
 export const SKILLS = [
   {
-    icon: <RiReactjsLine className="text-4xl lg:text-6xl text-cyan-400" />,
-    name: "React",
-  },
-  {
-    icon: <SiMongodb className="text-4xl lg:text-6xl text-green-600" />,
-    name: "MongoDB",
-  },
-
-  {
     icon: <FaNodeJs className="text-4xl lg:text-6xl text-green-600" />,
     name: "Node.js",
+  },
+  {
+    icon: <SiTypescript className="text-4xl lg:text-6xl text-blue-500" />,
+    name: "TypeScript",
+  },
+  {
+    icon: <SiRedis className="text-4xl lg:text-6xl text-red-500" />,
+    name: "Redis",
+  },
+  {
+    icon: <SiKubernetes className="text-4xl lg:text-6xl text-blue-500" />,
+    name: "Kubernetes",
+  },
+  {
+    icon: <FaDocker className="text-4xl lg:text-6xl text-blue-600" />,
+    name: "Docker",
   },
   {
     icon: <BiLogoPostgresql className="text-4xl lg:text-6xl text-sky-700" />,
     name: "PostgreSQL",
   },
   {
-    icon: <SiTailwindcss className="text-4xl lg:text-6xl text-blue-400" />,
-    name: "Tailwind CSS",
+    icon: <SiMongodb className="text-4xl lg:text-6xl text-green-600" />,
+    name: "MongoDB",
   },
   {
-    icon: <GrMysql className="text-4xl lg:text-6xl text-blue-500" />,
-    name: "MySQL",
+    icon: <RiReactjsLine className="text-4xl lg:text-6xl text-cyan-400" />,
+    name: "React",
+  },
+  {
+    icon: <SiTailwindcss className="text-4xl lg:text-6xl text-blue-400" />,
+    name: "Tailwind CSS",
   },
   {
     icon: <FaGitAlt className="text-4xl lg:text-6xl text-orange-600" />,
@@ -133,21 +161,11 @@ export const SKILLS = [
     icon: <SiPostman className="text-4xl lg:text-6xl text-orange-500" />,
     name: "Postman",
   },
-  {
-    icon: <FaDocker className="text-4xl lg:text-6xl text-blue-600" />,
-    name: "Docker",
-  },
 ];
 
+/* ================= SOCIAL ================= */
+
 export const SOCIAL_MEDIA_LINKS = [
-  {
-    href: "https://instagram.com/samprem__/",
-    icon: <FaInstagram fontSize={25} className="hover:opacity-80" />,
-  },
-  {
-    href: "https://x.com/sampremm",
-    icon: <FaXTwitter fontSize={25} className="hover:opacity-80" />,
-  },
   {
     href: "https://github.com/sampremm",
     icon: <FaGithub fontSize={25} className="hover:opacity-80" />,
@@ -155,5 +173,13 @@ export const SOCIAL_MEDIA_LINKS = [
   {
     href: "https://www.linkedin.com/in/samprem1/",
     icon: <FaLinkedin fontSize={25} className="hover:opacity-80" />,
+  },
+  {
+    href: "mailto:samprem888111@gmail.com",
+    icon: <FaInstagram fontSize={25} className="hover:opacity-80" />,
+  },
+  {
+    href: "https://x.com/sampremm",
+    icon: <FaXTwitter fontSize={25} className="hover:opacity-80" />,
   },
 ];

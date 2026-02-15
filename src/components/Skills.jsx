@@ -1,55 +1,57 @@
 import { SKILLS } from "../constants";
 import { motion } from "framer-motion";
 
-const containerVariants = {
-  hidden: { opacity: 0, y: 20 },
+const container = {
+  hidden: {},
   visible: {
-    opacity: 1,
-    y: 0,
     transition: {
-      staggerChildren: 0.2, // smoother stagger
-      duration: 0.5,
-      ease: "easeOut",
+      staggerChildren: 0.08,
     },
   },
 };
 
-const itemsVariants = {
-  hidden: { opacity: 0, x: -20, scale: 0.95 },
+const item = {
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
-    x: 0,
-    scale: 1,
-    transition: {
-      duration: 0.4,
-      ease: "easeOut",
-    },
+    y: 0,
+    transition: { duration: 0.5 },
   },
 };
 
 const Skills = () => {
   return (
-    <div id="skills" className="container mx-auto">
-      <h2 className="mb-12 mt-20 text-center text-4xl text-white">Skills</h2>
+    <section id="skills" className="py-24 px-6 text-white text-center">
+      <motion.h2
+        className="text-4xl font-semibold mb-12"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        Skills
+      </motion.h2>
+
       <motion.div
+        variants={container}
         initial="hidden"
         whileInView="visible"
-        variants={containerVariants}
         viewport={{ once: true }}
-        className="mx-2 flex flex-row flex-wrap justify-center gap-6 rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-950 px-4 py-10 lg:px-20"
+        className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto"
       >
         {SKILLS.map((skill, index) => (
           <motion.div
             key={index}
-            variants={itemsVariants}
-            className="flex w-full max-w-xs items-center gap-4 rounded-lg bg-zinc-800 px-4 py-3 shadow-md transition-all duration-300 hover:scale-105 sm:w-auto"
+            variants={item}
+            whileHover={{ y: -8, scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl shadow-md"
           >
             {skill.icon}
-            <h3 className="text-xl text-white lg:text-2xl">{skill.name}</h3>
+            <span className="text-lg">{skill.name}</span>
           </motion.div>
         ))}
       </motion.div>
-    </div>
+    </section>
   );
 };
 

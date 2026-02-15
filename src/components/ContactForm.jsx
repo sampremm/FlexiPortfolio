@@ -1,116 +1,121 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaTwitter,
+  FaInstagram,
+} from "react-icons/fa";
 
-const GitHubProfile = () => {
-  const [repos, setRepos] = useState([]);
-
-  useEffect(() => {
-    fetch("https://api.github.com/users/sampremm/repos?sort=updated&per_page=3")
-      .then((res) => res.json())
-      .then((data) => setRepos(data))
-      .catch(console.error);
-  }, []);
-
-  
-
+const Contact = () => {
   return (
-    <div className="flex flex-col items-center mt-12 px-4 text-white" id="contact">
-      {/* Section Title */}
-      <h2 className="text-4xl font-semibold mb-8">Let's Connect</h2>
-  <div className="flex gap-8 mt-8 justify-around">
-    {/* LinkedIn */}
-  <motion.a
-    href="https://www.linkedin.com/in/samprem1/"
-    target="_blank"
-    rel="noopener noreferrer"
-    whileHover={{ scale: 1.2, rotate: 5 }}
-    whileTap={{ scale: 0.95 }}
-    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-  >
-    <motion.img
-      src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
-      alt="LinkedIn Profile"
-      className="w-32 h-32 rounded-full border-4 border-gray-300 shadow-lg"
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.4 }}
-    />
-  </motion.a>
-  {/* GitHub */}
-  <motion.a
-    href="https://github.com/sampremm"
-    target="_blank"
-    rel="noopener noreferrer"
-    whileHover={{ scale: 1.2, rotate: 5 }}
-    whileTap={{ scale: 0.95 }}
-    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-  >
-    <motion.img
-      src="https://github.com/sampremm.png"
-      alt="Sam Prem Kumar Thalla"
-      className="w-32 h-32 rounded-full border-4 border-gray-300 shadow-lg"
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-    />
-  </motion.a>
+    <section id="contact" className="py-24 px-6 text-white text-center">
+      {/* Heading */}
+      <motion.h2
+        className="text-4xl font-semibold mb-4"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        Let’s Connect
+      </motion.h2>
 
-  
+      <p className="text-gray-400 mb-12">
+        Open to Backend Engineer opportunities • Immediate Joiner
+      </p>
 
-  {/* Gmail */}
-  <motion.a
-    href="mailto:samprem888111@gmail.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    whileHover={{ scale: 1.2, rotate: 5 }}
-    whileTap={{ scale: 0.95 }}
-    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-  >
-    <motion.img
-      src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
-      alt="Email"
-      className="w-32 h-32 rounded-full border-4 border-gray-300 shadow-lg"
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.6 }}
-    />
-  </motion.a>
-</div>
+      {/* Contact Cards */}
+      <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto mb-16">
 
+        {/* Email */}
+        <motion.a
+          whileHover={{ y: -6, scale: 1.03 }}
+          href="mailto:samprem888111@gmail.com"
+          className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72 hover:bg-zinc-800 transition"
+        >
+          <FaEnvelope className="mb-2 text-yellow-400 text-xl" />
+          <p className="text-sm text-gray-400">Email</p>
+          <p className="text-sm">samprem888111@gmail.com</p>
+        </motion.a>
 
-      {/* Contribution Graph */}
-      <h3 className="text-2xl font-semibold mt-6 mb-4">GitHub Contributions</h3>
-      <motion.img
-        src="https://ghchart.rshah.org/sampremm"
-        alt="GitHub Contributions"
-        className="w-full max-w-xl mt-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      />
+        {/* LinkedIn */}
+        <motion.a
+          whileHover={{ y: -6, scale: 1.03 }}
+          href="https://www.linkedin.com/in/samprem1/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72 hover:bg-zinc-800"
+        >
+          <FaLinkedin className="mb-2 text-blue-400 text-xl" />
+          <p className="text-sm text-gray-400">LinkedIn</p>
+          <p className="text-sm">linkedin.com/in/samprem1</p>
+        </motion.a>
 
-      {/* Latest 3 Repos */}
-      <h3 className="text-2xl font-semibold mt-8 mb-4">Latest Repositories</h3>
-      <div className="flex flex-col md:flex-row gap-6">
-        {repos.map((repo, index) => (
-          <motion.a
-            key={repo.id}
-            href={repo.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-gray-800 p-4 rounded-lg shadow-lg w-72"
-            whileHover={{ scale: 1.05, y: -5 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 * index, type: "spring", stiffness: 300, damping: 20 }}
-          >
-            <h4 className="text-lg font-semibold text-white mb-2">{repo.name}</h4>
-            <p className="text-gray-300 text-sm line-clamp-3">{repo.description || "No description"}</p>
-          </motion.a>
-        ))}
+        {/* GitHub */}
+        <motion.a
+          whileHover={{ y: -6, scale: 1.03 }}
+          href="https://github.com/sampremm"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72 hover:bg-zinc-800"
+        >
+          <FaGithub className="mb-2 text-white text-xl" />
+          <p className="text-sm text-gray-400">GitHub</p>
+          <p className="text-sm">github.com/sampremm</p>
+        </motion.a>
+
+        {/* Twitter / X */}
+        <motion.a
+          whileHover={{ y: -6, scale: 1.03 }}
+          href="https://x.com/sampremm"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72 hover:bg-zinc-800"
+        >
+          <FaTwitter className="mb-2 text-sky-400 text-xl" />
+          <p className="text-sm text-gray-400">Twitter / X</p>
+          <p className="text-sm">x.com/sampremm</p>
+        </motion.a>
+
+        {/* Instagram */}
+        <motion.a
+          whileHover={{ y: -6, scale: 1.03 }}
+          href="https://www.instagram.com/samprem__/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72 hover:bg-zinc-800"
+        >
+          <FaInstagram className="mb-2 text-pink-400 text-xl" />
+          <p className="text-sm text-gray-400">Instagram</p>
+          <p className="text-sm">@samprem__</p>
+        </motion.a>
+
+        {/* Status */}
+        <div className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72">
+          <FaMapMarkerAlt className="mb-2 text-green-400 text-xl" />
+          <p className="text-sm text-gray-400">Status</p>
+          <p className="text-sm">India • Open to Work</p>
+        </div>
       </div>
-    </div>
+
+      {/* GitHub Contribution Graph */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="max-w-4xl mx-auto"
+      >
+        <h3 className="text-2xl font-semibold mb-6">GitHub Activity</h3>
+        <img
+          src="https://ghchart.rshah.org/22c55e/sampremm"
+          alt="GitHub contribution graph"
+          className="w-full rounded-lg border border-zinc-800 bg-zinc-900 p-4"
+        />
+      </motion.div>
+    </section>
   );
 };
 
-export default GitHubProfile;
+export default Contact;
