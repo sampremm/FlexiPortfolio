@@ -6,7 +6,7 @@ import Project from './components/Project';
 import Skills from './components/Skills';
 import ContactForm from './components/ContactForm';
 import Fotter from './components/Fotter';
-import Photography from "./components/photography";
+import Photography from "./components/Photography";
 
 
 const App = () => {
