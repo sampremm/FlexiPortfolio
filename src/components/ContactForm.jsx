@@ -1,119 +1,117 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  FaGithub,
-  FaLinkedin,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaTwitter,
-  FaInstagram,
+  FaGithub, FaLinkedin, FaEnvelope,
+  FaMapMarkerAlt, FaTwitter, FaInstagram,
 } from "react-icons/fa";
+
+const links = [
+  { icon: <FaEnvelope />, label: "Email", value: "samprem888111@gmail.com", href: "mailto:samprem888111@gmail.com", color: "text-amber-400" },
+  { icon: <FaLinkedin />, label: "LinkedIn", value: "linkedin.com/in/samprem1", href: "https://www.linkedin.com/in/samprem1/", color: "text-blue-400" },
+  { icon: <FaGithub />, label: "GitHub", value: "github.com/sampremm", href: "https://github.com/sampremm", color: "text-white" },
+  { icon: <FaTwitter />, label: "Twitter / X", value: "x.com/sampremm", href: "https://x.com/sampremm", color: "text-sky-400" },
+  { icon: <FaInstagram />, label: "Instagram", value: "@samprem__", href: "https://www.instagram.com/samprem__/", color: "text-pink-400" },
+  { icon: <FaMapMarkerAlt />, label: "Status", value: "India · Open to Work", href: null, color: "text-amber-400" },
+];
+
+const container = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
+const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-24 px-6 text-white text-center">
-      {/* Heading */}
-      <motion.h2
-        className="text-4xl font-semibold mb-4"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-      >
-        Let’s Connect
-      </motion.h2>
+    <section id="contact" className="py-28 px-6">
+      <div className="max-w-6xl mx-auto">
 
-      <p className="text-gray-400 mb-12">
-        Open to Backend Engineer opportunities • Immediate Joiner
-      </p>
-
-      {/* Contact Cards */}
-      <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto mb-16">
-
-        {/* Email */}
-        <motion.a
-          whileHover={{ y: -6, scale: 1.03 }}
-          href="mailto:samprem888111@gmail.com"
-          className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72 hover:bg-zinc-800 transition"
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3 mb-4"
         >
-          <FaEnvelope className="mb-2 text-yellow-400 text-xl" />
-          <p className="text-sm text-gray-400">Email</p>
-          <p className="text-sm">samprem888111@gmail.com</p>
-        </motion.a>
+          <div className="w-5 h-px bg-amber-500" />
+          <span className="text-xs font-mono tracking-widest uppercase text-amber-500">Contact</span>
+        </motion.div>
 
-        {/* LinkedIn */}
-        <motion.a
-          whileHover={{ y: -6, scale: 1.03 }}
-          href="https://www.linkedin.com/in/samprem1/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72 hover:bg-zinc-800"
-        >
-          <FaLinkedin className="mb-2 text-blue-400 text-xl" />
-          <p className="text-sm text-gray-400">LinkedIn</p>
-          <p className="text-sm">linkedin.com/in/samprem1</p>
-        </motion.a>
-
-        {/* GitHub */}
-        <motion.a
-          whileHover={{ y: -6, scale: 1.03 }}
-          href="https://github.com/sampremm"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72 hover:bg-zinc-800"
-        >
-          <FaGithub className="mb-2 text-white text-xl" />
-          <p className="text-sm text-gray-400">GitHub</p>
-          <p className="text-sm">github.com/sampremm</p>
-        </motion.a>
-
-        {/* Twitter / X */}
-        <motion.a
-          whileHover={{ y: -6, scale: 1.03 }}
-          href="https://x.com/sampremm"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72 hover:bg-zinc-800"
-        >
-          <FaTwitter className="mb-2 text-sky-400 text-xl" />
-          <p className="text-sm text-gray-400">Twitter / X</p>
-          <p className="text-sm">x.com/sampremm</p>
-        </motion.a>
-
-        {/* Instagram */}
-        <motion.a
-          whileHover={{ y: -6, scale: 1.03 }}
-          href="https://www.instagram.com/samprem__/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72 hover:bg-zinc-800"
-        >
-          <FaInstagram className="mb-2 text-pink-400 text-xl" />
-          <p className="text-sm text-gray-400">Instagram</p>
-          <p className="text-sm">@samprem__</p>
-        </motion.a>
-
-        {/* Status */}
-        <div className="bg-zinc-900 border border-zinc-800 px-6 py-4 rounded-xl w-72">
-          <FaMapMarkerAlt className="mb-2 text-green-400 text-xl" />
-          <p className="text-sm text-gray-400">Status</p>
-          <p className="text-sm">India • Open to Work</p>
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-4">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black text-white"
+          >
+            Let's <span className="text-amber-400">Connect.</span>
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-2"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <span className="text-xs font-mono tracking-wider text-amber-400 border border-amber-900 bg-amber-950/40 px-3 py-1.5 rounded-full">
+              Open to Backend Engineer opportunities · Immediate Joiner
+            </span>
+          </motion.div>
         </div>
-      </div>
 
-      {/* GitHub Contribution Graph */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="max-w-4xl mx-auto"
-      >
-        <h3 className="text-2xl font-semibold mb-6">GitHub Activity</h3>
-        <img
-          src="https://ghchart.rshah.org/22c55e/sampremm"
-          alt="GitHub contribution graph"
-          className="w-full rounded-lg border border-zinc-800 bg-zinc-900 p-4"
-        />
-      </motion.div>
+        {/* Cards */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-16"
+        >
+          {links.map((link, index) => {
+            const Wrapper = link.href ? motion.a : motion.div;
+            const props = link.href
+              ? { href: link.href, target: "_blank", rel: "noopener noreferrer" }
+              : {};
+            return (
+              <Wrapper
+                key={index}
+                variants={item}
+                whileHover={link.href ? { y: -4 } : {}}
+                {...props}
+                className="flex items-center gap-4 p-5 bg-zinc-950 border border-zinc-800 hover:border-amber-900/60 rounded-xl transition-colors duration-200 group"
+              >
+                <div className={`text-xl ${link.color} p-3 rounded-lg bg-zinc-900 group-hover:scale-110 transition-transform duration-200`}>
+                  {link.icon}
+                </div>
+                <div>
+                  <p className="text-xs font-mono tracking-wider uppercase text-zinc-600 mb-1">{link.label}</p>
+                  <p className="text-sm text-zinc-300 group-hover:text-white transition-colors">{link.value}</p>
+                </div>
+              </Wrapper>
+            );
+          })}
+        </motion.div>
+
+        {/* GitHub heatmap */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-zinc-950 border border-zinc-800 rounded-xl p-6"
+        >
+          <div className="flex items-center gap-3 mb-5">
+            <FaGithub className="text-zinc-500" />
+            <h3 className="text-sm font-semibold text-white">GitHub Activity</h3>
+          </div>
+          <img
+            src="https://ghchart.rshah.org/f59e0b/sampremm"
+            alt="GitHub contribution graph"
+            className="w-full rounded-lg"
+          />
+          <div className="flex items-center justify-end gap-2 mt-3">
+            <span className="text-xs font-mono text-zinc-700">Less</span>
+            {["#1c1917", "#78350f", "#b45309", "#f59e0b", "#fcd34d"].map((c) => (
+              <div key={c} className="w-2.5 h-2.5 rounded-sm" style={{ background: c }} />
+            ))}
+            <span className="text-xs font-mono text-zinc-700">More</span>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };
