@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { PROFILE, SKILLS } from '../constants';
 
 const TerminalAnimation = () => {
   const [lines, setLines] = useState([]);
-  
+
   const allLines = useMemo(() => [
     { text: "fetching package metadata...", type: "info" },
     { text: "resolved dependency: distributed-systems@latest", type: "success" },
@@ -48,7 +49,7 @@ const TerminalAnimation = () => {
           {lines.map((line, idx) => {
             if (!line) return null;
             return (
-              <motion.div 
+              <motion.div
                 key={idx}
                 initial={{ opacity: 0, x: -5 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -69,55 +70,98 @@ const TerminalAnimation = () => {
 };
 
 const HybridHero = () => {
+  const words = ['Engineer.', 'Architect.', 'Builder.', 'Developer.'];
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(100);
+
+  useEffect(() => {
+    const handleType = () => {
+      const i = loopNum % words.length;
+      const fullText = words[i];
+
+      setDisplayText(isDeleting 
+        ? fullText.substring(0, displayText.length - 1) 
+        : fullText.substring(0, displayText.length + 1)
+      );
+
+      setTypingSpeed(isDeleting ? 50 : 100);
+
+      if (!isDeleting && displayText === fullText) {
+        setTimeout(() => setIsDeleting(true), 1500);
+      } else if (isDeleting && displayText === '') {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+    };
+
+    const timer = setTimeout(handleType, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, loopNum, typingSpeed]);
+
   return (
-    <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 pt-32 pb-20 relative overflow-hidden bg-bg">
+    <section className="min-h-screen flex flex-col justify-center px-6 md:px-16 pt-32 pb-10 relative overflow-hidden bg-bg">
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-4 relative z-10">
-        
+
         {/* Profile Info */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
           className="relative z-10"
         >
           <div className="hero-status inline-flex items-center gap-2 mb-6">
             <span className="w-1.5 h-1.5 bg-green rounded-full animate-blink"></span>
-            <span className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold">Infrastructure & Systems Specialist</span>
+            <span className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold">{PROFILE.role}</span>
           </div>
-          
-          <h1 className="text-[12vw] lg:text-[7rem] leading-[0.85] font-black tracking-tighter mb-8">
+
+          <div className="mb-4">
+            <span className="font-mono text-amber text-xs md:text-sm font-bold tracking-widest uppercase">{PROFILE.name}</span>
+          </div>
+
+          <h1 className="text-[10vw] lg:text-[6.5rem] leading-[0.85] font-black tracking-tighter mb-8">
             <motion.span 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
               className="block"
-            >Backend</motion.span>
+              animate={{ 
+                x: [0, -1, 1, 0],
+                opacity: [1, 0.9, 1]
+              }}
+              transition={{ 
+                duration: 0.3, 
+                repeat: Infinity, 
+                repeatDelay: 5 
+              }}
+            >
+              Backend
+            </motion.span>
+            <span className="text-amber block min-h-[1em]">
+              {displayText}
+              <span className="animate-pulse">_</span>
+            </span>
             <motion.span 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-amber block"
-            >Engineer.</motion.span>
-            <motion.span 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-transparent block" 
-              style={{ WebkitTextStroke: '1px rgba(241,245,249,0.15)' }}
-            >Builder.</motion.span>
+              className="text-transparent block bg-clip-text bg-gradient-to-r from-white/10 via-white/40 to-white/10"
+              animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              style={{ 
+                WebkitTextStroke: '1px rgba(241,245,249,0.15)',
+                backgroundSize: '200% auto'
+              }}
+            >
+              Systems.
+            </motion.span>
           </h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
             className="font-mono text-xs md:text-base text-muted2 leading-relaxed max-w-md mb-12"
           >
-            Building the <span className="text-amber">"Plumbing"</span> of the Cloud. 
-            Specializing in distributed systems, idempotency, and high-performance infrastructure.
+            {PROFILE.info}
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
@@ -130,30 +174,36 @@ const HybridHero = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
             transition={{ delay: 1 }}
             className="flex flex-wrap gap-2"
           >
-            {[ "Node.js", "Java", "Docker","Redis","AWS", ].map(tech => (
-              <span key={tech} className="px-3 py-1 border border-border rounded-[2px] text-[8px] md:text-[9px] font-mono text-muted uppercase tracking-widest">
-                {tech}
+            {SKILLS.slice(0, 5).map(skill => (
+              <span key={skill.name} className="px-3 py-1 border border-border rounded-[2px] text-[8px] md:text-[9px] font-mono text-muted uppercase tracking-widest">
+                {skill.name}
               </span>
             ))}
           </motion.div>
         </motion.div>
 
         {/* Terminal Animation */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: 1,
+            y: [0, -10, 0]
+          }}
+          transition={{ 
+            opacity: { duration: 0.6, delay: 0.2 },
+            y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+          }}
           className="flex justify-center lg:justify-end relative"
         >
           <TerminalAnimation />
-          {/* Subtle Glow */}
-          <div className="absolute inset-0 bg-amber/5 blur-[80px] rounded-full -z-10 animate-pulse"></div>
+          {/* Subtle Yellow Gradient Light */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-amber/10 blur-[120px] rounded-full -z-10 animate-pulse-slow"></div>
         </motion.div>
       </div>
 
