@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaInstagram } from "react-icons/fa";
+import { FiCamera } from "react-icons/fi";
 import photo1 from "../assets/birds.jpeg";
 import photo2 from "../assets/leaf.jpeg";
 import photo3 from "../assets/chruch.jpeg";
@@ -15,92 +16,59 @@ const photos = [
 
 const Photography = () => {
   return (
-    <section id="photography" className="py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="photography" className="py-24 px-6 max-w-6xl mx-auto">
+      <div className="mb-16">
+        <div className="flex items-center gap-4 mb-2">
+          <FiCamera className="text-accent-secondary" />
+          <h2 className="text-3xl font-bold font-mono tracking-tighter uppercase text-white">Visual Telemetry</h2>
+        </div>
+        <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">Beyond Code // Through the Lens.</p>
+        <div className="h-0.5 w-full bg-zinc-800 mt-6 relative">
+          <div className="absolute left-0 top-0 h-full w-24 bg-accent-secondary"></div>
+        </div>
+      </div>
 
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-3 mb-3"
-            >
-              <div className="w-5 h-px bg-amber-500" />
-              <span className="text-xs font-mono tracking-widest uppercase text-amber-500">
-                Beyond Code
-              </span>
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-black text-white"
-            >
-              Through the Lens.
-            </motion.h2>
-          </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {photos.map((photo, index) => (
           <motion.a
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            key={index}
+            href={photo.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            href="https://www.instagram.com/pixel_studio___"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ y: -2 }}
-            className="hidden md:flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-zinc-400 border border-zinc-800 px-4 py-2.5 rounded-lg hover:border-amber-800 hover:text-amber-400 transition"
+            transition={{ delay: index * 0.1 }}
+            className="group relative overflow-hidden rounded-xl border border-white/5 bg-[#1a1a1e]"
           >
-            <FaInstagram size={12} /> View Instagram
-          </motion.a>
-        </div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-3"
-        >
-          {photos.map((photo, index) => (
-            <motion.a
-              key={index}
-              href={photo.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-              }}
-              whileHover={{ y: -6 }}
-              className="group relative overflow-hidden rounded-xl border border-zinc-800 hover:border-amber-900 transition-colors"
-            >
-              <div className="aspect-[3/4]">
-                <img
-                  src={photo.img}
-                  alt="Photography"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-amber-950/40 transition-all duration-400 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center gap-1">
-                  <FaInstagram className="text-amber-400 text-xl" />
-                  <span className="text-amber-400 text-xs font-mono tracking-wider">View</span>
+            <div className="aspect-[3/4]">
+              <img
+                src={photo.img}
+                alt="Photography"
+                className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
+              />
+            </div>
+            <div className="absolute inset-0 bg-accent-secondary/0 group-hover:bg-accent-secondary/10 transition-all duration-400 flex items-center justify-center">
+              <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center gap-2">
+                <div className="p-3 bg-black/80 rounded-full text-accent-secondary border border-accent-secondary/50">
+                  <FaInstagram className="text-xl" />
                 </div>
+                <span className="text-accent-secondary text-[10px] font-mono uppercase tracking-[0.2em] font-bold">RAW_IMG</span>
               </div>
-            </motion.a>
-          ))}
-        </motion.div>
+            </div>
+          </motion.a>
+        ))}
+      </div>
 
-        <div className="mt-8 flex justify-center md:hidden">
-          <a
-            href="https://www.instagram.com/pixel_studio___"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-zinc-400 border border-zinc-800 px-5 py-2.5 rounded-lg hover:border-amber-800 hover:text-amber-400 transition"
-          >
-            <FaInstagram size={12} /> View Instagram
-          </a>
-        </div>
+      <div className="mt-12 flex justify-center">
+        <a
+          href="https://www.instagram.com/pixel_studio___"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-3 text-[10px] font-mono tracking-[0.2em] uppercase text-gray-500 border border-white/10 px-8 py-4 rounded-xl hover:border-accent-secondary/50 hover:text-accent-secondary transition-all duration-300 group"
+        >
+          <FaInstagram className="group-hover:rotate-12 transition-transform" /> View Full Gallery
+        </a>
       </div>
     </section>
   );

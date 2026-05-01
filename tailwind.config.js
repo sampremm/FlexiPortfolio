@@ -7,16 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        accent: {
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#f97316', // main accent color (orange)
-          600: '#ea580c',
-          700: '#c2410c',
-        },
+        bg: "#080810",
+        bg2: "#0d0d18",
+        surface: "#111120",
+        border: "#1a1a2e",
+        amber: "#f59e0b",
+        amber2: "#fbbf24",
+        green: "#10b981",
+        muted: "#64748b",
+        muted2: "#94a3b8",
+        text: "#f1f5f9",
+      },
+      fontFamily: {
+        mono: ['JetBrains Mono', 'monospace'],
+        display: ['Inter', 'sans-serif'], // Inter as fallback for Cabinet Grotesk
       },
     },
   },
