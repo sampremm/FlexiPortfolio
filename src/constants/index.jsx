@@ -88,7 +88,7 @@ export const PROJECTS = [
     ],
     tags: ["Node.js", "Redis", "Docker", "PostgreSQL"],
     source: "https://github.com/sampremm/playto-engine",
-    demo: "https://playto-engine-vert.vercel.app/login",
+    demo: "https://playto-engine-vert.vercel.app/",
     image: image2
   },
   {
