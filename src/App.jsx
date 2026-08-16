@@ -4,8 +4,10 @@ import ProjectSpecs from './components/ProjectSpecs';
 import InfrastructureGrid from './components/InfrastructureGrid';
 import ResearchSection from './components/ResearchSection';
 import Photography from './components/Photography';
+import ContactForm from './components/ContactForm';
 import { ABOUT, SOCIAL_MEDIA_LINKS, PROFILE } from './constants';
 import { motion, useScroll, useSpring } from 'framer-motion';
+
 
 const App = () => {
   const { scrollYProgress } = useScroll();
@@ -64,11 +66,12 @@ const App = () => {
         {/* Tab Navigation */}
         <nav className="bg-[#0a0a0a] px-4 flex border-b border-[#252525] z-50 overflow-x-auto no-scrollbar shadow-xl">
           {[
-            { id: 'about', label: 'about' },
+          { id: 'about', label: 'about' },
             { id: 'projects', label: 'projects' },
             { id: 'skills', label: 'skills' },
             { id: 'research', label: 'research' },
-            { id: 'gallery', label: 'gallery' }
+            { id: 'gallery', label: 'gallery' },
+            { id: 'contact', label: 'contact' }
           ].map((tab) => (
             <a 
               key={tab.id}
@@ -140,9 +143,10 @@ const App = () => {
           </section>
 
           <ProjectSpecs />
+          <InfrastructureGrid />
           <ResearchSection />
           <Photography />
-          <InfrastructureGrid />
+
 
           {/* Contact Section */}
           <section id="contact" className="py-16 border-t border-[#252525]">
@@ -154,35 +158,48 @@ const App = () => {
                 <span className="text-white">./contact_form.py</span>
               </div>
               
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-                <div>
-                  <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-none">
-                    Got a role<br/><span className="text-amber">in mind?</span>
-                  </h2>
-                  <h3 className="text-2xl font-mono text-white mb-8">Let's talk.</h3>
-                  <p className="text-muted font-mono text-sm mb-8">Open to Backend / Platform Engineering roles in Hyderabad, Bangalore, and Pune. Immediate joiner.</p>
-                  <a href="mailto:samprem888111@gmail.com" className="btn-terminal inline-block">
-                  Send Email ↗
-                </a>
-              </div>
-              
-              <div className="flex flex-col gap-2">
-                {SOCIAL_MEDIA_LINKS.map((link, i) => (
-                  <a 
-                    key={i} 
-                    href={link.href} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="flex justify-between items-center bg-[#121212] border border-[#252525] p-4 hover:border-amber hover:bg-[#1a1a1a] transition-all group"
-                  >
-                    <span className="font-mono text-[10px] text-amber uppercase font-bold tracking-widest">[{link.label}]</span>
-                    <span className="text-muted font-mono text-xs truncate pl-4 group-hover:text-white">{link.href.replace('https://', '').replace('mailto:', '')}</span>
-                  </a>
-                ))}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                {/* Left: Headline + social links */}
+                <div className="flex flex-col gap-8">
+                  <div>
+                    <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-none">
+                      Got a role<br/><span className="text-amber">in mind?</span>
+                    </h2>
+                    <h3 className="text-2xl font-mono text-white mb-4">Let's talk.</h3>
+                    <p className="text-muted font-mono text-sm mb-6">Open to Backend / Platform Engineering roles in Hyderabad, Bangalore, and Pune. Immediate joiner.</p>
+                    <a href="mailto:samprem888111@gmail.com" className="btn-terminal inline-block">
+                      Send Email ↗
+                    </a>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-amber/60 mb-2">// SOCIAL_LINKS</p>
+                    {SOCIAL_MEDIA_LINKS.map((link, i) => (
+                      <a 
+                        key={i} 
+                        href={link.href} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="flex justify-between items-center bg-[#121212] border border-[#252525] p-4 hover:border-amber hover:bg-[#1a1a1a] transition-all group"
+                      >
+                        <span className="font-mono text-[10px] text-amber uppercase font-bold tracking-widest">[{link.label}]</span>
+                        <span className="text-muted font-mono text-xs truncate pl-4 group-hover:text-white">{link.href.replace('https://', '').replace('mailto:', '')}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right: Contact Form */}
+                <div className="bg-[#121212] border border-[#252525] p-6 md:p-8">
+                  <div className="flex items-center gap-2 font-mono text-[10px] text-cyan uppercase tracking-widest mb-6">
+                    <span className="animate-pulse">●</span> contact_form.init()
+                  </div>
+                  <ContactForm />
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+
 
           <footer className="py-8 px-6 md:px-16 border-t border-[#252525] flex flex-col md:flex-row justify-between items-center gap-4 bg-[#0c0c0c]">
             <p className="font-mono text-[9px] text-muted uppercase tracking-[0.2em]">bash: version 5.2.15-release (x86_64-pc-linux-gnu)</p>

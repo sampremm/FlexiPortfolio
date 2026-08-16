@@ -20,7 +20,7 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Scanlines Effect */
+  /* Subtle vignette only — no harsh scanlines */
   body::before {
     content: "";
     position: fixed;
@@ -28,28 +28,21 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(
-      rgba(18, 16, 16, 0) 50%,
-      rgba(0, 0, 0, 0.25) 50%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 0, 0, 0.06),
-      rgba(0, 255, 0, 0.02),
-      rgba(0, 0, 255, 0.06)
+    background: radial-gradient(
+      ellipse at center,
+      transparent 60%,
+      rgba(0, 0, 0, 0.35) 100%
     );
     z-index: 1000;
-    background-size: 100% 2px, 3px 100%;
     pointer-events: none;
   }
 
-  /* Flicker Animation */
+  /* Subtle flicker — very slow, barely noticeable */
   @keyframes flicker {
-    0% { opacity: 0.97; }
-    5% { opacity: 0.95; }
-    10% { opacity: 0.9; }
-    15% { opacity: 0.95; }
-    20% { opacity: 0.98; }
+    0%   { opacity: 1; }
+    92%  { opacity: 1; }
+    93%  { opacity: 0.97; }
+    94%  { opacity: 1; }
     100% { opacity: 1; }
   }
 
@@ -63,7 +56,7 @@
   }
 
   body {
-    animation: flicker 0.15s infinite;
+    animation: flicker 8s infinite;
   }
 }
 
@@ -116,3 +109,25 @@
 ::-webkit-scrollbar-track { background: #0c0c0c; }
 ::-webkit-scrollbar-thumb { background: #252525; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #333; }
+
+/* Hide scrollbar but keep scrollability */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Custom scrollbar for main content */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #252525; border-radius: 2px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--amber); }
+
+/* Muted color utilities */
+.text-muted { color: #8b95a1; }
+.text-muted2 { color: #b0bac4; }
+.text-amber { color: var(--amber); }
+.text-green { color: var(--green); }
+.text-cyan { color: var(--cyan); }
+.bg-amber { background-color: var(--amber); }
+.bg-green { background-color: var(--green); }
+.border-border { border-color: var(--border); }
+.selection\:bg-amber::selection { background-color: var(--amber); }
+.selection\:text-black::selection { color: #000; }

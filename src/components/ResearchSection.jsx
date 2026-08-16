@@ -31,8 +31,9 @@ const ResearchSection = () => {
                 {RESEARCH.details}
               </p>
               <p className="italic text-white bg-white/5 p-4 border-l-2 border-amber">
-                "{RESEARCH.quote}"
+                &ldquo;{RESEARCH.quote}&rdquo;
               </p>
+
             </div>
 
             <div className="mt-12 flex flex-wrap gap-6 items-center border-t border-[#252525] pt-10">
