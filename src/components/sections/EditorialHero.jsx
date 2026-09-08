@@ -10,10 +10,10 @@ const EditorialHero = () => {
     offset: ['start start', 'end start'],
   });
 
-  // Subtle cinematic scroll-away effect (scale 1.00 -> 0.96, subtle fade)
-  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
+  // Subtle cinematic scroll-away effect (scale 1.00 -> 0.97, subtle translation)
+  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
   const photoOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.75]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -22,33 +22,50 @@ const EditorialHero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[calc(100vh-4rem)] flex items-center py-8 sm:py-12 lg:py-12 px-6 md:px-12 max-w-7xl mx-auto border-b border-black/[0.12] dark:border-white/[0.12]"
+      className="relative min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center py-12 md:py-20 px-6 max-w-7xl mx-auto border-b border-black/[0.12] dark:border-white/[0.12]"
     >
-      <div className="w-full flex flex-col-reverse lg:flex-row items-center lg:items-center justify-between gap-10 lg:gap-14">
+      <motion.div style={{ y: heroY }} className="w-full flex flex-col items-center text-center space-y-8 sm:space-y-10">
         
-        {/* Left Column: Minimal Identity, Massive Headline, One-line Thesis, CTA (55% desktop) */}
+        {/* Large Professional Portrait */}
         <motion.div
-          style={{ y: textY }}
-          className="w-full lg:w-[55%] flex flex-col justify-center space-y-5 sm:space-y-6"
+          style={{ scale: photoScale, opacity: photoOpacity }}
+          className="w-full sm:w-[90%] md:w-[65%] lg:w-[50%] xl:w-[45%] flex justify-center"
         >
+          <motion.div
+            initial={{ opacity: 0, y: 40, clipPath: 'inset(12% 0 0 0)' }}
+            animate={{ opacity: 1, y: 0, clipPath: 'inset(0% 0 0 0)' }}
+            transition={{ duration: 0.95, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-full h-[55vh] md:h-[60vh] lg:h-[65vh] overflow-hidden bg-[#EAEAE6] dark:bg-[#14161B] border border-black/[0.12] dark:border-white/[0.12]"
+          >
+            <img
+              src={avatarImg}
+              alt="Thalla Sam Prem Kumar - Backend Engineer"
+              className="w-full h-full object-cover object-[50%_25%] filter grayscale contrast-105 hover:grayscale-0 transition-all duration-700 block"
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Text Container */}
+        <div className="flex flex-col items-center space-y-5 sm:space-y-6 max-w-4xl mx-auto">
+          
           {/* Top Identity Tag */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="font-mono text-xs uppercase tracking-[0.2em] text-[#6F6F6F] dark:text-[#9E9E9E] font-medium"
+            transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-[#6F6F6F] dark:text-[#9E9E9E] font-medium"
           >
-            SAM PREM KUMAR
+            THALLA SAM PREM KUMAR
           </motion.div>
 
-          {/* Massive Two-Line Headline with Staggered Entrance */}
+          {/* Massive Headline with Staggered Entrance */}
           <div className="overflow-hidden space-y-1">
             <div className="overflow-hidden">
               <motion.div
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-[5.4rem] xl:text-[6.8rem] tracking-tighter leading-[0.88] uppercase text-[#111111] dark:text-[#EDEDED] whitespace-nowrap"
+                transition={{ duration: 0.7, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-[5.4rem] xl:text-[6.8rem] tracking-tighter leading-[0.88] uppercase text-[#111111] dark:text-[#EDEDED]"
               >
                 SOFTWARE
               </motion.div>
@@ -57,8 +74,8 @@ const EditorialHero = () => {
               <motion.div
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-[5.4rem] xl:text-[6.8rem] tracking-tighter leading-[0.88] uppercase text-[#111111] dark:text-[#EDEDED] whitespace-nowrap"
+                transition={{ duration: 0.7, delay: 0.36, ease: [0.16, 1, 0.3, 1] }}
+                className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-[5.4rem] xl:text-[6.8rem] tracking-tighter leading-[0.88] uppercase text-[#111111] dark:text-[#EDEDED]"
               >
                 ENGINEER.
               </motion.div>
@@ -69,8 +86,8 @@ const EditorialHero = () => {
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="font-body text-base sm:text-lg md:text-xl text-[#111111] dark:text-[#EDEDED] font-normal leading-relaxed max-w-lg"
+            transition={{ duration: 0.6, delay: 0.44, ease: [0.16, 1, 0.3, 1] }}
+            className="font-body text-base sm:text-lg md:text-xl text-[#111111] dark:text-[#EDEDED] font-normal leading-relaxed max-w-2xl mx-auto"
           >
             I build backend systems, distributed infrastructure and AI-powered products.
           </motion.p>
@@ -79,11 +96,13 @@ const EditorialHero = () => {
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-6 font-mono text-xs uppercase tracking-wider text-[#6F6F6F] dark:text-[#9E9E9E]"
+            transition={{ duration: 0.5, delay: 0.52, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 font-mono text-xs uppercase tracking-wider text-[#6F6F6F] dark:text-[#9E9E9E] mt-2"
           >
             <span>HYDERABAD, INDIA</span>
-            <span>·</span>
+            <span className="hidden sm:inline">·</span>
+            <span>BACKEND / CLOUD / AI</span>
+            <span className="hidden sm:inline">·</span>
             <div className="flex items-center gap-2 text-[#111111] dark:text-[#EDEDED] font-semibold">
               <span className="w-2 h-2 rounded-full bg-[#10B981]" />
               <span>OPEN TO WORK</span>
@@ -94,8 +113,8 @@ const EditorialHero = () => {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap items-center gap-4 pt-2"
+            transition={{ duration: 0.5, delay: 0.60, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap items-center justify-center gap-4 pt-6"
           >
             <button
               onClick={() => scrollTo('work')}
@@ -125,28 +144,9 @@ const EditorialHero = () => {
               <span>GITHUB</span>
             </a>
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Right Column: Much Larger Professional Editorial Photograph (45% desktop, 90% mobile) */}
-        <motion.div
-          style={{ scale: photoScale, opacity: photoOpacity }}
-          className="w-full sm:w-[85%] lg:w-[44%] flex items-center justify-center shrink-0"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 40, clipPath: 'inset(12% 0 0 0)' }}
-            animate={{ opacity: 1, y: 0, clipPath: 'inset(0% 0 0 0)' }}
-            transition={{ duration: 0.95, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full h-[360px] sm:h-[440px] lg:h-[500px] xl:h-[540px] overflow-hidden bg-[#EAEAE6] dark:bg-[#14161B] border border-black/[0.12] dark:border-white/[0.12] rounded-[2px]"
-          >
-            <img
-              src={avatarImg}
-              alt="Thalla Sam Prem Kumar - Backend Engineer"
-              className="w-full h-full object-cover object-[62%_25%] filter grayscale contrast-105 hover:grayscale-0 transition-all duration-700 block"
-            />
-          </motion.div>
-        </motion.div>
-
-      </div>
+      </motion.div>
     </section>
   );
 };
