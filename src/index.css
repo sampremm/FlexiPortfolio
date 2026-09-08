@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,128 +6,120 @@
 
 @layer base {
   :root {
-    --bg: #0c0c0c;
-    --surface: #151515;
-    --border: #252525;
+    --bg-primary: #08080c;
+    --bg-secondary: #0e0e15;
+    --bg-card: rgba(16, 16, 24, 0.75);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(245, 158, 11, 0.4);
     --amber: #f59e0b;
+    --amber-glow: rgba(245, 158, 11, 0.25);
     --green: #10b981;
     --cyan: #06b6d4;
-    --magenta: #d946ef;
+    --indigo: #6366f1;
   }
 
   body {
-    @apply antialiased m-0 p-0 overflow-x-hidden bg-[#0c0c0c] text-[#d1d1d1] selection:bg-amber selection:text-black;
+    @apply antialiased m-0 p-0 overflow-x-hidden bg-[#07070a] text-[#e2e8f0] selection:bg-amber selection:text-black;
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Subtle vignette only — no harsh scanlines */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: radial-gradient(
-      ellipse at center,
-      transparent 60%,
-      rgba(0, 0, 0, 0.35) 100%
-    );
-    z-index: 1000;
-    pointer-events: none;
+  /* Cyberpunk ambient grid & aura overlay */
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   }
 
-  /* Subtle flicker — very slow, barely noticeable */
-  @keyframes flicker {
-    0%   { opacity: 1; }
-    92%  { opacity: 1; }
-    93%  { opacity: 0.97; }
-    94%  { opacity: 1; }
-    100% { opacity: 1; }
-  }
-
-  @keyframes pulse-slow {
-    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
-  }
-
-  .animate-pulse-slow {
-    animation: pulse-slow 8s infinite ease-in-out;
-  }
-
-  body {
-    animation: flicker 8s infinite;
+  .bg-dot-pattern {
+    background-size: 24px 24px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
   }
 }
 
 @layer components {
+  /* Glassmorphism card container */
+  .glass-card {
+    @apply bg-[#0e0e15]/80 backdrop-blur-md border border-white/[0.08] transition-all duration-300;
+  }
+
+  .glass-card-hover {
+    @apply hover:border-amber/40 hover:bg-[#13131e]/90 hover:shadow-[0_8px_30px_rgba(245,158,11,0.08)] transition-all duration-300;
+  }
+
+  /* Terminal Window */
   .terminal-window {
-    @apply bg-[#0c0c0c] border border-[#252525] rounded-lg overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)];
+    @apply bg-[#09090e]/95 border border-[#232332] rounded-xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.85)];
   }
 
   .terminal-header {
-    @apply bg-[#1a1a1a] px-4 py-2 flex items-center justify-between border-b border-[#252525];
-  }
-
-  .terminal-prompt {
-    @apply text-amber font-bold mr-2;
-  }
-
-  .terminal-path {
-    @apply text-cyan font-bold mr-2;
-  }
-
-  .btn-terminal {
-    @apply border border-amber text-amber px-4 py-2 font-mono text-[11px] uppercase tracking-widest hover:bg-amber hover:text-black transition-all;
-  }
-
-  /* Status Pill */
-  .hero-status {
-    @apply inline-flex items-center gap-2 font-mono text-[10px] text-amber border border-amber/30 px-3 py-1 rounded-sm bg-amber/5 uppercase tracking-widest mb-8;
+    @apply bg-[#13131d] px-4 py-2.5 flex items-center justify-between border-b border-[#232332]/80;
   }
 
   /* Buttons */
-  .btn-amber {
-    @apply bg-amber text-black px-8 py-3 font-mono text-[11px] font-bold uppercase tracking-widest hover:bg-green hover:scale-105 active:scale-95 transition-all duration-300;
-    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.2);
+  .btn-amber-glow {
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider bg-amber text-black overflow-hidden transition-all duration-300 hover:bg-[#fbbf24] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] active:scale-95;
   }
 
-  .btn-outline {
-    @apply border border-white/10 text-white px-8 py-3 font-mono text-[11px] font-bold uppercase tracking-widest hover:border-amber hover:text-amber hover:scale-105 active:scale-95 transition-all duration-300;
+  .btn-ghost-glow {
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-white/90 border border-white/10 bg-white/[0.03] backdrop-blur-sm transition-all duration-300 hover:border-amber/50 hover:text-amber hover:bg-amber/5 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] active:scale-95;
+  }
+
+  .btn-terminal {
+    @apply border border-amber/40 text-amber bg-amber/5 px-4 py-2 font-mono text-[11px] uppercase tracking-widest hover:bg-amber hover:text-black hover:border-amber transition-all duration-200;
+  }
+
+  /* Status Badge */
+  .status-pill {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider border border-emerald-500/30 bg-emerald-500/10 text-emerald-400;
+  }
+
+  .amber-pill {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider border border-amber/30 bg-amber/10 text-amber;
   }
 }
 
 /* Custom Cursor */
 #cursor { 
-  @apply fixed top-0 left-0 w-2 h-5 bg-green pointer-events-none z-[9999] hidden lg:block; 
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.6); 
+  @apply fixed top-0 left-0 w-2 h-4 bg-amber pointer-events-none z-[9999] hidden lg:block; 
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.8); 
   mix-blend-mode: difference;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0c0c0c; }
-::-webkit-scrollbar-thumb { background: #252525; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #333; }
+/* Animations */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.08); }
+}
 
-/* Hide scrollbar but keep scrollability */
+.animate-pulse-slow {
+  animation: pulse-slow 8s infinite ease-in-out;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #07070a; }
+::-webkit-scrollbar-thumb { background: #1e1e2d; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+
+.custom-scrollbar::-webkit-scrollbar { width: 5px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #232332; border-radius: 3px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Custom scrollbar for main content */
-.custom-scrollbar::-webkit-scrollbar { width: 4px; }
-.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: #252525; border-radius: 2px; }
-.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--amber); }
-
-/* Muted color utilities */
-.text-muted { color: #8b95a1; }
-.text-muted2 { color: #b0bac4; }
-.text-amber { color: var(--amber); }
-.text-green { color: var(--green); }
-.text-cyan { color: var(--cyan); }
-.bg-amber { background-color: var(--amber); }
-.bg-green { background-color: var(--green); }
-.border-border { border-color: var(--border); }
-.selection\:bg-amber::selection { background-color: var(--amber); }
-.selection\:text-black::selection { color: #000; }
+/* Code and tech pills */
+.tech-pill {
+  @apply px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider rounded-md border border-white/[0.08] bg-white/[0.02] text-slate-400 group-hover:text-white group-hover:border-amber/30 transition-colors;
+}
