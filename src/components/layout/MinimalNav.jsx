@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiSun, FiMoon, FiMenu, FiX, FiFileText } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -13,23 +13,44 @@ const NAV_LINKS = [
 const MinimalNav = ({ onCLIOpen }) => {
   const { dark, toggle } = useTheme();
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setMobileMenu(false);
   };
 
+  const navClasses = isScrolled 
+    ? "bg-[#F4F4F0]/95 dark:bg-[#0D0E11]/95 backdrop-blur-md border-b border-black/[0.12] dark:border-white/[0.12] text-[#111111] dark:text-[#EDEDED]"
+    : "bg-transparent border-b border-transparent text-[#EDEDED]";
+
+  const subTextClasses = isScrolled 
+    ? "text-[#6F6F6F] dark:text-[#9E9E9E]" 
+    : "text-[#EDEDED]/80";
+
   return (
-    <nav className="sticky top-0 z-40 w-full bg-[#F4F4F0]/90 dark:bg-[#0D0E11]/90 backdrop-blur-sm border-b border-black/[0.12] dark:border-white/[0.12] transition-colors duration-200">
+    <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${navClasses}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
         
         {/* Left: Brand */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="font-display font-bold tracking-tight text-sm uppercase text-[#111111] dark:text-[#EDEDED] hover:opacity-70 transition-opacity flex items-center gap-3"
+          className="font-display font-bold tracking-tight text-sm uppercase hover:opacity-70 transition-opacity flex items-center gap-3"
         >
           <span>SAM PREM KUMAR</span>
-          <span className="hidden sm:inline-block text-[11px] font-mono text-[#6F6F6F] dark:text-[#9E9E9E] font-normal">
+          <span className={`hidden sm:inline-block text-[11px] font-mono font-normal ${subTextClasses}`}>
             / BACKEND &amp; DISTRIBUTED SYSTEMS
           </span>
         </button>
@@ -37,13 +58,13 @@ const MinimalNav = ({ onCLIOpen }) => {
         {/* Right: Desktop Navigation Items */}
         <div className="hidden md:flex items-center gap-8 text-xs font-mono">
           {/* Status Indicator */}
-          <div className="flex items-center gap-2 text-[11px] text-[#6F6F6F] dark:text-[#9E9E9E]">
+          <div className={`flex items-center gap-2 text-[11px] ${subTextClasses}`}>
             <span className="w-2 h-2 rounded-full bg-[#10B981]" />
             <span className="tracking-wider">OPEN TO WORK</span>
           </div>
 
           {/* Section Links */}
-          <div className="flex items-center gap-6 text-[#111111] dark:text-[#EDEDED]">
+          <div className="flex items-center gap-6">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.id}
@@ -60,7 +81,11 @@ const MinimalNav = ({ onCLIOpen }) => {
             href="https://drive.google.com/file/d/1JrKWKczaGiB1wFtKlGTOknd0KAo9iN1G/view?usp=drive_link"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 border border-black/[0.18] dark:border-white/[0.18] hover:border-[#111111] dark:hover:border-[#EDEDED] text-[#111111] dark:text-[#EDEDED] transition-colors text-[11px] tracking-wider"
+            className={`flex items-center gap-1.5 px-3 py-1.5 border transition-colors text-[11px] tracking-wider ${
+              isScrolled 
+                ? 'border-black/[0.18] dark:border-white/[0.18] hover:border-[#111111] dark:hover:border-[#EDEDED]'
+                : 'border-white/[0.3] hover:border-white text-[#EDEDED]'
+            }`}
           >
             <FiFileText className="text-xs" />
             <span>CV</span>
@@ -70,7 +95,11 @@ const MinimalNav = ({ onCLIOpen }) => {
           <button
             onClick={onCLIOpen}
             title="Launch Terminal Easter Egg"
-            className="text-[11px] font-mono px-2 py-1 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded text-[#6F6F6F] dark:text-[#9E9E9E] transition-colors"
+            className={`text-[11px] font-mono px-2 py-1 rounded transition-colors ${
+              isScrolled
+                ? 'bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-[#6F6F6F] dark:text-[#9E9E9E]'
+                : 'bg-white/10 hover:bg-white/20 text-[#EDEDED]'
+            }`}
           >
             &gt;_
           </button>
@@ -78,7 +107,7 @@ const MinimalNav = ({ onCLIOpen }) => {
           {/* Theme Toggle */}
           <button
             onClick={toggle}
-            className="p-2 text-sm text-[#111111] dark:text-[#EDEDED] hover:opacity-70 transition-opacity"
+            className="p-2 text-sm hover:opacity-70 transition-opacity"
             aria-label="Toggle theme"
           >
             {dark ? <FiSun /> : <FiMoon />}
@@ -89,20 +118,22 @@ const MinimalNav = ({ onCLIOpen }) => {
         <div className="flex md:hidden items-center gap-3">
           <button
             onClick={onCLIOpen}
-            className="text-[11px] font-mono px-2 py-1 bg-black/5 dark:bg-white/5 rounded text-[#6F6F6F] dark:text-[#9E9E9E]"
+            className={`text-[11px] font-mono px-2 py-1 rounded ${
+              isScrolled ? 'bg-black/5 dark:bg-white/5 text-[#6F6F6F] dark:text-[#9E9E9E]' : 'bg-white/10 text-[#EDEDED]'
+            }`}
           >
             &gt;_
           </button>
           <button
             onClick={toggle}
-            className="p-2 text-sm text-[#111111] dark:text-[#EDEDED]"
+            className="p-2 text-sm"
             aria-label="Toggle theme"
           >
             {dark ? <FiSun /> : <FiMoon />}
           </button>
           <button
             onClick={() => setMobileMenu(!mobileMenu)}
-            className="p-2 text-lg text-[#111111] dark:text-[#EDEDED]"
+            className="p-2 text-lg"
             aria-label="Open menu"
           >
             {mobileMenu ? <FiX /> : <FiMenu />}
@@ -113,7 +144,7 @@ const MinimalNav = ({ onCLIOpen }) => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenu && (
-        <div className="md:hidden border-t border-black/[0.12] dark:border-white/[0.12] bg-[#F4F4F0] dark:bg-[#0D0E11] px-6 py-6 space-y-4 font-mono text-xs">
+        <div className="md:hidden border-t border-black/[0.12] dark:border-white/[0.12] bg-[#F4F4F0] dark:bg-[#0D0E11] text-[#111111] dark:text-[#EDEDED] px-6 py-6 space-y-4 font-mono text-xs">
           <div className="flex items-center gap-2 text-[11px] text-[#6F6F6F] dark:text-[#9E9E9E] pb-2 border-b border-black/[0.08] dark:border-white/[0.08]">
             <span className="w-2 h-2 rounded-full bg-[#10B981]" />
             <span>OPEN TO WORK</span>
