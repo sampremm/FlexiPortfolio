@@ -4,23 +4,41 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        bg: "#080810",
-        bg2: "#0d0d18",
-        surface: "#111120",
-        border: "#1a1a2e",
-        amber: "#f59e0b",
-        amber2: "#fbbf24",
-        green: "#10b981",
-        muted: "#64748b",
-        muted2: "#94a3b8",
-        text: "#f1f5f9",
+        /* Editorial Canvas */
+        canvas: '#F4F4F0',
+        ink: '#111111',
+        obsidian: '#0D0E11',
+        'soft-white': '#EDEDED',
+        
+        /* Editorial Secondary */
+        subtle: '#6F6F6F',
+        'subtle-dark': '#9E9E9E',
+        
+        /* Surface */
+        surface: {
+          light: '#FFFFFF',
+          dark: '#14161B',
+        },
+        
+        /* Muted Technical Accent */
+        accent: {
+          DEFAULT: '#10B981',
+          muted: '#059669',
+          dark: '#047857',
+        },
       },
       fontFamily: {
+        display: ['Space Grotesk', 'sans-serif'],
+        body: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
-        display: ['Inter', 'sans-serif'], // Inter as fallback for Cabinet Grotesk
+      },
+      borderColor: {
+        DEFAULT: 'rgba(0, 0, 0, 0.12)',
+        dark: 'rgba(255, 255, 255, 0.12)',
       },
     },
   },
