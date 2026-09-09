@@ -1,123 +1,184 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FiArrowRight } from 'react-icons/fi';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { FiArrowDown } from 'react-icons/fi';
 
-const THINKING_PRINCIPLES = [
+const PRINCIPLES = [
   {
     num: "01",
-    title: "Building from Scratch",
-    desc: "Starting at the socket and protocol layer to understand how HTTP, TCP, and byte streams behave before trusting higher-level framework abstractions.",
+    title: "BUILD FROM SCRATCH"
   },
   {
     num: "02",
-    title: "Debugging Complex Systems",
-    desc: "Tracing distributed state across network boundaries, race conditions, memory leaks, and idempotency failures using deterministic logs and telemetry.",
+    title: "UNDERSTAND FAILURE"
   },
   {
     num: "03",
-    title: "Understanding Failure Modes",
-    desc: "Assuming the network will partition, downstream providers will fail, and workers will crash. Designing atomic transactions and append-only ledgers that self-recover.",
+    title: "DEBUG COMPLEX SYSTEMS"
   },
   {
     num: "04",
-    title: "Learning by Building",
-    desc: "Validating architectural concepts through working, containerized prototypes—from custom PaaS engines on AWS ECS to metaheuristic PV simulations.",
-  },
+    title: "LEARN BY BUILDING"
+  }
+];
+
+const JOURNEY = [
+  { label: "ELECTRICAL ENGINEERING", year: "2022" },
+  { label: "SELF-LEARNED BACKEND DEVELOPMENT", year: "" },
+  { label: "BACKEND SYSTEMS", year: "" },
+  { label: "AI SYSTEMS", year: "" }
 ];
 
 const EditorialAbout = () => {
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-10%" });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
   return (
-    <section id="about" className="py-28 sm:py-32 px-6 md:px-12 max-w-7xl mx-auto border-b border-black/[0.12] dark:border-white/[0.12]">
-      
-      {/* Section Header */}
+    <section 
+      id="about" 
+      ref={containerRef}
+      className="relative w-full pt-32 pb-16 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden"
+    >
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
-      >
-        <div>
-          <div className="font-mono text-xs uppercase tracking-widest text-[#10B981] mb-2 font-semibold">
-            04 // BACKGROUND &amp; PHILOSOPHY
-          </div>
-          <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl tracking-tight uppercase text-[#111111] dark:text-[#EDEDED]">
-            ABOUT.
-          </h2>
-        </div>
-        <div className="font-mono text-xs text-[#6F6F6F] dark:text-[#9E9E9E] max-w-md">
-          ENGINEERING TRAJECTORY
-        </div>
-      </motion.div>
-
-      {/* Trajectory Flow Banner */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-        className="p-6 bg-[#EAEAE6] dark:bg-[#14161B] border border-black/[0.12] dark:border-white/[0.12] mb-16"
-      >
-        <div className="font-mono text-xs uppercase tracking-widest text-[#6F6F6F] dark:text-[#9E9E9E] mb-3">
-          SYSTEM EVOLUTION
-        </div>
-        <div className="flex flex-wrap items-center gap-3 font-mono text-xs sm:text-sm font-semibold text-[#111111] dark:text-[#EDEDED]">
-          <span>Electrical Engineering Background</span>
-          <span className="text-[#10B981]">→</span>
-          <span>Software / Backend Engineering</span>
-          <span className="text-[#10B981]">→</span>
-          <span>Distributed Systems</span>
-          <span className="text-[#10B981]">→</span>
-          <span className="text-[#10B981] font-bold">AI-Powered Systems</span>
-        </div>
-      </motion.div>
-
-      {/* Editorial Narrative & How I Think Grid */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className="flex flex-col gap-24"
       >
         
-        {/* Left Col: Narrative (5 cols) */}
-        <div className="lg:col-span-5 space-y-6">
-          <h3 className="font-display font-bold text-2xl uppercase tracking-tight text-[#111111] dark:text-[#EDEDED]">
-            Architecting for Resiliency
-          </h3>
-          <p className="font-body text-base text-[#6F6F6F] dark:text-[#9E9E9E] leading-relaxed">
-            My background in electrical systems grounded my thinking in circuit dynamics, transient analysis, and feedback control. Transitioning into backend engineering, I applied that physical intuition to distributed compute clusters, transactional atomicity, and event-driven message queuing.
-          </p>
-          <p className="font-body text-base text-[#6F6F6F] dark:text-[#9E9E9E] leading-relaxed">
-            I don't treat backend development as stringing CRUD endpoints together. I focus on what happens when a database lock deadlocks, when network jitter duplicates an HTTP request, or when an ephemeral build container runs out of memory.
-          </p>
+        {/* Intro Two-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+          
+          {/* Left: Heading */}
+          <motion.div variants={itemVariants} className="flex flex-col items-start">
+            <div className="font-mono text-xs md:text-sm uppercase tracking-widest text-[#6F6F6F] dark:text-[#8E8E93] font-medium mb-8">
+              02 // ABOUT
+            </div>
+            
+            <h2 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl tracking-tighter leading-[0.85] uppercase text-[#111111] dark:text-[#EDEDED]">
+              ENGINEER.<br />
+              BUILDER.<br />
+              SYSTEMS<br />
+              THINKER.
+            </h2>
+          </motion.div>
+
+          {/* Right: Narrative */}
+          <motion.div variants={itemVariants} className="flex flex-col justify-end space-y-6 lg:pb-2">
+            <p className="font-body text-base sm:text-lg text-[#111111] dark:text-[#EDEDED] leading-relaxed max-w-lg">
+              I started in Electrical Engineering and moved into software by building things from scratch.
+            </p>
+            <p className="font-body text-base sm:text-lg text-[#111111] dark:text-[#EDEDED] leading-relaxed max-w-lg">
+              Today I focus on backend engineering, distributed systems, cloud infrastructure and AI-powered software.
+            </p>
+            <p className="font-body text-base sm:text-lg text-[#111111] dark:text-[#EDEDED] leading-relaxed max-w-lg">
+              I enjoy understanding how systems behave under load, failure and change.
+            </p>
+          </motion.div>
+          
         </div>
 
-        {/* Right Col: How I Think (7 cols) */}
-        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {THINKING_PRINCIPLES.map((p) => (
-            <div
-              key={p.num}
-              className="p-6 border border-black/[0.12] dark:border-white/[0.12] bg-[#EAEAE6] dark:bg-[#14161B] flex flex-col justify-between space-y-4"
-            >
-              <div>
-                <span className="font-mono text-xs text-[#10B981] font-semibold block mb-2">
-                  {p.num} // PRINCIPLE
+        {/* Engineering Journey */}
+        <motion.div variants={itemVariants} className="pt-12 border-t border-black/10 dark:border-white/10">
+          <div className="font-mono text-xs uppercase tracking-widest text-[#6F6F6F] dark:text-[#8E8E93] mb-12">
+            ENGINEERING JOURNEY
+          </div>
+          
+          <div className="flex flex-col space-y-4">
+            {JOURNEY.map((step, idx) => (
+              <motion.div 
+                key={idx}
+                variants={itemVariants}
+                className="flex flex-col items-start"
+              >
+                <div className="flex items-center gap-6">
+                  {/* Subtle vertical line connecting stages if not last */}
+                  <div className="relative flex flex-col items-center justify-center w-8">
+                    {step.year && (
+                      <span className="font-display font-bold text-xl text-[#10B981] absolute -left-16">
+                        {step.year}
+                      </span>
+                    )}
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#111111] dark:bg-[#EDEDED]" />
+                    {idx !== JOURNEY.length - 1 && (
+                      <div className="w-[1px] h-10 bg-black/20 dark:bg-white/20 absolute top-4" />
+                    )}
+                  </div>
+                  <span className="font-mono text-sm sm:text-base uppercase tracking-wider text-[#111111] dark:text-[#EDEDED]">
+                    {step.label}
+                  </span>
+                </div>
+                {/* Arrow spacing for visual flow */}
+                {idx !== JOURNEY.length - 1 && (
+                  <div className="flex items-center gap-6 mt-4">
+                    <div className="flex flex-col items-center justify-center w-8">
+                      <FiArrowDown className="text-black/30 dark:text-white/30 text-xs" />
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Core Principles */}
+        <motion.div variants={itemVariants} className="pt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/10">
+            {PRINCIPLES.map((p, idx) => (
+              <motion.div 
+                key={idx}
+                variants={itemVariants}
+                className="bg-[#F4F4F0] dark:bg-[#0D0E11] p-8 lg:p-10 flex flex-col items-start justify-between min-h-[200px]"
+              >
+                <span className="font-display font-bold text-3xl text-[#10B981] mb-8">
+                  {p.num}
                 </span>
-                <h4 className="font-display font-bold text-base uppercase tracking-wider text-[#111111] dark:text-[#EDEDED]">
+                <h4 className="font-mono text-sm uppercase tracking-widest leading-relaxed text-[#111111] dark:text-[#EDEDED] max-w-[120px]">
                   {p.title}
                 </h4>
-              </div>
-              <p className="font-body text-xs sm:text-sm text-[#6F6F6F] dark:text-[#9E9E9E] leading-relaxed">
-                {p.desc}
-              </p>
-            </div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Transition to Work */}
+        <motion.div variants={itemVariants} className="pt-32 pb-16 flex flex-col items-center justify-center text-center space-y-12">
+          <h3 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl tracking-tighter uppercase text-[#111111] dark:text-[#EDEDED]">
+            THEN I BUILD.
+          </h3>
+          
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <FiArrowDown className="text-2xl text-[#6F6F6F] dark:text-[#8E8E93]" />
+          </motion.div>
+          
+          <div className="font-mono text-xs uppercase tracking-widest text-[#10B981] font-semibold">
+            03 // SELECTED WORK
+          </div>
+        </motion.div>
 
       </motion.div>
-
     </section>
   );
 };

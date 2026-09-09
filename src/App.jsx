@@ -37,10 +37,10 @@ const MainApp = () => {
       {/* Editorial Main Flow */}
       <main>
         <EditorialHero />
+        <EditorialAbout />
         <SelectedWork />
         <EditorialResearch />
         <TechnicalManifest />
-        <EditorialAbout />
       </main>
 
       {/* Dramatic Closing Section */}

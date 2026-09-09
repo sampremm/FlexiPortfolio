@@ -24,7 +24,7 @@ const EditorialHero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-[100svh] overflow-hidden bg-black flex flex-col justify-end"
+      className="relative w-full min-h-[100svh] overflow-hidden bg-black flex flex-col justify-center"
     >
       {/* Background Image Layer */}
       <motion.div
@@ -37,18 +37,18 @@ const EditorialHero = () => {
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
           src={avatarImg}
           alt="Thalla Sam Prem Kumar - Software Engineer"
-          className="w-full h-full object-cover object-[center_20%] sm:object-[center_25%] md:object-center grayscale-[0.2] contrast-105"
+          className="w-full h-full object-cover object-[0%_center] lg:object-left"
         />
-        {/* Readability Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-[#0A0A0A]/90" />
+        {/* Readability Gradient Overlay - Subtle Right-Side Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-[#0A0A0A]/90 via-[#0A0A0A]/50 to-transparent" />
       </motion.div>
 
-      {/* Content Container (Lower Left Composition) */}
+      {/* Content Container (Right Side Composition) */}
       <motion.div 
         style={{ opacity: textOpacity }}
-        className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-16 md:pb-24 flex flex-col justify-end pt-32"
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-end justify-center h-full pt-20 pb-16"
       >
-        <div className="flex flex-col items-start text-left">
+        <div className="flex flex-col items-start text-left w-full md:w-auto max-w-full md:max-w-[50%] lg:max-w-[45%] xl:max-w-[40%] mt-auto md:mt-0">
           
           {/* Identity Tag */}
           <motion.div
@@ -67,7 +67,7 @@ const EditorialHero = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[11rem] tracking-tighter leading-[0.85] uppercase text-white"
+                className="font-display font-bold text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] xl:text-[9rem] tracking-tighter leading-[0.85] uppercase text-white"
               >
                 SOFTWARE
               </motion.div>
@@ -77,7 +77,7 @@ const EditorialHero = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.78, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display font-bold text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[11rem] tracking-tighter leading-[0.85] uppercase text-white"
+                className="font-display font-bold text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] xl:text-[9rem] tracking-tighter leading-[0.85] uppercase text-white"
               >
                 ENGINEER.
               </motion.div>
@@ -89,7 +89,7 @@ const EditorialHero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 1.0, ease: "easeOut" }}
-            className="font-body text-base sm:text-lg md:text-xl text-[#E0E0E0] font-normal leading-relaxed max-w-xl mb-8"
+            className="font-body text-base sm:text-lg md:text-xl text-[#E0E0E0] font-normal leading-relaxed max-w-[90%] md:max-w-lg mb-8 text-shadow-sm"
           >
             I build backend systems, distributed infrastructure and AI-powered products.
           </motion.p>
@@ -99,13 +99,13 @@ const EditorialHero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 1.1, ease: "easeOut" }}
-            className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#A0A0A0] flex flex-wrap items-center gap-2 sm:gap-4 mb-8"
+            className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#D0D0D0] flex flex-wrap items-center gap-2 sm:gap-4 mb-8"
           >
             <span>HYDERABAD, INDIA</span>
             <span className="hidden sm:inline">·</span>
-            <span>BACKEND / DISTRIBUTED SYSTEMS / CLOUD / AI</span>
+            <span>BACKEND / CLOUD / AI</span>
             <span className="hidden sm:inline">·</span>
-            <div className="flex items-center gap-2 text-white font-medium">
+            <div className="flex items-center gap-2 text-white font-medium drop-shadow-md">
               <span className="w-2 h-2 rounded-full bg-[#10B981]" />
               <span>OPEN TO WORK</span>
             </div>
@@ -120,7 +120,7 @@ const EditorialHero = () => {
           >
             <button
               onClick={() => scrollTo('work')}
-              className="inline-flex items-center justify-center font-mono text-xs uppercase tracking-wider font-semibold py-3 px-6 bg-white text-black hover:bg-transparent hover:text-white border border-white transition-all duration-300 gap-2"
+              className="inline-flex items-center justify-center font-mono text-xs uppercase tracking-wider font-semibold py-3 px-6 bg-white text-black hover:bg-transparent hover:text-white border border-white transition-all duration-300 gap-2 shadow-sm"
             >
               <span>VIEW WORK</span>
               <FiArrowDown className="text-xs" />
@@ -130,7 +130,7 @@ const EditorialHero = () => {
               href="https://drive.google.com/file/d/1JrKWKczaGiB1wFtKlGTOknd0KAo9iN1G/view?usp=drive_link"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center font-mono text-xs uppercase tracking-wider font-medium py-3 px-6 bg-transparent text-white border border-white/30 hover:border-white transition-all duration-300 gap-2"
+              className="inline-flex items-center justify-center font-mono text-xs uppercase tracking-wider font-medium py-3 px-6 bg-transparent text-white border border-white/30 hover:border-white transition-all duration-300 gap-2 backdrop-blur-sm"
             >
               <FiFileText className="text-xs" />
               <span>RESUME</span>
