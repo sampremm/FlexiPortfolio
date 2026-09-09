@@ -110,9 +110,7 @@ const EditorialContact = () => {
               <a href="https://twitter.com/samprem1" target="_blank" rel="noreferrer" aria-label="X / Twitter" className="p-4 bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.08] transition-all duration-300 group">
                 <FaXTwitter className="text-2xl text-[#9E9E9E] group-hover:text-white group-hover:scale-110 transition-transform duration-300" />
               </a>
-              <a href="https://t.me/samprem1" target="_blank" rel="noreferrer" aria-label="Telegram" className="p-4 bg-white/[0.03] border border-white/[0.08] hover:border-[#26A5E4]/40 hover:bg-[#26A5E4]/10 transition-all duration-300 group">
-                <FaTelegram className="text-2xl text-[#9E9E9E] group-hover:text-[#26A5E4] group-hover:scale-110 transition-transform duration-300" />
-              </a>
+              
               <a href="mailto:samprem888111@gmail.com" aria-label="Email" className="p-4 bg-white/[0.03] border border-white/[0.08] hover:border-[#10B981]/40 hover:bg-[#10B981]/10 transition-all duration-300 group">
                 <FiMail className="text-2xl text-[#9E9E9E] group-hover:text-[#10B981] group-hover:scale-110 transition-transform duration-300" />
               </a>
