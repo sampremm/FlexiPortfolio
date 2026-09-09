@@ -18,29 +18,52 @@ const EditorialHero = () => {
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(
+  // ------------------------------------------------------------
+  // IMAGE PARALLAX
+  // ------------------------------------------------------------
+
+  const imageY = useTransform(
     scrollYProgress,
     [0, 1],
-    [0, prefersReducedMotion ? 0 : -30]
+    [0, prefersReducedMotion ? 0 : -20]
   );
 
-  const scale = useTransform(
+  const imageScale = useTransform(
     scrollYProgress,
     [0, 1],
-    [1, prefersReducedMotion ? 1 : 1.04]
+    [1, prefersReducedMotion ? 1 : 1.03]
+  );
+
+  // ------------------------------------------------------------
+  // TEXT PARALLAX / FADE
+  // ------------------------------------------------------------
+
+  const textY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, prefersReducedMotion ? 0 : -12]
   );
 
   const textOpacity = useTransform(
     scrollYProgress,
-    [0, 0.55],
+    [0, 0.6],
     [1, 0]
   );
+
+  // ------------------------------------------------------------
+  // SCROLL NAVIGATION
+  // ------------------------------------------------------------
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({
       behavior: 'smooth',
+      block: 'start',
     });
   };
+
+  // ------------------------------------------------------------
+  // SOCIAL LINKS
+  // ------------------------------------------------------------
 
   const socialLinks = [
     {
@@ -68,58 +91,103 @@ const EditorialHero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative flex min-h-[100svh] w-full items-center overflow-hidden bg-black"
+      className="
+        relative
+        flex
+        min-h-[100svh]
+        w-full
+        items-center
+        overflow-hidden
+        bg-black
+      "
     >
       {/* =========================================================
-          BACKGROUND IMAGE
+          BACKGROUND / PORTRAIT
       ========================================================= */}
+
       <motion.div
-        style={{ y, scale }}
-        className="absolute inset-0 h-full w-full"
+        style={{
+          y: imageY,
+          scale: imageScale,
+        }}
+        className="
+          absolute
+          inset-0
+          h-full
+          w-full
+          will-change-transform
+        "
       >
         <motion.img
           src={avatarImg}
-          alt="Thalla Sam Prem Kumar - Software Engineer"
+          alt="Thalla Sam Prem Kumar illustrated portrait"
           initial={{
-            scale: prefersReducedMotion ? 1 : 1.06,
-            opacity: prefersReducedMotion ? 1 : 0.9,
+            scale: prefersReducedMotion ? 1 : 1.05,
+            opacity: prefersReducedMotion ? 1 : 0.92,
           }}
           animate={{
             scale: 1,
             opacity: 1,
           }}
           transition={{
-            duration: 1.4,
+            duration: 1.25,
             ease: [0.16, 1, 0.3, 1],
           }}
           className="
             h-full
             w-full
             object-cover
-            object-[18%_center]
-            sm:object-[12%_center]
-            lg:object-left
+            object-top
+            md:object-center
           "
         />
 
-        {/* Main readability gradient */}
+        {/* Bottom readability gradient */}
         <div
           className="
-            absolute inset-0
+            absolute
+            inset-0
             bg-gradient-to-t
-            from-black/85
-            via-black/20
-            to-black/10
-            md:bg-none
+            from-black/50
+            via-black/10
+            to-transparent
           "
         />
 
-        {/* Subtle top gradient for navigation */}
+        {/* Right-side readability gradient.
+            Keeps the face/illustration visible while giving
+            the text a darker field on desktop. */}
         <div
           className="
-            absolute inset-x-0 top-0 h-32
+            absolute
+            inset-0
+            bg-gradient-to-r
+            from-transparent
+            via-black/5
+            to-black/50
+            md:to-black/60
+          "
+        />
+
+        {/* Mobile readability layer */}
+        <div
+          className="
+            absolute
+            inset-0
+            md:hidden
+            bg-black/10
+          "
+        />
+
+        {/* Top navigation readability */}
+        <div
+          className="
+            absolute
+            inset-x-0
+            top-0
+            h-36
             bg-gradient-to-b
-            from-black/40
+            from-black/45
             to-transparent
           "
         />
@@ -128,47 +196,51 @@ const EditorialHero = () => {
       {/* =========================================================
           HERO CONTENT
       ========================================================= */}
+
       <motion.div
-        style={{ opacity: textOpacity }}
+        style={{
+          opacity: textOpacity,
+          y: textY,
+        }}
         className="
-          relative z-10
-          mx-auto
-          flex
+          relative
+          z-10
           min-h-[100svh]
           w-full
-          max-w-[1600px]
-          items-center
-          px-6
-          pb-20
-          pt-28
-          sm:px-8
-          md:px-12
-          lg:px-16
-          xl:px-20
         "
       >
+        {/* -------------------------------------------------------
+            DESKTOP / TABLET CONTENT
+            Explicitly anchored to the RIGHT
+        ------------------------------------------------------- */}
+
         <div
           className="
-            ml-auto
-            flex
-            w-full
-            max-w-[760px]
+            absolute
+            right-[1.5vw]
+            top-1/2
+            hidden
+            w-[54vw]
+            max-w-[900px]
+            -translate-y-1/2
             flex-col
             items-start
             text-left
-            lg:w-[43vw]
-            xl:w-[50vw]
+            lg:flex
+            xl:right-[1vw]
+            xl:w-[45vw]
           "
         >
-          {/* ====================================================
+          {/* =====================================================
               NAME
           ===================================================== */}
+
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.6,
-              delay: 0.45,
+              delay: 0.3,
               ease: 'easeOut',
             }}
             className="
@@ -177,9 +249,8 @@ const EditorialHero = () => {
               text-[11px]
               font-medium
               uppercase
-              tracking-[0.28em]
+              tracking-[0.25em]
               text-white/80
-              md:text-[#111111]/80
               sm:text-xs
             "
           >
@@ -189,35 +260,71 @@ const EditorialHero = () => {
           {/* =====================================================
               HEADLINE
           ===================================================== */}
-          <div className="mb-7 max-w-full overflow-visible">
+
+          <div className="mb-7 w-full overflow-visible">
             <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{
+                opacity: 0,
+                y: 45,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
               transition={{
                 duration: 0.85,
-                delay: 0.58,
+                delay: 0.45,
                 ease: [0.16, 1, 0.3, 1],
               }}
               className="
                 max-w-full
-                break-words
+                whitespace-normal
                 font-display
-                text-[3.6rem]
-                font-bold
+                text-[4.6rem]
+                font-semibold
                 uppercase
-                leading-[0.82]
+                leading-[0.8]
                 tracking-[-0.065em]
                 text-white
-                md:text-[#111111]
-                sm:text-[4.8rem]
-                md:text-[5.8rem]
-                lg:text-[7rem]
-                xl:text-[8rem]
-                2xl:text-[8.5rem]
+                sm:text-[5.5rem]
+                lg:text-[6.8rem]
+                xl:text-[7.8rem]
+                2xl:text-[8.4rem]
               "
             >
               SOFTWARE
-              <br />
+            </motion.h1>
+
+            <motion.h1
+              initial={{
+                opacity: 0,
+                y: 45,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.85,
+                delay: 0.56,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="
+                max-w-full
+                whitespace-normal
+                font-display
+                text-[4.6rem]
+                font-semibold
+                uppercase
+                leading-[0.8]
+                tracking-[-0.065em]
+                text-white
+                sm:text-[5.5rem]
+                lg:text-[6.8rem]
+                xl:text-[7.8rem]
+                2xl:text-[8.4rem]
+              "
+            >
               ENGINEER.
             </motion.h1>
           </div>
@@ -225,24 +332,30 @@ const EditorialHero = () => {
           {/* =====================================================
               THESIS
           ===================================================== */}
+
           <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{
+              opacity: 0,
+              y: 18,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
             transition={{
               duration: 0.65,
-              delay: 0.82,
+              delay: 0.75,
               ease: 'easeOut',
             }}
             className="
               mb-7
-              max-w-[580px]
+              max-w-[590px]
               font-body
               text-base
               leading-relaxed
               text-white/85
-              md:text-[#111111]/85
               sm:text-lg
-              md:text-xl
+              xl:text-xl
             "
           >
             I build backend systems, distributed infrastructure
@@ -252,12 +365,19 @@ const EditorialHero = () => {
           {/* =====================================================
               META
           ===================================================== */}
+
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{
+              opacity: 0,
+              y: 12,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
             transition={{
               duration: 0.65,
-              delay: 0.96,
+              delay: 0.88,
               ease: 'easeOut',
             }}
             className="
@@ -272,19 +392,24 @@ const EditorialHero = () => {
               uppercase
               tracking-[0.12em]
               text-white/65
-              md:text-[#111111]/70
               sm:text-[11px]
             "
           >
             <span>HYDERABAD, INDIA</span>
 
-            <span className="text-white/30 md:text-[#111111]/30">·</span>
+            <span className="text-white/30">
+              ·
+            </span>
 
-            <span>BACKEND / CLOUD / AI</span>
+            <span>
+              BACKEND / CLOUD / AI
+            </span>
 
-            <span className="text-white/30 md:text-[#111111]/30">·</span>
+            <span className="text-white/30">
+              ·
+            </span>
 
-            <span className="flex items-center gap-2 text-white/85 md:text-[#111111]/85">
+            <span className="flex items-center gap-2 text-white/85">
               <span className="h-2 w-2 rounded-full bg-[#10B981]" />
               OPEN TO WORK
             </span>
@@ -292,23 +417,37 @@ const EditorialHero = () => {
 
           {/* =====================================================
               ACTIONS
-              VIEW WORK + RESUME + SOCIAL ICONS
+              VIEW WORK + RESUME + SOCIALS
           ===================================================== */}
+
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{
+              opacity: 0,
+              y: 14,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
             transition={{
               duration: 0.7,
-              delay: 1.08,
+              delay: 1,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="flex flex-wrap items-center gap-3"
+            className="
+              flex
+              flex-wrap
+              items-center
+              gap-3
+            "
           >
             {/* VIEW WORK */}
+
             <button
               type="button"
               onClick={() => scrollTo('work')}
               className="
+                group
                 inline-flex
                 items-center
                 justify-center
@@ -328,24 +467,31 @@ const EditorialHero = () => {
                 duration-300
                 hover:bg-transparent
                 hover:text-white
-                md:border-[#111111]
-                md:bg-[#111111]
-                md:text-white
-                md:hover:bg-transparent
-                md:hover:text-[#111111]
                 sm:px-6
               "
             >
-              VIEW WORK
-              <FiArrowDown className="text-sm" />
+              <span>
+                VIEW WORK
+              </span>
+
+              <FiArrowDown
+                className="
+                  text-sm
+                  transition-transform
+                  duration-300
+                  group-hover:translate-y-0.5
+                "
+              />
             </button>
 
             {/* RESUME */}
+
             <a
               href="https://drive.google.com/file/d/1JrKWKczaGiB1wFtKlGTOknd0KAo9iN1G/view?usp=drive_link"
               target="_blank"
               rel="noreferrer"
               className="
+                group
                 inline-flex
                 items-center
                 justify-center
@@ -366,21 +512,27 @@ const EditorialHero = () => {
                 duration-300
                 hover:border-white
                 hover:bg-white/10
-                md:border-[#111111]/35
-                md:bg-[#111111]/5
-                md:text-[#111111]
-                md:hover:border-[#111111]
-                md:hover:bg-[#111111]/10
                 sm:px-6
               "
             >
-              <FiFileText />
-              RESUME
+              <FiFileText
+                className="
+                  text-sm
+                  transition-transform
+                  duration-300
+                  group-hover:-translate-y-0.5
+                "
+              />
+
+              <span>
+                RESUME
+              </span>
             </a>
 
             {/* =================================================
-                SOCIAL ICONS — BESIDE RESUME
+                SOCIAL ICONS
             ================================================= */}
+
             <div className="ml-1 flex items-center gap-1.5">
               {socialLinks.map(
                 ({ label, href, icon: Icon }) => (
@@ -416,12 +568,6 @@ const EditorialHero = () => {
                       hover:border-white/55
                       hover:bg-white/10
                       hover:text-white
-                      md:border-[#111111]/20
-                      md:bg-transparent
-                      md:text-[#111111]/65
-                      md:hover:border-[#111111]/55
-                      md:hover:bg-[#111111]/5
-                      md:hover:text-[#111111]
                     "
                   >
                     <Icon
@@ -438,24 +584,368 @@ const EditorialHero = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* -------------------------------------------------------
+            MOBILE CONTENT
+        ------------------------------------------------------- */}
+
+        <div
+          className="
+            absolute
+            inset-x-0
+            bottom-0
+            flex
+            w-full
+            flex-col
+            items-start
+            px-5
+            pb-20
+            pt-28
+            text-left
+            lg:hidden
+            sm:px-8
+          "
+        >
+          {/* NAME */}
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 16,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.6,
+              delay: 0.3,
+              ease: 'easeOut',
+            }}
+            className="
+              mb-4
+              font-mono
+              text-[10px]
+              font-medium
+              uppercase
+              tracking-[0.23em]
+              text-white/80
+              sm:text-xs
+            "
+          >
+            SAM PREM KUMAR
+          </motion.div>
+
+          {/* MOBILE HEADLINE */}
+
+          <div className="mb-6">
+            <motion.h1
+              initial={{
+                opacity: 0,
+                y: 38,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.8,
+                delay: 0.44,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="
+                font-display
+                text-[3.5rem]
+                font-semibold
+                uppercase
+                leading-[0.82]
+                tracking-[-0.06em]
+                text-white
+                sm:text-[4.8rem]
+              "
+            >
+              SOFTWARE
+            </motion.h1>
+
+            <motion.h1
+              initial={{
+                opacity: 0,
+                y: 38,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.8,
+                delay: 0.54,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="
+                font-display
+                text-[3.5rem]
+                font-semibold
+                uppercase
+                leading-[0.82]
+                tracking-[-0.06em]
+                text-white
+                sm:text-[4.8rem]
+              "
+            >
+              ENGINEER.
+            </motion.h1>
+          </div>
+
+          {/* MOBILE THESIS */}
+
+          <motion.p
+            initial={{
+              opacity: 0,
+              y: 16,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.65,
+              delay: 0.73,
+              ease: 'easeOut',
+            }}
+            className="
+              mb-6
+              max-w-[540px]
+              font-body
+              text-sm
+              leading-relaxed
+              text-white/85
+              sm:text-lg
+            "
+          >
+            I build backend systems, distributed infrastructure
+            and AI-powered products.
+          </motion.p>
+
+          {/* MOBILE META */}
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 10,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.6,
+              delay: 0.87,
+              ease: 'easeOut',
+            }}
+            className="
+              mb-7
+              flex
+              flex-wrap
+              items-center
+              gap-x-3
+              gap-y-2
+              font-mono
+              text-[9px]
+              uppercase
+              tracking-[0.11em]
+              text-white/65
+              sm:text-[10px]
+            "
+          >
+            <span>
+              HYDERABAD, INDIA
+            </span>
+
+            <span className="text-white/30">
+              ·
+            </span>
+
+            <span>
+              BACKEND / CLOUD / AI
+            </span>
+
+            <span className="text-white/30">
+              ·
+            </span>
+
+            <span className="flex items-center gap-2 text-white/85">
+              <span className="h-2 w-2 rounded-full bg-[#10B981]" />
+              OPEN TO WORK
+            </span>
+          </motion.div>
+
+          {/* MOBILE ACTIONS */}
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 12,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.65,
+              delay: 1,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="
+              flex
+              w-full
+              flex-wrap
+              items-center
+              gap-2.5
+            "
+          >
+            {/* VIEW WORK */}
+
+            <button
+              type="button"
+              onClick={() => scrollTo('work')}
+              className="
+                group
+                inline-flex
+                items-center
+                justify-center
+                gap-2
+                border
+                border-white
+                bg-white
+                px-4
+                py-3
+                font-mono
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.12em]
+                text-black
+                transition-all
+                duration-300
+                hover:bg-transparent
+                hover:text-white
+              "
+            >
+              VIEW WORK
+
+              <FiArrowDown
+                className="
+                  text-sm
+                  transition-transform
+                  duration-300
+                  group-hover:translate-y-0.5
+                "
+              />
+            </button>
+
+            {/* RESUME */}
+
+            <a
+              href="https://drive.google.com/file/d/1JrKWKczaGiB1wFtKlGTOknd0KAo9iN1G/view?usp=drive_link"
+              target="_blank"
+              rel="noreferrer"
+              className="
+                inline-flex
+                items-center
+                justify-center
+                gap-2
+                border
+                border-white/35
+                bg-white/5
+                px-4
+                py-3
+                font-mono
+                text-[10px]
+                font-medium
+                uppercase
+                tracking-[0.12em]
+                text-white
+                backdrop-blur-sm
+                transition-all
+                duration-300
+                hover:border-white
+                hover:bg-white/10
+              "
+            >
+              <FiFileText />
+              RESUME
+            </a>
+
+            {/* MOBILE SOCIAL ICONS */}
+
+            <div className="flex items-center gap-1">
+              {socialLinks.map(
+                ({ label, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={
+                      href.startsWith('mailto:')
+                        ? undefined
+                        : '_blank'
+                    }
+                    rel={
+                      href.startsWith('mailto:')
+                        ? undefined
+                        : 'noreferrer'
+                    }
+                    aria-label={label}
+                    title={label}
+                    className="
+                      flex
+                      h-10
+                      w-10
+                      items-center
+                      justify-center
+                      border
+                      border-white/20
+                      bg-black/10
+                      text-white/65
+                      backdrop-blur-sm
+                      transition-all
+                      duration-300
+                      hover:border-white/55
+                      hover:bg-white/10
+                      hover:text-white
+                    "
+                  >
+                    <Icon className="text-[16px]" />
+                  </a>
+                )
+              )}
+            </div>
+          </motion.div>
+        </div>
       </motion.div>
 
       {/* =========================================================
           SCROLL INDICATOR
       ========================================================= */}
+
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
         transition={{
           duration: 0.8,
           delay: 1.45,
         }}
-        style={{ opacity: textOpacity }}
+        style={{
+          opacity: textOpacity,
+        }}
         className="
           absolute
           bottom-7
           left-1/2
-          z-10
+          z-20
           -translate-x-1/2
           text-white/45
         "
@@ -476,7 +966,9 @@ const EditorialHero = () => {
             animate={
               prefersReducedMotion
                 ? {}
-                : { y: [0, 4, 0] }
+                : {
+                    y: [0, 4, 0],
+                  }
             }
             transition={{
               duration: 2,
