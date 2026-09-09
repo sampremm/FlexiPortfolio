@@ -1,44 +1,16 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { FiArrowDown } from 'react-icons/fi';
-
-const PRINCIPLES = [
-  {
-    num: "01",
-    title: "BUILD FROM SCRATCH"
-  },
-  {
-    num: "02",
-    title: "UNDERSTAND FAILURE"
-  },
-  {
-    num: "03",
-    title: "DEBUG COMPLEX SYSTEMS"
-  },
-  {
-    num: "04",
-    title: "LEARN BY BUILDING"
-  }
-];
-
-const JOURNEY = [
-  { label: "ELECTRICAL ENGINEERING", year: "2022" },
-  { label: "SELF-LEARNED BACKEND DEVELOPMENT", year: "" },
-  { label: "BACKEND SYSTEMS", year: "" },
-  { label: "AI SYSTEMS", year: "" }
-];
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FiArrowRight, FiArrowDown } from 'react-icons/fi';
 
 const EditorialAbout = () => {
-  const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-10%" });
-
+  // Motion variants for staggering
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1
+        staggerChildren: 0.1,
+        delayChildren: 0.2
       }
     }
   };
@@ -48,135 +20,139 @@ const EditorialAbout = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
+  const lineVariants = {
+    hidden: { height: 0 },
+    visible: {
+      height: '100%',
+      transition: { duration: 1.5, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
   return (
-    <section 
-      id="about" 
-      ref={containerRef}
-      className="relative w-full pt-32 pb-16 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden"
-    >
-      <motion.div
+    <section id="about" className="relative bg-[#F4F4F0] dark:bg-[#0D0E11] text-[#111111] dark:text-[#EDEDED] py-24 sm:py-32 px-6 md:px-12 border-b border-black/[0.12] dark:border-white/[0.12]">
+      <motion.div 
         variants={containerVariants}
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="flex flex-col gap-24"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-10%' }}
+        className="max-w-7xl mx-auto"
       >
         
-        {/* Intro Two-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-          
-          {/* Left: Heading */}
-          <motion.div variants={itemVariants} className="flex flex-col items-start">
-            <div className="font-mono text-xs md:text-sm uppercase tracking-widest text-[#6F6F6F] dark:text-[#8E8E93] font-medium mb-8">
-              02 // ABOUT
-            </div>
-            
-            <h2 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl tracking-tighter leading-[0.85] uppercase text-[#111111] dark:text-[#EDEDED]">
-              ENGINEER.<br />
-              BUILDER.<br />
-              SYSTEMS<br />
-              THINKER.
-            </h2>
+        {/* Top Intro Section */}
+        <div className="max-w-4xl mb-24 md:mb-32">
+          <motion.div variants={itemVariants} className="font-mono text-xs uppercase tracking-widest text-[#10B981] mb-6 font-semibold">
+            02 // ABOUT
           </motion.div>
+          
+          <motion.h2 variants={itemVariants} className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter uppercase leading-[0.9] mb-12">
+            ENGINEER.<br />
+            BUILDER.<br />
+            SYSTEMS THINKER.
+          </motion.h2>
 
-          {/* Right: Narrative */}
-          <motion.div variants={itemVariants} className="flex flex-col justify-end space-y-6 lg:pb-2">
-            <p className="font-body text-base sm:text-lg text-[#111111] dark:text-[#EDEDED] leading-relaxed max-w-lg">
+          <motion.div variants={itemVariants} className="font-body text-lg sm:text-xl text-[#6F6F6F] dark:text-[#9E9E9E] leading-relaxed max-w-2xl space-y-6">
+            <p>
               I started in Electrical Engineering and moved into software by building things from scratch.
             </p>
-            <p className="font-body text-base sm:text-lg text-[#111111] dark:text-[#EDEDED] leading-relaxed max-w-lg">
+            <p>
               Today I focus on backend engineering, distributed systems, cloud infrastructure and AI-powered software.
-            </p>
-            <p className="font-body text-base sm:text-lg text-[#111111] dark:text-[#EDEDED] leading-relaxed max-w-lg">
               I enjoy understanding how systems behave under load, failure and change.
             </p>
           </motion.div>
-          
         </div>
 
-        {/* Engineering Journey */}
-        <motion.div variants={itemVariants} className="pt-12 border-t border-black/10 dark:border-white/10">
-          <div className="font-mono text-xs uppercase tracking-widest text-[#6F6F6F] dark:text-[#8E8E93] mb-12">
-            ENGINEERING JOURNEY
-          </div>
+        {/* Two Column Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 lg:gap-16 border-t border-black/[0.1] dark:border-white/[0.1] pt-16">
           
-          <div className="flex flex-col space-y-4">
-            {JOURNEY.map((step, idx) => (
-              <motion.div 
-                key={idx}
-                variants={itemVariants}
-                className="flex flex-col items-start"
-              >
-                <div className="flex items-center gap-6">
-                  {/* Subtle vertical line connecting stages if not last */}
-                  <div className="relative flex flex-col items-center justify-center w-8">
-                    {step.year && (
-                      <span className="font-display font-bold text-xl text-[#10B981] absolute -left-16">
-                        {step.year}
-                      </span>
-                    )}
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#111111] dark:bg-[#EDEDED]" />
-                    {idx !== JOURNEY.length - 1 && (
-                      <div className="w-[1px] h-10 bg-black/20 dark:bg-white/20 absolute top-4" />
-                    )}
+          {/* Left Column: Engineering Journey */}
+          <motion.div variants={itemVariants} className="relative">
+            <div className="font-mono text-[10px] uppercase tracking-widest text-[#111111] dark:text-[#EDEDED] font-bold mb-12">
+              ENGINEERING JOURNEY
+            </div>
+            
+            <div className="relative pl-6 sm:pl-8 pb-4">
+              {/* Animated Timeline Line */}
+              <div className="absolute left-[3px] top-2 bottom-0 w-[1px] bg-black/10 dark:bg-white/10">
+                <motion.div 
+                  variants={lineVariants}
+                  className="w-full bg-[#10B981]"
+                />
+              </div>
+
+              {/* Journey Nodes */}
+              <div className="space-y-12">
+                <div className="relative">
+                  <div className="absolute -left-[27px] sm:-left-[35px] top-1.5 w-1.5 h-1.5 bg-[#111111] dark:bg-[#EDEDED] rounded-full" />
+                  <div className="font-display font-bold text-2xl sm:text-3xl text-[#111111] dark:text-[#EDEDED] mb-2 leading-none">
+                    2022
                   </div>
-                  <span className="font-mono text-sm sm:text-base uppercase tracking-wider text-[#111111] dark:text-[#EDEDED]">
-                    {step.label}
-                  </span>
+                  <div className="font-mono text-xs uppercase tracking-widest text-[#6F6F6F] dark:text-[#9E9E9E]">
+                    ELECTRICAL & ELECTRONICS<br />ENGINEERING
+                  </div>
                 </div>
-                {/* Arrow spacing for visual flow */}
-                {idx !== JOURNEY.length - 1 && (
-                  <div className="flex items-center gap-6 mt-4">
-                    <div className="flex flex-col items-center justify-center w-8">
-                      <FiArrowDown className="text-black/30 dark:text-white/30 text-xs" />
-                    </div>
+
+                <div className="relative">
+                  <div className="absolute -left-[31px] sm:-left-[39px] top-0 text-[#10B981] opacity-50">
+                    <FiArrowDown />
                   </div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                  <div className="font-mono text-xs uppercase tracking-widest text-[#111111] dark:text-[#EDEDED] font-semibold">
+                    SELF-LEARNED BACKEND<br />DEVELOPMENT
+                  </div>
+                </div>
 
-        {/* Core Principles */}
-        <motion.div variants={itemVariants} className="pt-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/10">
-            {PRINCIPLES.map((p, idx) => (
-              <motion.div 
-                key={idx}
-                variants={itemVariants}
-                className="bg-[#F4F4F0] dark:bg-[#0D0E11] p-8 lg:p-10 flex flex-col items-start justify-between min-h-[200px]"
-              >
-                <span className="font-display font-bold text-3xl text-[#10B981] mb-8">
-                  {p.num}
-                </span>
-                <h4 className="font-mono text-sm uppercase tracking-widest leading-relaxed text-[#111111] dark:text-[#EDEDED] max-w-[120px]">
-                  {p.title}
-                </h4>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                <div className="relative">
+                  <div className="absolute -left-[31px] sm:-left-[39px] top-0 text-[#10B981] opacity-50">
+                    <FiArrowDown />
+                  </div>
+                  <div className="font-mono text-xs uppercase tracking-widest text-[#111111] dark:text-[#EDEDED] font-semibold">
+                    BACKEND SYSTEMS
+                  </div>
+                </div>
 
-        {/* Transition to Work */}
-        <motion.div variants={itemVariants} className="pt-32 pb-16 flex flex-col items-center justify-center text-center space-y-12">
-          <h3 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl tracking-tighter uppercase text-[#111111] dark:text-[#EDEDED]">
-            THEN I BUILD.
-          </h3>
-          
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <FiArrowDown className="text-2xl text-[#6F6F6F] dark:text-[#8E8E93]" />
+                <div className="relative">
+                  <div className="absolute -left-[31px] sm:-left-[39px] top-0 text-[#10B981] opacity-50">
+                    <FiArrowDown />
+                  </div>
+                  <div className="font-mono text-xs uppercase tracking-widest text-[#111111] dark:text-[#EDEDED] font-semibold">
+                    AI SYSTEMS
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </motion.div>
-          
-          <div className="font-mono text-xs uppercase tracking-widest text-[#10B981] font-semibold">
-            03 // SELECTED WORK
-          </div>
-        </motion.div>
+
+          {/* Right Column: How I Work (Principles) */}
+          <motion.div variants={itemVariants} className="md:border-l md:border-black/[0.1] md:dark:border-white/[0.1] md:pl-8 lg:pl-16">
+            <div className="font-mono text-[10px] uppercase tracking-widest text-[#111111] dark:text-[#EDEDED] font-bold mb-12">
+              HOW I WORK
+            </div>
+            
+            <div className="space-y-10">
+              {[
+                { num: '01', title: 'BUILD FROM SCRATCH' },
+                { num: '02', title: 'UNDERSTAND FAILURE' },
+                { num: '03', title: 'DEBUG COMPLEX SYSTEMS' },
+                { num: '04', title: 'LEARN BY BUILDING' }
+              ].map((principle, idx) => (
+                <div key={idx} className="group cursor-default flex items-start gap-6">
+                  <span className="font-mono text-xs text-[#6F6F6F] dark:text-[#9E9E9E] group-hover:text-[#10B981] transition-colors mt-1">
+                    {principle.num}
+                  </span>
+                  <h3 className="font-display font-bold text-xl sm:text-2xl tracking-tight uppercase text-[#111111] dark:text-[#EDEDED] group-hover:translate-x-1 transition-transform duration-300">
+                    {principle.title}
+                  </h3>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+        </div>
+
 
       </motion.div>
     </section>

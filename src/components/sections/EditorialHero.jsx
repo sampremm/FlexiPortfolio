@@ -48,7 +48,7 @@ const EditorialHero = () => {
         style={{ opacity: textOpacity }}
         className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-end justify-center h-full pt-20 pb-16"
       >
-        <div className="flex flex-col items-start text-left w-full md:w-auto max-w-full md:max-w-[50%] lg:max-w-[45%] xl:max-w-[40%] mt-auto md:mt-0">
+        <div className="flex flex-col items-start text-left w-full md:w-[52vw] max-w-[calc(100vw-3rem)] md:max-w-[850px] mt-auto md:mt-0">
           
           {/* Identity Tag */}
           <motion.div
@@ -61,23 +61,23 @@ const EditorialHero = () => {
           </motion.div>
 
           {/* Massive Two-Line Headline */}
-          <div className="overflow-hidden space-y-1 mb-6">
-            <div className="overflow-hidden">
+          <div className="overflow-visible space-y-1 mb-6 max-w-full">
+            <div className="overflow-visible">
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display font-bold text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] xl:text-[9rem] tracking-tighter leading-[0.85] uppercase text-white"
+                className="font-display font-bold text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] 2xl:text-[9rem] tracking-[-0.06em] leading-[0.82] break-normal uppercase text-white overflow-visible whitespace-nowrap"
               >
                 SOFTWARE
               </motion.div>
             </div>
-            <div className="overflow-hidden">
+            <div className="overflow-visible">
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.78, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display font-bold text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] xl:text-[9rem] tracking-tighter leading-[0.85] uppercase text-white"
+                className="font-display font-bold text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] 2xl:text-[9rem] tracking-[-0.06em] leading-[0.82] break-normal uppercase text-white overflow-visible whitespace-nowrap"
               >
                 ENGINEER.
               </motion.div>
