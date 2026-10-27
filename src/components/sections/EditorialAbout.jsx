@@ -59,7 +59,7 @@ const EditorialAbout = () => {
               I started in Electrical Engineering and moved into software by building things from scratch.
             </p>
             <p>
-              Today I focus on backend engineering, distributed systems, cloud infrastructure and AI-powered software.
+              Today I focus on backend engineering: queues, idempotent APIs, safe transactions and AWS deployments.
               I enjoy understanding how systems behave under load, failure and change.
             </p>
           </motion.div>
