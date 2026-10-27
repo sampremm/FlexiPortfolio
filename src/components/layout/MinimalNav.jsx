@@ -23,7 +23,7 @@ const MinimalNav = ({ onCLIOpen }) => {
         setIsScrolled(false);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -32,9 +32,14 @@ const MinimalNav = ({ onCLIOpen }) => {
     setMobileMenu(false);
   };
 
-  const navClasses = isScrolled 
-    ? "bg-[#F4F4F0]/95 dark:bg-[#0D0E11]/95 backdrop-blur-md border-b border-black/[0.12] dark:border-white/[0.12] text-[#111111] dark:text-[#EDEDED]"
-    : "bg-transparent border-b border-transparent text-[#EDEDED]";
+  const navClasses = isScrolled
+    ? "pt-3 px-3 text-[#111111] dark:text-[#EDEDED]"
+    : "text-[#EDEDED]";
+
+  // Floating glass pill once the hero is scrolled past
+  const barClasses = isScrolled
+    ? "max-w-6xl h-14 px-5 md:px-7 rounded-full bg-[#F4F4F0]/75 dark:bg-[#14161B]/75 backdrop-blur-xl border border-black/[0.08] dark:border-white/[0.08] shadow-[0_10px_40px_-15px_rgba(0,0,0,0.25)]"
+    : "max-w-7xl h-16 px-6 md:px-12 border border-transparent";
 
   const subTextClasses = isScrolled 
     ? "text-[#6F6F6F] dark:text-[#9E9E9E]" 
@@ -42,7 +47,7 @@ const MinimalNav = ({ onCLIOpen }) => {
 
   return (
     <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${navClasses}`}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
+      <div className={`mx-auto flex items-center justify-between transition-all duration-500 ${barClasses}`}>
         
         {/* Left: Brand */}
         <button
@@ -81,7 +86,7 @@ const MinimalNav = ({ onCLIOpen }) => {
             href="https://drive.google.com/file/d/1JrKWKczaGiB1wFtKlGTOknd0KAo9iN1G/view?usp=drive_link"
             target="_blank"
             rel="noreferrer"
-            className={`flex items-center gap-1.5 px-3 py-1.5 border transition-colors text-[11px] tracking-wider ${
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border transition-colors text-[11px] tracking-wider ${
               isScrolled 
                 ? 'border-black/[0.18] dark:border-white/[0.18] hover:border-[#111111] dark:hover:border-[#EDEDED]'
                 : 'border-white/[0.3] hover:border-white text-[#EDEDED]'
@@ -144,7 +149,7 @@ const MinimalNav = ({ onCLIOpen }) => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenu && (
-        <div className="md:hidden border-t border-black/[0.12] dark:border-white/[0.12] bg-[#F4F4F0] dark:bg-[#0D0E11] text-[#111111] dark:text-[#EDEDED] px-6 py-6 space-y-4 font-mono text-xs">
+        <div className="md:hidden mt-2 mx-3 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl bg-[#F4F4F0] dark:bg-[#14161B] text-[#111111] dark:text-[#EDEDED] px-6 py-6 space-y-4 font-mono text-xs">
           <div className="flex items-center gap-2 text-[11px] text-[#6F6F6F] dark:text-[#9E9E9E] pb-2 border-b border-black/[0.08] dark:border-white/[0.08]">
             <span className="w-2 h-2 rounded-full bg-[#10B981]" />
             <span>OPEN TO WORK</span>
@@ -163,7 +168,7 @@ const MinimalNav = ({ onCLIOpen }) => {
               href="https://drive.google.com/file/d/1JrKWKczaGiB1wFtKlGTOknd0KAo9iN1G/view?usp=drive_link"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 py-2 px-4 border border-black/20 dark:border-white/20 text-[#111111] dark:text-[#EDEDED]"
+              className="inline-flex items-center gap-2 py-2 px-4 rounded-full border border-black/20 dark:border-white/20 text-[#111111] dark:text-[#EDEDED]"
             >
               <FiFileText />
               <span>DOWNLOAD RESUME / CV</span>

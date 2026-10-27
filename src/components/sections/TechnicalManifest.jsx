@@ -119,10 +119,10 @@ const TechnicalManifest = () => {
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="flex flex-col items-start mb-24"
+        className="flex flex-col items-start mb-16 md:mb-20"
       >
-        <motion.div variants={itemVariants} className="font-mono text-xs md:text-sm uppercase tracking-widest text-[#6F6F6F] dark:text-[#8E8E93] font-medium mb-8">
-          03 // TECHNICAL STACK
+        <motion.div variants={itemVariants} className="eyebrow mb-6">
+          04 — Technical Stack
         </motion.div>
         
         <motion.h2 variants={itemVariants} className="font-display font-bold text-5xl sm:text-6xl md:text-7xl tracking-tighter leading-[0.85] uppercase text-[#111111] dark:text-[#EDEDED]">
@@ -136,35 +136,35 @@ const TechnicalManifest = () => {
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 lg:gap-x-24 lg:gap-y-24"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
       >
         {STACK_CATEGORIES.map((category) => (
           <motion.div 
             key={category.num}
             variants={itemVariants}
-            className="flex flex-col border-t border-black/10 dark:border-white/10 pt-6"
+            className="group/card relative flex flex-col overflow-hidden rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-white/60 dark:bg-[#111215] p-7 hover:border-black/[0.2] dark:hover:border-white/[0.2] hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.3)] transition-all duration-500"
           >
             {/* Category Title */}
             <div className="flex items-baseline gap-4 mb-8">
-              <span className="font-display font-bold text-lg text-[#10B981]">
+              <span className="font-mono text-[11px] font-semibold tracking-widest text-[#10B981]">
                 {category.num}
               </span>
-              <h3 className="font-display font-bold text-lg uppercase tracking-widest text-[#111111] dark:text-[#EDEDED]">
+              <h3 className="font-display font-bold text-xl uppercase tracking-tight text-[#111111] dark:text-[#EDEDED]">
                 {category.category}
               </h3>
             </div>
 
             {/* Icon Row */}
-            <div className="flex flex-wrap items-center gap-6 sm:gap-8 mb-8 relative">
+            <div className="flex flex-wrap items-center gap-3 mb-8 relative">
               {category.icons.map((tech, idx) => (
                 <div 
                   key={idx}
-                  className="relative group flex items-center justify-center cursor-pointer"
+                  className="relative group flex items-center justify-center w-14 h-14 rounded-xl border border-black/[0.06] dark:border-white/[0.06] bg-[#F4F4F0] dark:bg-white/[0.03] hover:border-[#10B981]/40 transition-colors cursor-default"
                   onMouseEnter={() => setHoveredIcon(`${category.num}-${idx}`)}
                   onMouseLeave={() => setHoveredIcon(null)}
                 >
                   <tech.Icon 
-                    className="text-3xl sm:text-4xl text-[#6F6F6F] dark:text-[#8E8E93] group-hover:text-[#111111] dark:group-hover:text-white transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-105"
+                    className="text-2xl text-[#6F6F6F] dark:text-[#8E8E93] group-hover:text-[#111111] dark:group-hover:text-white transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-105"
                   />
                   {/* Tiny Tooltip */}
                   {hoveredIcon === `${category.num}-${idx}` && (
@@ -181,7 +181,7 @@ const TechnicalManifest = () => {
             </div>
 
             {/* Capabilities */}
-            <div className="font-mono text-xs sm:text-sm text-[#6F6F6F] dark:text-[#8E8E93] tracking-widest">
+            <div className="mt-auto pt-5 border-t border-black/[0.06] dark:border-white/[0.06] font-mono text-[11px] uppercase text-[#6F6F6F] dark:text-[#8E8E93] tracking-widest">
               {category.capabilities}
             </div>
 

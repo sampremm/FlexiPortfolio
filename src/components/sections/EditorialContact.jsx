@@ -20,10 +20,12 @@ const EditorialContact = () => {
   };
 
   return (
-    <section id="contact" className="relative bg-[#0D0E11] text-[#EDEDED] py-28 sm:py-32 px-6 md:px-12 border-t border-white/[0.12]">
+    <section id="contact" className="relative bg-[#0D0E11] text-[#EDEDED] pt-28 sm:pt-36 px-6 md:px-12 border-t border-white/[0.12] overflow-hidden">
+      {/* Ambient light */}
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-[#10B981]/[0.08] blur-3xl pointer-events-none" />
       <Toaster position="bottom-right" />
 
-      <div className="max-w-7xl mx-auto space-y-24">
+      <div className="relative max-w-7xl mx-auto space-y-24">
         
         {/* Top: Headline & Primary Information */}
         <motion.div
@@ -35,8 +37,8 @@ const EditorialContact = () => {
         >
           {/* Left: Dramatic Headline */}
           <div className="md:col-span-7 space-y-6">
-            <div className="font-mono text-[10px] uppercase tracking-widest text-[#10B981] font-semibold">
-              05 // INITIATE TRANSMISSION
+            <div className="eyebrow">
+              05 — Contact
             </div>
             <h2 className="font-display font-bold text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tighter uppercase leading-[0.88] text-white">
               LET’S BUILD<br />
@@ -70,13 +72,13 @@ const EditorialContact = () => {
               <div className="flex items-center gap-4">
                 <a
                   href="mailto:samprem888111@gmail.com"
-                  className="font-display font-bold text-lg sm:text-xl md:text-2xl hover:text-[#10B981] transition-colors underline underline-offset-4"
+                  className="font-display font-bold text-lg sm:text-xl md:text-2xl break-all hover:text-[#10B981] transition-colors underline decoration-white/30 hover:decoration-[#10B981] underline-offset-[6px]"
                 >
                   samprem888111@gmail.com
                 </a>
                 <button
                   onClick={handleCopyEmail}
-                  className="p-2 bg-white/[0.05] hover:bg-white/[0.1] text-xs font-mono flex items-center justify-center text-neutral-300 hover:text-white transition-colors rounded-sm"
+                  className="w-10 h-10 shrink-0 bg-white/[0.05] border border-white/[0.08] hover:bg-white/[0.1] flex items-center justify-center text-neutral-300 hover:text-white transition-colors rounded-full"
                   aria-label="Copy email to clipboard"
                 >
                   {copied ? <FiCheck className="text-[#10B981] text-lg" /> : <FiCopy className="text-lg" />}
@@ -101,17 +103,17 @@ const EditorialContact = () => {
               CHANNELS
             </span>
             <div className="flex flex-wrap gap-4">
-              <a href="https://github.com/sampremm" target="_blank" rel="noreferrer" aria-label="GitHub" className="p-4 bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.08] transition-all duration-300 group">
+              <a href="https://github.com/sampremm" target="_blank" rel="noreferrer" aria-label="GitHub" className="p-4 rounded-full bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.08] transition-all duration-300 group">
                 <FaGithub className="text-2xl text-[#9E9E9E] group-hover:text-white group-hover:scale-110 transition-transform duration-300" />
               </a>
-              <a href="https://www.linkedin.com/in/samprem1/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="p-4 bg-white/[0.03] border border-white/[0.08] hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/10 transition-all duration-300 group">
+              <a href="https://www.linkedin.com/in/samprem1/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="p-4 rounded-full bg-white/[0.03] border border-white/[0.08] hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/10 transition-all duration-300 group">
                 <FaLinkedin className="text-2xl text-[#9E9E9E] group-hover:text-[#0A66C2] group-hover:scale-110 transition-transform duration-300" />
               </a>
-              <a href="https://twitter.com/samprem1" target="_blank" rel="noreferrer" aria-label="X / Twitter" className="p-4 bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.08] transition-all duration-300 group">
+              <a href="https://twitter.com/samprem1" target="_blank" rel="noreferrer" aria-label="X / Twitter" className="p-4 rounded-full bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.08] transition-all duration-300 group">
                 <FaXTwitter className="text-2xl text-[#9E9E9E] group-hover:text-white group-hover:scale-110 transition-transform duration-300" />
               </a>
               
-              <a href="mailto:samprem888111@gmail.com" aria-label="Email" className="p-4 bg-white/[0.03] border border-white/[0.08] hover:border-[#10B981]/40 hover:bg-[#10B981]/10 transition-all duration-300 group">
+              <a href="mailto:samprem888111@gmail.com" aria-label="Email" className="p-4 rounded-full bg-white/[0.03] border border-white/[0.08] hover:border-[#10B981]/40 hover:bg-[#10B981]/10 transition-all duration-300 group">
                 <FiMail className="text-2xl text-[#9E9E9E] group-hover:text-[#10B981] group-hover:scale-110 transition-transform duration-300" />
               </a>
             </div>
@@ -181,7 +183,7 @@ const EditorialContact = () => {
               href="https://github.com/sampremm"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest font-semibold py-2.5 px-5 border border-white/[0.15] text-white hover:bg-white hover:text-black transition-colors"
+              className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest font-semibold py-2.5 px-5 rounded-full border border-white/[0.15] text-white hover:bg-white hover:text-black transition-colors"
             >
               <FiGithub />
               <span>GITHUB ↗</span>
@@ -189,7 +191,7 @@ const EditorialContact = () => {
           </div>
 
           <div className="w-full md:w-auto overflow-x-auto custom-scrollbar pb-4">
-            <div className="min-w-[600px] p-6 border border-white/[0.08] bg-[#111215]">
+            <div className="min-w-[600px] p-6 rounded-2xl border border-white/[0.08] bg-[#111215]">
               <GitHubCalendar 
                 username="sampremm" 
                 colorScheme="dark"
@@ -201,20 +203,19 @@ const EditorialContact = () => {
                 blockMargin={4}
                 hideColorLegend={false}
                 hideTotalCount={false}
+                errorMessage="Contribution graph is unavailable right now — see the full history on GitHub."
               />
             </div>
           </div>
         </motion.div>
 
         {/* Colophon / Bottom Line */}
-        <div className="border-t border-white/[0.08] pt-8 pb-12 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[10px] tracking-widest text-[#6F6F6F] uppercase">
+        <div className="border-t border-white/[0.08] pt-8 pb-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[10px] tracking-widest text-[#6F6F6F] uppercase">
           <div>
             © {new Date().getFullYear()} THALLA SAM PREM KUMAR. ALL RIGHTS RESERVED.
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-            <span>SWISS EDITORIAL SYSTEM</span>
-            <span className="hidden sm:inline">·</span>
-            <span>SPACE GROTESK / PLUS JAKARTA SANS</span>
+            <span>DESIGNED &amp; ENGINEERED IN HYDERABAD</span>
           </div>
         </div>
 

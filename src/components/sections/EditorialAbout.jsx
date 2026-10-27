@@ -44,8 +44,8 @@ const EditorialAbout = () => {
         
         {/* Top Intro Section */}
         <div className="max-w-4xl mb-24 md:mb-32">
-          <motion.div variants={itemVariants} className="font-mono text-xs uppercase tracking-widest text-[#10B981] mb-6 font-semibold">
-            02 // ABOUT
+          <motion.div variants={itemVariants} className="eyebrow mb-6">
+            01 — About
           </motion.div>
           
           <motion.h2 variants={itemVariants} className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter uppercase leading-[0.9] mb-12">

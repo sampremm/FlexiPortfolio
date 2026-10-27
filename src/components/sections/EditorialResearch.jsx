@@ -158,8 +158,8 @@ const EditorialResearch = () => {
         className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
       >
         <div>
-          <div className="font-mono text-xs uppercase tracking-widest text-[#10B981] mb-2 font-semibold">
-            RESEARCH / 2022
+          <div className="eyebrow mb-5">
+            03 — Research · 2022
           </div>
           <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl tracking-tight uppercase text-[#111111] dark:text-[#EDEDED] leading-none">
             DETECTING THE<br />GLOBAL MAXIMUM<br />POWER POINT

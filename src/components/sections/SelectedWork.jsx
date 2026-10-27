@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiGithub, FiExternalLink, FiArrowUpRight } from 'react-icons/fi';
 import ProjectDetailModal from './ProjectDetailModal';
+import ProjectVisual from '../ui/ProjectVisual';
 
-// Images from assets
-import vercelImg from '../../assets/Logo_Vercel-1.jpg';
-import playtoImg from '../../assets/todo-image.jpg';
-import notifyImg from '../../assets/notificy.jpg';
-import snaplinkImg from '../../assets/url.jpg';
 
 const PRIMARY_PROJECTS = [
   {
@@ -18,7 +14,6 @@ const PRIMARY_PROJECTS = [
     flow: ["Git Push", "API", "Queue", "ECS Build", "Redis Pub/Sub", "WebSocket", "S3", "Reverse Proxy"],
     stack: ["Node.js", "Redis", "PostgreSQL", "Docker", "AWS", "S3", "NGINX"],
     source: "https://github.com/sampremm/vercel-backend",
-    image: vercelImg,
     // Drawer specifics
     context: "Building a PaaS from scratch to understand container orchestration and live log streaming.",
     problem: "Orchestrating isolated, untrusted code execution environments on demand while streaming real-time build logs to thousands of concurrent websocket connections.",
@@ -40,7 +35,6 @@ const PRIMARY_PROJECTS = [
     stack: ["Python", "Django", "PostgreSQL", "Redis", "Celery", "Docker", "AWS EC2"],
     source: "https://github.com/sampremm/playto-engine",
     demo: "https://playto-engine-vert.vercel.app/",
-    image: playtoImg,
     context: "Financial systems require absolute correctness over absolute speed.",
     problem: "Preventing double-spend replay attacks during network partitions and high-concurrency bursts across distributed worker nodes.",
     architecture: "Requests hit a Redis TTL lock for fast-path rejection, then proceed to a PostgreSQL SELECT FOR UPDATE lock for strict serialized execution. All changes hit an append-only ledger.",
@@ -60,7 +54,6 @@ const PRIMARY_PROJECTS = [
     flow: ["Inbound", "AI Processing", "Kafka", "Consumer", "Structured Processing", "PostgreSQL"],
     stack: ["AI Agents", "Kafka", "Node.js", "PostgreSQL", "Docker", "BullMQ"],
     source: "https://github.com/sampremm/algohire-hackthon",
-    image: notifyImg,
     context: "Parsing unstructured inbound data efficiently at scale.",
     problem: "Evaluating and categorizing non-deterministic candidate profiles without dropping data during traffic spikes.",
     architecture: "Autonomous agents parse data, emitting structured schemas to Kafka topics partitioned by domain. Consumers read in order and idempotently persist to PostgreSQL.",
@@ -80,7 +73,6 @@ const PRIMARY_PROJECTS = [
     stack: ["Node.js", "Redis", "NGINX", "MySQL", "Docker"],
     source: "https://github.com/sampremm/url-shortener",
     demo: "https://url-shortener-six-sandy.vercel.app/",
-    image: snaplinkImg,
     context: "Building high-throughput, low-latency edge services.",
     problem: "Generating globally unique, short URL tokens at high concurrency without database lock contention.",
     architecture: "A decoupled Key Generation Service allocates token ranges to application nodes. NGINX routes traffic, while Upstash Redis caches read hits.",
@@ -134,7 +126,7 @@ const SelectedWork = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="work" className="py-28 sm:py-32 px-6 md:px-12 max-w-7xl mx-auto border-b border-black/[0.12] dark:border-white/[0.12]">
+    <section id="work" className="py-28 sm:py-36 px-6 md:px-12 max-w-7xl mx-auto border-b border-black/[0.12] dark:border-white/[0.12]">
       
       {/* Section Header */}
       <motion.div
@@ -142,169 +134,153 @@ const SelectedWork = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-24"
+        className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20 md:mb-28"
       >
         <div>
-          <div className="font-mono text-xs uppercase tracking-widest text-[#10B981] mb-2 font-semibold">
-            03 // SELECTED WORK
+          <div className="eyebrow mb-5">
+            02 — Selected Work
           </div>
-          <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl tracking-tight uppercase text-[#111111] dark:text-[#EDEDED]">
+          <h2 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl tracking-tighter leading-[0.9] uppercase text-[#111111] dark:text-[#EDEDED]">
             THEN I BUILD.
           </h2>
         </div>
+        <p className="font-body text-sm sm:text-base text-[#6F6F6F] dark:text-[#9E9E9E] leading-relaxed max-w-sm md:text-right">
+          Four systems, each built to answer one hard question about correctness, concurrency or scale. Open any panel for the full case study.
+        </p>
       </motion.div>
 
       {/* Primary Projects */}
-      <div className="space-y-32">
+      <div className="space-y-24 md:space-y-32">
         {PRIMARY_PROJECTS.map((project, index) => (
-          <motion.div
+          <motion.article
             key={project.id}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="border-t border-black/[0.12] dark:border-white/[0.12] pt-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start group"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center group"
           >
-            {/* Left Col: Details (5 cols) */}
-            <div className="lg:col-span-5 space-y-6">
-              <motion.div 
-                className="transition-transform duration-500 ease-out group-hover:-translate-y-1"
-              >
-                <span className="font-mono text-[10px] font-semibold text-[#6F6F6F] dark:text-[#9E9E9E] tracking-widest block mb-2">
-                  {project.num}
-                </span>
-                <h3 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl uppercase tracking-tight text-[#111111] dark:text-[#EDEDED] leading-none mb-4">
+            {/* Details (5 cols) — alternate sides on desktop */}
+            <div className={`lg:col-span-5 space-y-7 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+              <div>
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="font-mono text-[11px] font-semibold text-[#10B981] tracking-widest">
+                    {project.id}
+                  </span>
+                  <span className="h-px w-10 bg-black/[0.15] dark:bg-white/[0.15]" />
+                  <span className="font-mono text-[10px] text-[#6F6F6F] dark:text-[#9E9E9E] tracking-[0.2em] uppercase">
+                    {project.stack[0]} · {project.stack[1]}
+                  </span>
+                </div>
+                <h3 className="font-display font-bold text-3xl sm:text-4xl lg:text-[2.75rem] uppercase tracking-tight text-[#111111] dark:text-[#EDEDED] leading-[0.95]">
                   {project.title}
                 </h3>
-              </motion.div>
+              </div>
 
-              <p className="font-body text-sm sm:text-base text-[#6F6F6F] dark:text-[#9E9E9E] leading-relaxed max-w-sm">
+              <p className="font-body text-base text-[#555555] dark:text-[#A1A1A1] leading-relaxed max-w-md">
                 {project.description}
               </p>
 
               {/* Stack */}
-              <div className="pt-2">
-                <span className="font-mono text-[10px] text-[#111111] dark:text-[#EDEDED] uppercase tracking-widest font-bold block mb-3">
-                  STACK
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {project.stack.map(tech => (
-                    <span key={tech} className="font-mono text-[10px] uppercase tracking-wider px-2 py-1 bg-black/[0.04] dark:bg-white/[0.04] text-[#6F6F6F] dark:text-[#9E9E9E]">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Links */}
-              <div className="pt-6 flex items-center gap-4">
-                <span className="font-mono text-[10px] text-[#111111] dark:text-[#EDEDED] uppercase tracking-widest font-bold hidden sm:block">
-                  LINKS
-                </span>
-                
-                {project.source && (
-                  <a href={project.source} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-[#6F6F6F] dark:text-[#9E9E9E] hover:text-[#111111] dark:hover:text-white transition-colors group/link">
-                    <FiGithub />
-                    <span>GitHub</span>
-                    <FiArrowUpRight className="opacity-0 -translate-x-2 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:translate-x-0" />
-                  </a>
-                )}
-                {project.demo && (
-                  <a href={project.demo} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-[#6F6F6F] dark:text-[#9E9E9E] hover:text-[#111111] dark:hover:text-white transition-colors group/link">
-                    <FiExternalLink />
-                    <span>Live</span>
-                    <FiArrowUpRight className="opacity-0 -translate-x-2 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:translate-x-0" />
-                  </a>
-                )}
-              </div>
-            </div>
-
-            {/* Right Col: Flow & Image (7 cols) */}
-            <div className="lg:col-span-7 space-y-6 cursor-pointer" onClick={() => setSelectedProject(project)}>
-              
-              {/* Architecture Flow */}
-              <div className="bg-[#F4F4F0] dark:bg-[#111215] p-6 border border-black/[0.08] dark:border-white/[0.08]">
-                <div className="font-mono text-[10px] uppercase tracking-widest text-[#10B981] font-bold mb-4">
-                  ARCHITECTURE
-                </div>
-                <div className="flex flex-wrap items-center gap-y-3 font-mono text-[11px] text-[#6F6F6F] dark:text-[#9E9E9E]">
-                  {project.flow.map((node, idx) => (
-                    <motion.div 
-                      key={idx}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.1 * idx, duration: 0.4 }}
-                      className="flex items-center"
-                    >
-                      <span className="uppercase text-[#111111] dark:text-[#EDEDED]">{node}</span>
-                      {idx < project.flow.length - 1 && (
-                        <span className="text-[#10B981] mx-2 font-bold opacity-50">→</span>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Image */}
-              <div className="relative overflow-hidden bg-[#111215] border border-black/[0.08] dark:border-white/[0.08]">
-                <div className="absolute inset-0 bg-[#10B981]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none mix-blend-overlay" />
-                <motion.img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-56 sm:h-72 lg:h-80 object-cover filter grayscale contrast-125 transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-                />
-                
-                <div className="absolute top-4 right-4 z-20 flex items-center justify-center w-10 h-10 bg-black text-white rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <FiArrowUpRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </div>
-              </div>
-
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Secondary Projects */}
-      <div className="mt-32 pt-16 border-t border-black/[0.12] dark:border-white/[0.12]">
-        <div className="font-mono text-[10px] uppercase tracking-widest text-[#6F6F6F] mb-12">
-          ADDITIONAL REPOSITORIES
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {SECONDARY_PROJECTS.map(project => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6 }}
-              className="group cursor-pointer border border-black/[0.08] dark:border-white/[0.08] bg-[#F4F4F0]/50 dark:bg-[#111215]/50 p-6 sm:p-8 hover:bg-[#F4F4F0] dark:hover:bg-[#111215] transition-colors"
-              onClick={() => setSelectedProject(project)}
-            >
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <span className="font-mono text-[10px] font-semibold text-[#10B981] tracking-widest block mb-2">
-                    {project.num}
-                  </span>
-                  <h4 className="font-display font-bold text-lg sm:text-xl tracking-tight text-[#111111] dark:text-[#EDEDED] uppercase">
-                    {project.title}
-                  </h4>
-                </div>
-                <FiArrowUpRight className="text-xl text-[#6F6F6F] dark:text-[#9E9E9E] opacity-0 -translate-x-2 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
-              </div>
-              
-              <p className="font-body text-xs sm:text-sm text-[#6F6F6F] dark:text-[#9E9E9E] mb-6">
-                {project.description}
-              </p>
-
               <div className="flex flex-wrap gap-2">
                 {project.stack.map(tech => (
-                  <span key={tech} className="font-mono text-[9px] uppercase tracking-wider px-2 py-1 border border-black/[0.1] dark:border-white/[0.1] text-[#6F6F6F] dark:text-[#9E9E9E]">
+                  <span key={tech} className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-black/[0.1] dark:border-white/[0.1] text-[#555555] dark:text-[#A1A1A1]">
                     {tech}
                   </span>
                 ))}
               </div>
-            </motion.div>
+
+              {/* Links */}
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <button
+                  onClick={() => setSelectedProject(project)}
+                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest font-semibold px-5 py-2.5 rounded-full bg-[#111111] text-[#F4F4F0] dark:bg-[#EDEDED] dark:text-[#0D0E11] hover:bg-[#10B981] dark:hover:bg-[#10B981] hover:text-white dark:hover:text-white transition-colors"
+                >
+                  Read case study
+                  <FiArrowUpRight />
+                </button>
+                {project.source && (
+                  <a href={project.source} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-4 py-2.5 rounded-full border border-black/[0.12] dark:border-white/[0.12] text-[#555555] dark:text-[#A1A1A1] hover:text-[#111111] dark:hover:text-white hover:border-black/40 dark:hover:border-white/40 transition-colors">
+                    <FiGithub />
+                    <span>Source</span>
+                  </a>
+                )}
+                {project.demo && (
+                  <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-4 py-2.5 rounded-full border border-black/[0.12] dark:border-white/[0.12] text-[#555555] dark:text-[#A1A1A1] hover:text-[#111111] dark:hover:text-white hover:border-black/40 dark:hover:border-white/40 transition-colors">
+                    <FiExternalLink />
+                    <span>Live</span>
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* System panel (7 cols) */}
+            <div
+              role="button"
+              tabIndex={0}
+              aria-label={`Open ${project.title} case study`}
+              className={`lg:col-span-7 cursor-pointer rounded-2xl ${index % 2 === 1 ? 'lg:order-1' : ''}`}
+              onClick={() => setSelectedProject(project)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setSelectedProject(project);
+                }
+              }}
+            >
+              <ProjectVisual project={project} />
+            </div>
+          </motion.article>
+        ))}
+      </div>
+
+      {/* Secondary Projects */}
+      <div className="mt-28 md:mt-36">
+        <div className="flex items-center gap-4 mb-10">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#6F6F6F] dark:text-[#9E9E9E]">
+            More from the workshop
+          </span>
+          <span className="flex-1 h-px bg-black/[0.12] dark:bg-white/[0.12]" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {SECONDARY_PROJECTS.map(project => (
+            <motion.button
+              key={project.id}
+              type="button"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6 }}
+              className="group relative text-left overflow-hidden rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-white/60 dark:bg-[#111215] p-7 sm:p-8 hover:-translate-y-1 hover:border-black/[0.2] dark:hover:border-white/[0.2] hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.35)] transition-all duration-500"
+              onClick={() => setSelectedProject(project)}
+            >
+              <div className="absolute -top-24 -right-24 w-56 h-56 rounded-full bg-[#10B981]/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              <div className="relative flex justify-between items-start mb-6">
+                <div>
+                  <span className="font-mono text-[11px] font-semibold text-[#10B981] tracking-widest block mb-3">
+                    {project.id}
+                  </span>
+                  <h4 className="font-display font-bold text-xl sm:text-2xl tracking-tight text-[#111111] dark:text-[#EDEDED] uppercase leading-tight">
+                    {project.title}
+                  </h4>
+                </div>
+                <span className="shrink-0 w-10 h-10 rounded-full border border-black/[0.12] dark:border-white/[0.12] flex items-center justify-center text-[#6F6F6F] dark:text-[#9E9E9E] group-hover:bg-[#111111] group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black group-hover:border-transparent transition-colors duration-300">
+                  <FiArrowUpRight className="transition-transform duration-300 group-hover:rotate-45" />
+                </span>
+              </div>
+              
+              <p className="relative font-body text-sm text-[#555555] dark:text-[#A1A1A1] leading-relaxed mb-7 max-w-md">
+                {project.description}
+              </p>
+
+              <div className="relative flex flex-wrap gap-2">
+                {project.stack.map(tech => (
+                  <span key={tech} className="font-mono text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-black/[0.1] dark:border-white/[0.1] text-[#6F6F6F] dark:text-[#9E9E9E]">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </motion.button>
           ))}
         </div>
       </div>

@@ -29,7 +29,7 @@ const MainApp = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F4F4F0] dark:bg-[#0D0E11] text-[#111111] dark:text-[#EDEDED] font-body selection:bg-[#111111] selection:text-[#F4F4F0] dark:selection:bg-[#EDEDED] dark:selection:text-[#0D0E11] transition-colors duration-200">
+    <div className="grain min-h-screen bg-[#F4F4F0] dark:bg-[#0D0E11] text-[#111111] dark:text-[#EDEDED] font-body selection:bg-[#10B981] selection:text-white transition-colors duration-200">
       
       {/* Minimal Sticky Navigation */}
       <MinimalNav onCLIOpen={() => setCliOpen(true)} />
