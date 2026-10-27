@@ -3,10 +3,10 @@ import { FiSun, FiMoon, FiMenu, FiX, FiFileText } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
 
 const NAV_LINKS = [
+  { id: 'about', label: 'ABOUT' },
   { id: 'work', label: 'WORK' },
   { id: 'research', label: 'RESEARCH' },
   { id: 'stack', label: 'STACK' },
-  { id: 'about', label: 'ABOUT' },
   { id: 'contact', label: 'CONTACT' },
 ];
 
