@@ -52,18 +52,18 @@ const MinimalNav = ({ onCLIOpen }) => {
         {/* Left: Brand */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="font-display font-bold tracking-tight text-sm uppercase hover:opacity-70 transition-opacity flex items-center gap-3"
+          className="shrink-0 whitespace-nowrap font-display font-bold tracking-tight text-sm uppercase hover:opacity-70 transition-opacity flex items-center gap-3"
         >
           <span>SAM PREM KUMAR</span>
-          <span className={`hidden sm:inline-block text-[11px] font-mono font-normal ${subTextClasses}`}>
+          <span className={`hidden 2xl:inline-block text-[11px] font-mono font-normal ${subTextClasses}`}>
             / BACKEND &amp; DISTRIBUTED SYSTEMS
           </span>
         </button>
 
         {/* Right: Desktop Navigation Items */}
-        <div className="hidden md:flex items-center gap-8 text-xs font-mono">
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8 whitespace-nowrap text-xs font-mono">
           {/* Status Indicator */}
-          <div className={`flex items-center gap-2 text-[11px] ${subTextClasses}`}>
+          <div className={`hidden xl:flex items-center gap-2 text-[11px] ${subTextClasses}`}>
             <span className="w-2 h-2 rounded-full bg-[#10B981]" />
             <span className="tracking-wider">OPEN TO WORK</span>
           </div>
@@ -120,7 +120,7 @@ const MinimalNav = ({ onCLIOpen }) => {
         </div>
 
         {/* Mobile Hamburger & Quick Theme */}
-        <div className="flex md:hidden items-center gap-3">
+        <div className="flex lg:hidden items-center gap-3">
           <button
             onClick={onCLIOpen}
             className={`text-[11px] font-mono px-2 py-1 rounded ${
@@ -149,7 +149,7 @@ const MinimalNav = ({ onCLIOpen }) => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenu && (
-        <div className="md:hidden mt-2 mx-3 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl bg-[#F4F4F0] dark:bg-[#14161B] text-[#111111] dark:text-[#EDEDED] px-6 py-6 space-y-4 font-mono text-xs">
+        <div className="lg:hidden mt-2 mx-3 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] shadow-xl bg-[#F4F4F0] dark:bg-[#14161B] text-[#111111] dark:text-[#EDEDED] px-6 py-6 space-y-4 font-mono text-xs">
           <div className="flex items-center gap-2 text-[11px] text-[#6F6F6F] dark:text-[#9E9E9E] pb-2 border-b border-black/[0.08] dark:border-white/[0.08]">
             <span className="w-2 h-2 rounded-full bg-[#10B981]" />
             <span>OPEN TO WORK</span>
