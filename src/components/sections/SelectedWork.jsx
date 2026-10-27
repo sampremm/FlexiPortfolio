@@ -11,9 +11,9 @@ const PRIMARY_PROJECTS = [
     num: "PROJECT 01",
     title: "VERCEL — CLOUD PAAS",
     description: "Event-driven cloud deployment platform using isolated AWS ECS/Fargate build environments, Redis Pub/Sub telemetry, PostgreSQL state, Docker and private S3 artifacts.",
-    flow: ["Git Push", "API", "Queue", "ECS Build", "Redis Pub/Sub", "WebSocket", "S3", "Reverse Proxy"],
+    flow: ["Git Push", "API", "ECS Build", "Redis Pub/Sub", "WebSocket", "S3", "Reverse Proxy"],
     stack: ["Node.js", "Redis", "PostgreSQL", "Prisma", "Docker", "AWS", "S3"],
-    source: "https://github.com/sampremm/vercel-backend",
+    source: "https://github.com/sampremm/vercel",
     // Drawer specifics
     context: "Building a PaaS from scratch to understand container orchestration and live log streaming.",
     problem: "Orchestrating isolated, untrusted code execution environments on demand while streaming real-time build logs to the browser.",

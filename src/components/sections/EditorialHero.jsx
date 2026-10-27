@@ -402,7 +402,7 @@ const EditorialHero = () => {
             </span>
 
             <span>
-              BACKEND / CLOUD / AI
+              BACKEND / CLOUD
             </span>
 
             <span className="text-white/30">
@@ -766,7 +766,7 @@ const EditorialHero = () => {
             </span>
 
             <span>
-              BACKEND / CLOUD / AI
+              BACKEND / CLOUD
             </span>
 
             <span className="text-white/30">

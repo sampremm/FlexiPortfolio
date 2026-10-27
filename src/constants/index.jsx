@@ -82,7 +82,7 @@ export const PROJECTS = [
     ],
     highlights: ["Complete build isolation", "Dynamic framework detection", "Zero shared state", "Private bucket proxying"],
     tags: ["Node.js", "Redis", "Docker", "AWS ECS", "S3", "Prisma", "PostgreSQL"],
-    source: "https://github.com/sampremm/vercel-backend",
+    source: "https://github.com/sampremm/vercel",
     image: image4
   },
   {

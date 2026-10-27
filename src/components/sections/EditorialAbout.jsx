@@ -118,7 +118,7 @@ const EditorialAbout = () => {
                     <FiArrowDown />
                   </div>
                   <div className="font-mono text-xs uppercase tracking-widest text-[#111111] dark:text-[#EDEDED] font-semibold">
-                    AI SYSTEMS
+                    CLOUD & AWS DEPLOYMENTS
                   </div>
                 </div>
               </div>

@@ -4,12 +4,12 @@ import {
   SiTypescript, SiJavascript, SiPython, SiNodedotjs, 
   SiExpress, SiDjango, SiPostgresql, SiRedis, 
   SiMongodb, SiMysql, SiDocker, SiNginx, 
-  SiApachekafka, SiCelery 
+  SiCelery
 } from 'react-icons/si';
 import { 
   FaJava, FaAws, FaCloud, FaStream, 
-  FaNetworkWired, FaBrain, FaRobot, FaSearch, 
-  FaCogs, FaServer, FaLayerGroup 
+  FaNetworkWired,
+  FaServer, FaLayerGroup
 } from 'react-icons/fa';
 
 const STACK_CATEGORIES = [
@@ -64,21 +64,10 @@ const STACK_CATEGORIES = [
     category: "SYSTEMS",
     capabilities: "Events · Queues · Realtime",
     icons: [
-      { Icon: SiApachekafka, name: "Kafka" },
+      { Icon: SiRedis, name: "Redis Pub/Sub" },
       { Icon: FaStream, name: "BullMQ" },
       { Icon: SiCelery, name: "Celery" },
       { Icon: FaNetworkWired, name: "WebSockets" },
-    ]
-  },
-  {
-    num: "06",
-    category: "AI",
-    capabilities: "Models · Retrieval · Orchestration",
-    icons: [
-      { Icon: FaBrain, name: "LLMs" },
-      { Icon: FaRobot, name: "AI Agents" },
-      { Icon: FaSearch, name: "RAG" },
-      { Icon: FaCogs, name: "Automation" },
     ]
   }
 ];
