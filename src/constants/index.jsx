@@ -174,13 +174,13 @@ export const RESEARCH = {
   institution: "Dept. of Electrical & Electronics Engineering, JITS",
   problem: "Under Partial Shading Conditions (PSC), photovoltaic arrays exhibit multiple local peaks (LMPP) on the P-V characteristic curve due to bypass diodes. Traditional MPPT algorithms (P&O, Incremental Conductance) suffer from local optima entrapment, causing massive energy losses.",
   description: "Rooted in mathematical optimization and control theory, this paper presents a metaheuristic MPPT framework employing the Cuckoo Search Algorithm (CSA) coupled with a DC-DC boost converter to track the Global Maximum Power Point (GMPP) under dynamic irradiance variations.",
-  details: "By integrating Lévy flight random walks, CSA balances exploration across high-dimensional search spaces with rapid exploitation around optimal duty cycles. Unlike conventional Particle Swarm Optimization (PSO) or Genetic Algorithms (GA) which exhibit long convergence times, and classical P&O which suffers from heavy steady-state oscillations and drifting, CSA reliably converges to the global maximum with zero oscillation.",
-  quote: "Demonstrated that CSA MPPT rapidly identifies the Global Maximum Power Point (GMPP) of PV arrays under dynamic partial shading conditions, completely eliminating steady-state power oscillations and preventing local-peak entrapment.",
+  details: "By integrating Lévy flight random walks, CSA balances exploration across high-dimensional search spaces with rapid exploitation around optimal duty cycles. Unlike conventional Particle Swarm Optimization (PSO) or Genetic Algorithms (GA) which exhibit long convergence times, and classical P&O which suffers from heavy steady-state oscillations and drifting, CSA reliably converges to the global maximum with reduced oscillation compared to P&O.",
+  quote: "Demonstrated that CSA MPPT rapidly identifies the Global Maximum Power Point (GMPP) of PV arrays under dynamic partial shading conditions, reducing steady-state oscillations compared to P&O and preventing local-peak entrapment.",
   metrics: [
     { label: "Optimization Target", value: "Global MPP (GMPP)" },
-    { label: "Steady-State State", value: "Zero Oscillation" },
+    { label: "Steady-State State", value: "Reduced oscillation vs P&O" },
     { label: "Search Mechanism", value: "Lévy Flights" },
-    { label: "Drift Behavior", value: "Zero Drift" }
+    { label: "Drift Behavior", value: "Global peak tracking" }
   ],
   simulation: "MATLAB / Simulink with DC-DC Boost Converter & Real-time Irradiance Curves",
   link: "https://drive.google.com/file/d/1QUZ3L33mAqRigHwQnwg__ZOjVhmEPucZ/view"

@@ -55,7 +55,7 @@ const CSA_STEPS = [
   },
   {
     step: 3,
-    title: 'GMPP Locked (Zero Oscillation)',
+    title: 'GMPP Locked (Reduced oscillation vs P&O)',
     desc: 'All 3 nests converged onto Global Maximum Power Point (220.4W) in 0.11s.',
     nests: [
       { id: 'N1', x: 218, y: 18, v: 205.4, p: 220.4, d: 0.62 },

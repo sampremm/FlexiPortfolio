@@ -358,8 +358,8 @@ const EditorialHero = () => {
               xl:text-xl
             "
           >
-            I build backend systems, distributed infrastructure
-            and AI-powered products.
+            I build backend systems with queues, idempotent APIs, safe
+            transactions, and AWS deployments.
           </motion.p>
 
           {/* =====================================================
@@ -722,8 +722,8 @@ const EditorialHero = () => {
               sm:text-lg
             "
           >
-            I build backend systems, distributed infrastructure
-            and AI-powered products.
+            I build backend systems with queues, idempotent APIs, safe
+            transactions, and AWS deployments.
           </motion.p>
 
           {/* MOBILE META */}

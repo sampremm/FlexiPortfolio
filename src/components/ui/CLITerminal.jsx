@@ -11,7 +11,7 @@ const HELP_TEXT = [
   '  skills    - List backend, cloud, and database proficiencies',
   '  projects  - Inspect production distributed systems & repos',
   '  stats     - Project stats',
-  '  curl      - Simulate HTTP probe against production health checks',
+  '  curl      - Suggested commands',
   '  contact   - Communication channels & location coordinates',
   '  theme     - Toggle or set theme ("theme dark" / "theme light")',
   '  clear     - Wipe console screen buffer',
@@ -130,24 +130,7 @@ const CLITerminal = ({ isOpen, onClose }) => {
         break;
 
       case 'curl':
-        outputLines.push(
-          'HTTP/2 200 OK',
-          'server: caddy/2.7.4-alpine',
-          `date: ${new Date().toUTCString()}`,
-          'content-type: application/json; charset=utf-8',
-          'x-ratelimit-remaining: 9998',
-          '',
-          JSON.stringify(
-            {
-              status: 'operational',
-              system: 'samprem-mesh',
-              edge_region: 'ap-south-1',
-              verified_roles: ['Backend Engineer', 'Distributed Systems'],
-            },
-            null,
-            2
-          )
-        );
+        outputLines.push('Try: projects, stats, contact');
         break;
 
       case 'contact':

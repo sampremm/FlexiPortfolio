@@ -54,24 +54,6 @@ const PRIMARY_PROJECTS = [
   {
     id: "03",
     num: "PROJECT 03",
-    title: "AI JOB AGENT",
-    description: "AI-driven job processing pipeline using event-driven workers, Kafka and idempotent persistence.",
-    flow: ["Inbound", "AI Processing", "Kafka", "Consumer", "Structured Processing", "PostgreSQL"],
-    stack: ["AI Agents", "Kafka", "Node.js", "PostgreSQL", "Docker", "BullMQ"],
-    source: "https://github.com/sampremm/algohire-hackthon",
-    context: "Parsing unstructured inbound data efficiently at scale.",
-    problem: "Evaluating and categorizing non-deterministic candidate profiles without dropping data during traffic spikes.",
-    architecture: "Autonomous agents parse data, emitting structured schemas to Kafka topics partitioned by domain. Consumers read in order and idempotently persist to PostgreSQL.",
-    implementation: [
-      { label: "Agent Evaluation", detail: "LLM pipelines extracting structured scoring rubrics from raw text." },
-      { label: "Message Broker", detail: "Kafka topics partitioned by candidate domain for ordered stream consumption." }
-    ],
-    reliability: "Kafka partition offsets prevent message loss during burst traffic or consumer crashes.",
-    failure_handling: "Poison-pill quarantine handling corrupted payloads with automated retry triggers.",
-  },
-  {
-    id: "04",
-    num: "PROJECT 04",
     title: "SNAPLINK",
     description: "Distributed URL shortener using NGINX load balancing, Redis caching and a dedicated key-generation service.",
     flow: ["Request", "NGINX", "Redis", "Key Generation", "MySQL", "Analytics"],
@@ -95,8 +77,8 @@ const PRIMARY_PROJECTS = [
 
 const SECONDARY_PROJECTS = [
   {
-    id: "05",
-    num: "PROJECT 05",
+    id: "04",
+    num: "PROJECT 04",
     title: "RESILIENT NOTIFICATION ENGINE",
     description: "Notification delivery pipeline with BullMQ workers, exponential backoff retries and idempotent delivery.",
     stack: ["BullMQ", "Redis", "PostgreSQL", "Prisma", "React", "Docker", "Idempotency"],
@@ -114,8 +96,8 @@ const SECONDARY_PROJECTS = [
     failure_handling: "Exponential backoff, max 3 retries, then the delivery is marked FAILED.",
   },
   {
-    id: "06",
-    num: "PROJECT 06",
+    id: "05",
+    num: "PROJECT 05",
     title: "MULTITHREADED JAVA WEB SERVER",
     description: "Low-level HTTP/1.1 server built entirely from scratch using Java Sockets and Concurrency.",
     stack: ["Java Sockets", "HTTP/1.1", "Thread Pool", "Concurrency", "Request Parsing"],
@@ -156,7 +138,7 @@ const SelectedWork = () => {
           </h2>
         </div>
         <p className="font-body text-sm sm:text-base text-[#6F6F6F] dark:text-[#9E9E9E] leading-relaxed max-w-sm md:text-right">
-          Four systems, each built to answer one hard question about correctness, concurrency or scale. Open any panel for the full case study.
+          Three systems, each built to answer one hard question about correctness, concurrency or scale. Open any panel for the full case study.
         </p>
       </motion.div>
 
