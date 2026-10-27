@@ -9,7 +9,7 @@ import {
 import { 
   FaJava, FaAws, FaCloud, FaStream, 
   FaNetworkWired, FaBrain, FaRobot, FaSearch, 
-  FaCogs, FaServer 
+  FaCogs, FaServer, FaLayerGroup 
 } from 'react-icons/fa';
 
 const STACK_CATEGORIES = [
@@ -32,6 +32,7 @@ const STACK_CATEGORIES = [
       { Icon: SiNodedotjs, name: "Node.js" },
       { Icon: SiExpress, name: "Express" },
       { Icon: SiDjango, name: "Django" },
+      { Icon: SiDjango, name: "DRF" },
       { Icon: FaServer, name: "REST APIs" },
     ]
   },
@@ -55,6 +56,7 @@ const STACK_CATEGORIES = [
       { Icon: SiDocker, name: "Docker" },
       { Icon: SiNginx, name: "NGINX" },
       { Icon: FaCloud, name: "ECS" },
+      { Icon: FaLayerGroup, name: "Docker Compose" },
     ]
   },
   {

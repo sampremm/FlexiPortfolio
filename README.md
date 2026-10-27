@@ -39,11 +39,11 @@ A **cyber-minimalist terminal-style portfolio** built with React + Vite and **Fr
 
 | System | Stack | Description |
 |---|---|---|
-| **Vercel Clone – Cloud PaaS** | Node.js, Redis, Docker, AWS ECS, S3, NGINX | 4-service event-driven pipeline with ephemeral Fargate containers |
-| **Playto Payout Engine** | Python, Django, PostgreSQL, Redis, Celery, Docker, AWS EC2 | Fintech engine with two-tier idempotency barrier & append-only ledger |
-| **SnapLink – Distributed URL SaaS** | Node.js, Redis, NGINX, MySQL, Docker | Key generation service + sub-millisecond redirect via NGINX load balancing |
-| **Resilient Notification Engine** | BullMQ, Redis, Node.js, Express.js, Docker | Exactly-once delivery with dead-letter queues & exponential backoff |
-| **Multithreaded Java Web Server** | Java, Sockets, Multithreading | Custom HTTP/1.1 server on raw TCP/IP sockets with RFC-compliant parser |
+| **Vercel Clone – Cloud PaaS** | Node.js, Redis, Docker, AWS ECS, S3, Prisma, PostgreSQL | 4-service event-driven pipeline with ephemeral Fargate containers |
+| **Playto Payout Engine** | Django, DRF, Celery, PostgreSQL, Redis, Docker, AWS EC2, GitHub Actions | Fintech engine with two-tier idempotency barrier & append-only ledger |
+| **SnapLink – Distributed URL SaaS** | Node.js, Redis, NGINX, MySQL, Docker | 3 Express replicas behind NGINX, key-generation service with nanoid fallback, Redis-cached redirects |
+| **Resilient Notification Engine** | BullMQ, Redis, Node.js, PostgreSQL, Prisma, React, Docker | Idempotent delivery, exponential backoff (max 3 retries) |
+| **Multithreaded Java Web Server** | Java, Sockets, Multithreading | Single-threaded, thread-per-request and thread-pool servers, JMeter load-tested |
 
 ---
 

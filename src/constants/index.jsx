@@ -18,6 +18,8 @@ import {
   SiPrisma,
   SiNginx,
   SiGithubactions,
+  SiDjango,
+  SiCelery,
 } from "react-icons/si";
 
 import { FaNodeJs } from "react-icons/fa";
@@ -34,10 +36,9 @@ export const PROFILE = {
   name: "THALLA SAM PREM KUMAR",
   role: "Backend Engineer",
   subRole: "Distributed Systems · Cloud Architectures · Performance",
-  info: "Engineering high-throughput distributed backends, resilient event-driven pipelines, and atomic transaction systems with zero tolerance for state corruption.",
+  info: "I build backend systems with queues, idempotent APIs, safe transactions, and AWS deployments.",
   status: "OPEN TO BACKEND & DISTRIBUTED SYSTEMS ROLES · IMMEDIATE JOINER",
   location: "Hyderabad · Bangalore · Pune (Open to Remote)",
-  uptime: "99.99%",
   commitCount: "850+",
 };
 
@@ -46,12 +47,11 @@ export const PROFILE = {
 export const ABOUT = {
   title: "I architect backend systems that never silently fail.",
   text: "Specializing in distributed systems, asynchronous event pipelines, and high-concurrency data layers. Recently architected a Vercel-like PaaS where an API cluster orchestrates isolated AWS ECS Fargate worker containers that dynamically detect project frameworks, execute containerized builds, stream real-time logs over Redis Pub/Sub, and serve atomic deployments via an S3 reverse proxy.",
-  subtext: "Previously engineered a fintech payout reconciliation engine featuring a two-tier idempotency barrier (L1 Redis memory cache + L2 PostgreSQL row locks) with append-only ledger auditability to guarantee exactly-once execution and eliminate race conditions.",
+  subtext: "Previously engineered a fintech payout reconciliation engine featuring a two-tier idempotency barrier (L1 Redis memory cache + L2 PostgreSQL row locks) with append-only ledger auditability.",
   stats: [
-    { label: "Production-Grade Systems Shipped", value: "5+" },
-    { label: "AWS Services in Production", value: "4" },
-    { label: "Avg Execution Latency Target", value: "<15ms" },
-    { label: "Data Integrity & Idempotency", value: "100%" }
+    { label: "Backend projects on GitHub", value: "5" },
+    { label: "PostgreSQL shards (Playto)", value: "2" },
+    { label: "Services in Vercel Clone", value: "4" }
   ]
 };
 
@@ -67,21 +67,21 @@ export const PROJECTS = [
     specs: [
       { label: "Execution", value: "AWS ECS RunTask with dynamic env overrides" },
       { label: "Isolation", value: "Ephemeral container per commit (Zero shared state)" },
-      { label: "Telemetry", value: "Sub-millisecond Redis Pub/Sub live log stream" },
+      { label: "Telemetry", value: "Real-time build logs via Redis Pub/Sub + Socket.IO" },
       { label: "Proxying", value: "Private S3 Reverse Proxy with custom subdomain routing" }
     ],
     architecture: [
       "POST /deploy { repoUrl, commitSha }",
       "↓ Dispatches AWS ECS Task (Fargate instance)",
       "↓ Shallow git clone & inspect workspace config",
-      "↓ Containerized framework build (Vite / Next.js)",
+      "↓ Containerized framework build (Vite / CRA / Next.js static export)",
       "↓ Redis Pub/Sub streams build stdout/stderr",
       "↓ Upload artifact directory to S3 bucket",
       "↓ Auto-teardown container & update routing table",
-      "↓ Reverse proxy serves dynamic slug at edge"
+      "↓ Reverse proxy serves dynamic slug"
     ],
     highlights: ["Complete build isolation", "Dynamic framework detection", "Zero shared state", "Private bucket proxying"],
-    tags: ["Node.js", "Redis", "Docker", "AWS ECS", "S3", "NGINX"],
+    tags: ["Node.js", "Redis", "Docker", "AWS ECS", "S3", "Prisma", "PostgreSQL"],
     source: "https://github.com/sampremm/vercel-backend",
     image: image4
   },
@@ -90,32 +90,38 @@ export const PROJECTS = [
     category: "Fintech & Core Engine",
     filterCategory: "Core Engines",
     title: "Playto Payout Engine",
-    description: "High-concurrency fintech payout platform built with Django/Python, featuring a two-tier idempotency layer (Redis fast-path + PostgreSQL SELECT FOR UPDATE) and an immutable append-only ledger. Designed to withstand network partitions, double-spend replay attacks, and burst transactions while maintaining strict financial integrity.",
+    description: "High-concurrency fintech payout platform built with Django/Python, featuring a two-tier idempotency layer (Redis fast-path + PostgreSQL SELECT FOR UPDATE) and an immutable append-only ledger.",
     specs: [
       { label: "Idempotency", value: "L1 Redis TTL lock + L2 PostgreSQL row locks" },
       { label: "Ledger", value: "Immutable append-only ledger for financial auditing" },
       { label: "Security", value: "HMAC-SHA256 signed webhooks & payload validation" },
-      { label: "Async Workers", value: "Celery distributed task queue with Redis broker" }
+      { label: "Async Workers", value: "Celery distributed task queue with Redis broker" },
+      { label: "Row Locking", value: "SELECT FOR UPDATE row locks inside atomic transactions" },
+      { label: "Sharding", value: "Custom Django DB router across 2 PostgreSQL shards" },
+      { label: "Recovery", value: "Celery Beat sweeper recovers stuck payouts (exponential backoff, max 3 retries, then refund)" },
+      { label: "CI/CD", value: "GitHub Actions CI/CD: tests on real Postgres + Redis → Docker Hub → EC2" },
+      { label: "Concurrency Test", value: "Two simultaneous overdraw requests → one 201, one 402" }
     ],
-    highlights: ["Zero double-spending", "Strictly-once guarantees", "HMAC webhook verification"],
-    tags: ["Python", "Django", "PostgreSQL", "Redis", "Celery", "Docker", "AWS EC2"],
+    highlights: ["SELECT FOR UPDATE row locks", "2 PostgreSQL shards", "HMAC webhook verification"],
+    tags: ["Django", "DRF", "Celery", "PostgreSQL", "Redis", "Docker", "AWS EC2", "GitHub Actions"],
     source: "https://github.com/sampremm/playto-engine",
     demo: "https://playto-engine-vert.vercel.app/",
     image: image2
   },
   {
     id: "03",
-    category: "High-Throughput SaaS",
+    category: "URL Shortener",
     filterCategory: "Cloud & Distributed",
     title: "SnapLink – Distributed URL SaaS",
-    description: "High-scale URL shortener with a dedicated Key Generation Service (Aiven MySQL) and Upstash Redis caching. Implemented NGINX load balancing to distribute traffic and achieve sub-millisecond redirect latency for millions of records. Pre-allocated token ranges prevent distributed key collisions.",
+    description: "URL shortener running 3 stateless Express replicas behind an NGINX load balancer, with a key-generation service (MySQL) with nanoid fallback and Redis-cached redirects. Deployed on Railway + Vercel.",
     specs: [
-      { label: "Architecture", value: "Dedicated Key Generation Service (KGS token pool)" },
-      { label: "Storage Layer", value: "Aiven MySQL clustered + Upstash Redis cache" },
-      { label: "Performance", value: "Sub-millisecond redirect latency at scale" },
-      { label: "Load Balancing", value: "NGINX reverse proxy with health checking" }
+      { label: "Load Balancing", value: "3 stateless Express replicas behind NGINX load balancer" },
+      { label: "Key Generation", value: "Key-generation service (MySQL) with nanoid fallback" },
+      { label: "Caching", value: "Redis-cached redirects" },
+      { label: "Auth", value: "JWT (HTTP-only cookies), rate limit 100 req/15 min" },
+      { label: "Deployment", value: "Deployed on Railway + Vercel" }
     ],
-    highlights: ["Pre-generated key pools", "Global caching", "Sub-millisecond redirects"],
+    highlights: ["NGINX load balancing", "Key-generation service", "Redis-cached redirects"],
     tags: ["Node.js", "Redis", "NGINX", "MySQL", "Docker"],
     source: "https://github.com/sampremm/url-shortener",
     demo: "https://url-shortener-six-sandy.vercel.app/",
@@ -126,15 +132,15 @@ export const PROJECTS = [
     category: "Queue & Event Processing",
     filterCategory: "Core Engines",
     title: "Resilient Notification Engine",
-    description: "Asynchronous delivery system using BullMQ and Redis state machines. Implemented exponential backoff, dead-letter queues, and deterministic idempotency keys to guarantee exactly-once message delivery under downstream provider outages.",
+    description: "Asynchronous delivery system using BullMQ workers with a delivery state machine, exponential backoff (max 3 retries) and an idempotent worker that skips already-sent deliveries.",
     specs: [
-      { label: "Worker Engine", value: "BullMQ priority queues + Redis state machines" },
-      { label: "Resiliency", value: "Exponential backoff, jitter & dead-letter handling" },
-      { label: "Delivery", value: "Deterministic idempotency keys (Exactly-once)" },
-      { label: "Concurrency", value: "Multi-worker consumer pooling with rate limits" }
+      { label: "Worker Engine", value: "BullMQ workers with state machine QUEUED → PROCESSING → RETRYING → SENT/FAILED" },
+      { label: "Resiliency", value: "Exponential backoff, max 3 retries" },
+      { label: "Delivery", value: "Idempotent worker skips already-sent deliveries" },
+      { label: "Testing", value: "4-container Docker Compose + integration tests" }
     ],
-    highlights: ["Dead-letter queue handling", "Priority queues", "Bursty traffic absorption"],
-    tags: ["BullMQ", "Redis", "Node.js", "Express.js", "Docker"],
+    highlights: ["Delivery state machine", "Exponential backoff, max 3 retries", "Idempotent delivery"],
+    tags: ["BullMQ", "Redis", "Node.js", "Express.js", "Docker", "PostgreSQL", "Prisma", "React"],
     source: "https://github.com/sampremm/algohire-hackthon",
     image: image5
   },
@@ -143,14 +149,13 @@ export const PROJECTS = [
     category: "Low-Level Networking",
     filterCategory: "Systems",
     title: "Multithreaded Java Web Server",
-    description: "Custom HTTP/1.1 server built from scratch on raw Java Sockets. Implemented custom thread-pooling, non-blocking socket lifecycle management, and RFC-compliant HTTP request parsing without external HTTP frameworks.",
+    description: "HTTP server built from scratch on java.net.Socket in 3 implementations: single-threaded, thread-per-request, and fixed thread pool (10 workers). Load-tested with Apache JMeter.",
     specs: [
-      { label: "Networking", value: "Raw TCP/IP socket handling via Java java.net" },
-      { label: "Concurrency", value: "Custom bounded thread pool & task queue" },
-      { label: "Protocol", value: "RFC-compliant HTTP/1.1 chunked/pipelined parsing" },
-      { label: "Benchmarking", value: "Load tested for memory leak resistance & latency" }
+      { label: "Implementations", value: "3 implementations: single-threaded, thread-per-request, fixed thread pool (10 workers)" },
+      { label: "Networking", value: "Built on java.net.Socket with connection timeouts" },
+      { label: "Benchmarking", value: "Load-tested with Apache JMeter at 100–1000 concurrent users" }
     ],
-    highlights: ["Zero third-party abstractions", "Custom thread pool", "RFC-compliant parser"],
+    highlights: ["3 server implementations", "Fixed thread pool (10 workers)", "JMeter load-tested"],
     tags: ["Java", "Sockets", "Concurrency", "Multithreading"],
     source: "https://github.com/sampremm/multithreaded-webserver-java",
     image: image1
@@ -186,6 +191,8 @@ export const RESEARCH = {
 export const SKILLS = [
   { name: "Node.js", category: "Languages & Runtimes", icon: <FaNodeJs className="text-emerald-500" />, desc: "Event-driven runtime & asynchronous architectures" },
   { name: "Express.js", category: "Frameworks & APIs", icon: <SiExpress className="text-neutral-200" />, desc: "REST APIs, middleware pipelines & auth guards" },
+  { name: "Django", category: "Frameworks & APIs", icon: <SiDjango className="text-emerald-600" />, desc: "Python web framework, ORM & DB routers" },
+  { name: "DRF", category: "Frameworks & APIs", icon: <SiDjango className="text-red-400" />, desc: "Django REST Framework APIs" },
   { name: "Python", category: "Languages & Runtimes", icon: <FaPython className="text-amber-400" />, desc: "Data processing, algorithms & backend automation" },
   { name: "Java", category: "Languages & Runtimes", icon: <FaJava className="text-rose-500" />, desc: "Multithreading, OOP & low-level socket programming" },
   { name: "TypeScript", category: "Languages & Runtimes", icon: <SiTypescript className="text-sky-400" />, desc: "Strict type safety & domain-driven architecture" },
@@ -193,8 +200,10 @@ export const SKILLS = [
   { name: "Redis", category: "Databases & Storage", icon: <SiRedis className="text-red-500" />, desc: "In-memory caching, Pub/Sub, rate limiting & TTL locks" },
   { name: "MongoDB", category: "Databases & Storage", icon: <SiMongodb className="text-emerald-400" />, desc: "Document storage & high-write telemetry pipelines" },
   { name: "BullMQ", category: "Queues & Distributed", icon: <GiChargingBull className="text-amber-500" />, desc: "Distributed message queues, worker pools & retries" },
+  { name: "Celery", category: "Queues & Distributed", icon: <SiCelery className="text-lime-400" />, desc: "Async task workers & Celery Beat scheduling" },
   { name: "Prisma ORM", category: "Databases & Storage", icon: <SiPrisma className="text-teal-400" />, desc: "Type-safe database migrations & relation queries" },
   { name: "Docker", category: "DevOps & Cloud", icon: <FaDocker className="text-blue-500" />, desc: "Containerization, multi-stage builds & environment parity" },
+  { name: "Docker Compose", category: "DevOps & Cloud", icon: <FaDocker className="text-sky-400" />, desc: "Multi-container local environments" },
   { name: "AWS", category: "DevOps & Cloud", icon: <FaAws className="text-orange-400" />, desc: "ECS Fargate, S3, ECR, IAM & cloud networking" },
   { name: "NGINX", category: "DevOps & Cloud", icon: <SiNginx className="text-emerald-500" />, desc: "Reverse proxying, SSL termination & load balancing" },
   { name: "GitHub Actions", category: "DevOps & Cloud", icon: <SiGithubactions className="text-blue-400" />, desc: "CI/CD pipelines, automated testing & deployment" },

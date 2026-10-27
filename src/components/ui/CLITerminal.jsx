@@ -10,7 +10,7 @@ const HELP_TEXT = [
   '  about     - Core summary & architectural philosophy',
   '  skills    - List backend, cloud, and database proficiencies',
   '  projects  - Inspect production distributed systems & repos',
-  '  stats     - Production telemetry & engineering metrics',
+  '  stats     - Project stats',
   '  curl      - Simulate HTTP probe against production health checks',
   '  contact   - Communication channels & location coordinates',
   '  theme     - Toggle or set theme ("theme dark" / "theme light")',
@@ -24,7 +24,14 @@ const CLITerminal = ({ isOpen, onClose }) => {
     {
       type: 'output',
       lines: [
-        'Antigravity Core CLI v2.4.0 [x86_64-apple-darwin23.0]',
+        'INIT: Loading projects...',
+        'PLAYTO: Django + Celery + PostgreSQL (2 shards) — live',
+        'VERCEL: 4 services — API, build engine (ECS Fargate), S3 proxy, dashboard',
+        'SNAPLINK: 3 Express replicas behind NGINX + Redis cache — live',
+        'NOTIFY: BullMQ workers, retries (max 3), idempotent delivery',
+        'JAVA: single / thread-per-request / thread-pool servers, JMeter tested',
+        'STATUS: Open to backend roles · Hyderabad · Immediate joiner',
+        '',
         'Type "help" to view executable commands, or "projects" to view architecture.',
         '------------------------------------------------------------------',
       ],
@@ -116,14 +123,10 @@ const CLITerminal = ({ isOpen, onClose }) => {
         break;
 
       case 'stats':
-        outputLines.push(
-          'SYSTEM METRICS & PRODUCTION BENCHMARKS:',
-          `  • Availability SLA Target   : ${PROFILE.uptime}`,
-          `  • Production AWS Services   : 4 (ECS Fargate, ECR, S3, EC2)`,
-          `  • P99 Execution Latency     : ${ABOUT.stats[2]?.value || '<15ms'}`,
-          `  • Transaction Integrity     : ${ABOUT.stats[3]?.value || '100%'} (Idempotent locks)`,
-          `  • Production Deployed Repos : ${ABOUT.stats[0]?.value || '5+'}`
-        );
+        outputLines.push('PROJECT STATS:');
+        ABOUT.stats.forEach((s) => {
+          outputLines.push(`  • ${s.value.padEnd(3)} ${s.label}`);
+        });
         break;
 
       case 'curl':
@@ -133,7 +136,6 @@ const CLITerminal = ({ isOpen, onClose }) => {
           `date: ${new Date().toUTCString()}`,
           'content-type: application/json; charset=utf-8',
           'x-ratelimit-remaining: 9998',
-          'x-latency-origin: 7.82ms',
           '',
           JSON.stringify(
             {

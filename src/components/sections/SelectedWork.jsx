@@ -12,19 +12,21 @@ const PRIMARY_PROJECTS = [
     title: "VERCEL — CLOUD PAAS",
     description: "Event-driven cloud deployment platform using isolated AWS ECS/Fargate build environments, Redis Pub/Sub telemetry, PostgreSQL state, Docker and private S3 artifacts.",
     flow: ["Git Push", "API", "Queue", "ECS Build", "Redis Pub/Sub", "WebSocket", "S3", "Reverse Proxy"],
-    stack: ["Node.js", "Redis", "PostgreSQL", "Docker", "AWS", "S3", "NGINX"],
+    stack: ["Node.js", "Redis", "PostgreSQL", "Prisma", "Docker", "AWS", "S3"],
     source: "https://github.com/sampremm/vercel-backend",
     // Drawer specifics
     context: "Building a PaaS from scratch to understand container orchestration and live log streaming.",
-    problem: "Orchestrating isolated, untrusted code execution environments on demand while streaming real-time build logs to thousands of concurrent websocket connections.",
-    architecture: "A multi-tier architecture where an API enqueues builds, an ECS cluster spins up ephemeral Docker containers, and a Redis Pub/Sub backplane broadcasts stdout/stderr to stateless WebSocket instances.",
+    problem: "Orchestrating isolated, untrusted code execution environments on demand while streaming real-time build logs to the browser.",
+    architecture: "A multi-tier architecture where an API enqueues builds, an ECS cluster spins up ephemeral Docker containers, and a Redis Pub/Sub backplane broadcasts stdout/stderr to the dashboard over Socket.IO.",
     implementation: [
       { label: "Execution Engine", detail: "AWS ECS RunTask with dynamic env overrides for ephemeral container builds." },
       { label: "Build Isolation", detail: "Single ephemeral container per commit — strictly zero shared state between builds." },
-      { label: "Reverse Proxying", detail: "Private S3 Reverse Proxy serving dynamic subdomain routing at edge." }
+      { label: "Reverse Proxying", detail: "Private S3 Reverse Proxy serving dynamic subdomain routing." },
+      { label: "Live Logs", detail: "Real-time build logs via Redis Pub/Sub + Socket.IO." },
+      { label: "Framework Detection", detail: "Vite / CRA / Next.js static export." }
     ],
     reliability: "Worker isolation ensures zero cross-tenant pollution. Build failures are quarantined and reported in real-time.",
-    failure_handling: "Dead-letter queues catch unprocessable git events. Redis connection drops gracefully fallback without tearing down active builds.",
+    failure_handling: "Each build runs in its own ephemeral container, so a failed build is isolated from other deployments.",
   },
   {
     id: "02",
@@ -32,19 +34,22 @@ const PRIMARY_PROJECTS = [
     title: "PLAYTO — PAYOUT ENGINE",
     description: "Fintech payout engine designed around two-tier idempotency, PostgreSQL row locking, asynchronous workers and an append-only transaction ledger.",
     flow: ["Request", "Idempotency", "Redis", "PostgreSQL Lock", "Transaction", "Ledger", "Webhook"],
-    stack: ["Python", "Django", "PostgreSQL", "Redis", "Celery", "Docker", "AWS EC2"],
+    stack: ["Django", "DRF", "Celery", "PostgreSQL", "Redis", "Docker", "AWS EC2", "GitHub Actions"],
     source: "https://github.com/sampremm/playto-engine",
     demo: "https://playto-engine-vert.vercel.app/",
     context: "Financial systems require absolute correctness over absolute speed.",
-    problem: "Preventing double-spend replay attacks during network partitions and high-concurrency bursts across distributed worker nodes.",
+    problem: "Preventing double-spend when concurrent payout requests hit the same balance.",
     architecture: "Requests hit a Redis TTL lock for fast-path rejection, then proceed to a PostgreSQL SELECT FOR UPDATE lock for strict serialized execution. All changes hit an append-only ledger.",
     implementation: [
       { label: "Idempotency Layer", detail: "L1 Redis TTL memory cache paired with L2 PostgreSQL row locks." },
       { label: "Auditable Ledger", detail: "Strictly append-only double-entry financial ledger for forensic compliance." },
-      { label: "Security & Signing", detail: "HMAC-SHA256 signature verification across all incoming payout webhook events." }
+      { label: "Security & Signing", detail: "HMAC-SHA256 signature verification across all incoming payout webhook events." },
+      { label: "Row Locking", detail: "SELECT FOR UPDATE row locks inside atomic transactions." },
+      { label: "Sharding", detail: "Custom Django DB router across 2 PostgreSQL shards." },
+      { label: "CI/CD", detail: "GitHub Actions CI/CD: tests on real Postgres + Redis → Docker Hub → EC2." }
     ],
-    reliability: "100% elimination of double-spend replay attacks during network partition recoveries.",
-    failure_handling: "Failed webhooks are pushed to a Celery retry queue with exponential backoff.",
+    reliability: "Concurrency test: two simultaneous overdraw requests → one 201, one 402.",
+    failure_handling: "Celery Beat sweeper recovers stuck payouts (exponential backoff, max 3 retries, then refund).",
   },
   {
     id: "03",
@@ -73,15 +78,18 @@ const PRIMARY_PROJECTS = [
     stack: ["Node.js", "Redis", "NGINX", "MySQL", "Docker"],
     source: "https://github.com/sampremm/url-shortener",
     demo: "https://url-shortener-six-sandy.vercel.app/",
-    context: "Building high-throughput, low-latency edge services.",
+    context: "Building a horizontally scaled URL shortener.",
     problem: "Generating globally unique, short URL tokens at high concurrency without database lock contention.",
-    architecture: "A decoupled Key Generation Service allocates token ranges to application nodes. NGINX routes traffic, while Upstash Redis caches read hits.",
+    architecture: "3 stateless Express replicas behind NGINX load balancer. A key-generation service (MySQL) with nanoid fallback issues short codes, and redirects are Redis-cached.",
     implementation: [
-      { label: "Token Generation", detail: "Decoupled Key Generation Service allocating discrete numeric token ranges." },
-      { label: "Edge Caching", detail: "Upstash Redis cache intercepting 95%+ of read requests for rapid redirects." }
+      { label: "Load Balancing", detail: "3 stateless Express replicas behind NGINX load balancer." },
+      { label: "Key Generation", detail: "Key-generation service (MySQL) with nanoid fallback." },
+      { label: "Caching", detail: "Redis-cached redirects." },
+      { label: "Auth & Limits", detail: "JWT (HTTP-only cookies), rate limit 100 req/15 min." },
+      { label: "Deployment", detail: "Deployed on Railway + Vercel." }
     ],
-    reliability: "Pre-allocated monotonic ranges eliminate key collision probability.",
-    failure_handling: "If the KGS fails, nodes can continue generating tokens from their local pre-allocated pool until exhausted.",
+    reliability: "Stateless replicas let NGINX spread traffic across all 3 instances.",
+    failure_handling: "If the key-generation service is unavailable, short codes fall back to nanoid.",
   },
 ];
 
@@ -90,18 +98,20 @@ const SECONDARY_PROJECTS = [
     id: "05",
     num: "PROJECT 05",
     title: "RESILIENT NOTIFICATION ENGINE",
-    description: "Reliable notification delivery pipeline with dead-letter queueing and automated retries.",
-    stack: ["BullMQ", "Redis", "Worker Pools", "Retries", "DLQ", "Idempotency"],
+    description: "Notification delivery pipeline with BullMQ workers, exponential backoff retries and idempotent delivery.",
+    stack: ["BullMQ", "Redis", "PostgreSQL", "Prisma", "React", "Docker", "Idempotency"],
     source: "https://github.com/sampremm/algohire-hackthon",
     context: "Handling third-party API unreliability.",
     problem: "Ensuring high-priority notifications are delivered despite downstream vendor outages.",
-    architecture: "Jobs are pushed to BullMQ. Workers process jobs. Failures are caught and retried with exponential backoff before being sent to a DLQ.",
+    architecture: "BullMQ workers with state machine QUEUED → PROCESSING → RETRYING → SENT/FAILED.",
     implementation: [
-      { label: "Job Orchestration", detail: "BullMQ on top of Redis for robust job lifecycle management." },
-      { label: "Idempotent Delivery", detail: "Checking delivery states before executing external API calls." }
+      { label: "Job Orchestration", detail: "BullMQ workers with state machine QUEUED → PROCESSING → RETRYING → SENT/FAILED." },
+      { label: "Retries", detail: "Exponential backoff, max 3 retries." },
+      { label: "Idempotent Delivery", detail: "Idempotent worker skips already-sent deliveries." },
+      { label: "Testing", detail: "4-container Docker Compose + integration tests." }
     ],
-    reliability: "Ensures no dropped notifications during brief network blips.",
-    failure_handling: "Dead-letter queue captures permanently failed notifications for manual inspection.",
+    reliability: "Idempotent worker skips already-sent deliveries.",
+    failure_handling: "Exponential backoff, max 3 retries, then the delivery is marked FAILED.",
   },
   {
     id: "06",
@@ -112,13 +122,14 @@ const SECONDARY_PROJECTS = [
     source: "https://github.com/sampremm/multithreaded-webserver-java",
     context: "Understanding network primitives.",
     problem: "Serving concurrent HTTP requests without utilizing heavy enterprise web frameworks.",
-    architecture: "A main thread accepts TCP connections and dispatches them to a fixed thread pool. Each thread parses the raw HTTP bytestream and generates compliant responses.",
+    architecture: "3 implementations: single-threaded, thread-per-request, fixed thread pool (10 workers). Built on java.net.Socket with connection timeouts.",
     implementation: [
-      { label: "Socket Handling", detail: "Raw java.net.ServerSocket connection acceptance." },
-      { label: "Thread Pool", detail: "ExecutorService managing a fixed pool of worker threads to prevent OOM errors under load." }
+      { label: "Implementations", detail: "3 implementations: single-threaded, thread-per-request, fixed thread pool (10 workers)." },
+      { label: "Socket Handling", detail: "Built on java.net.Socket with connection timeouts." },
+      { label: "Load Testing", detail: "Load-tested with Apache JMeter at 100–1000 concurrent users." }
     ],
-    reliability: "Fixed thread pool provides backpressure, preventing the server from crashing under infinite connection requests.",
-    failure_handling: "Malformed HTTP requests are caught during parsing and yield clean 400 Bad Request responses.",
+    reliability: "Load-tested with Apache JMeter at 100–1000 concurrent users.",
+    failure_handling: "Connection timeouts on java.net.Socket close stalled connections.",
   }
 ];
 
